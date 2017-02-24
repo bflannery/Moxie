@@ -6,7 +6,7 @@ export default React.createClass({
   render() {
     return (
       <div className="app-container">
-        <h1> Cheese </h1>
+        {this.props.children}
       </div>
     );
   }

@@ -1,0 +1,37 @@
+import React from 'react';
+import store from '../../store';
+
+import Login from '../Login';
+
+export default React.createClass({
+
+  getInitialState() {
+    return {
+      session : store.session.toJSON(),
+    };
+  },
+
+  componentDidMount() {
+    store.session.on('update change', this.updateStatus);
+  },
+
+  componentWIllUnmount() {
+    store.session.off('update change', this.updateStatus);
+  },
+
+  render() {
+    return (
+      <div className="main-container">
+        <div className="landing-page-container">
+          <Login session={this.state.session}/>
+         </div>
+      </div>
+
+    );
+  },
+
+  updateStats(){
+    this.setState({session: store.session.toJSON()});
+  }
+
+});
