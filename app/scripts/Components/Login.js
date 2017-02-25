@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import store from '../store';
-import Register from './RegisterPage';
+
 
 
 export default React.createClass({
@@ -10,7 +10,7 @@ export default React.createClass({
 
       <div className="form-container">
         <form onSubmit={this.handleSubmit} className="login-form">
-          <input className="login-input" ref="login" type="email" placeholder="Email"/>
+          <input className="login-input" ref="email" type="email" placeholder="Email"/>
           <input className="login-input" ref="password" type="password" placeholder="Password"/>
           <input className="login-button" id="login-button" type="submit" value="Log In"/>
           <span className="redirect-link"> Not A Member? <Link to="/register">Signup Here!</Link></span>
@@ -23,9 +23,8 @@ export default React.createClass({
 
   handleSubmit(e){
     e.preventDefault();
-    const email = this.refs.login.value;
+    const email = this.refs.email.value;
     const password = this.refs.password.value;
     store.session.login(email, password);
-    store.movements.getToken();
   }
 });

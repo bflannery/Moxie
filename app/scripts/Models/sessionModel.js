@@ -16,7 +16,6 @@ export default Backbone.Model.extend({
   defaults: {
     auth: false,
     passwordReset: null
-
   },
 
   register(email, password){
@@ -55,6 +54,7 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       url: 'https://api.backendless.com/v1/users/logout',
       success: ()=> {
+        console.log('logged out!');
         this.clear();
         window.localStorage.clear();
         browserHistory.push('/');
@@ -69,12 +69,13 @@ export default Backbone.Model.extend({
       success: () => {
         console.log('New Password Sent');
         this.set({passwordReset: `A temporary password has been sent to ${email}.`});
+        alert(this.get('passwordReset'));
       },
       error: (response) => {
         console.log(response.responseJSON.code);
         if (response.responseJSON.code === 3020) {
           this.set({passwordReset: `I\'m sorry, that email was not found in our system.`});
-          console.log(this.get('passwordReset'));
+          alert(this.get('passwordReset'));
         }
       }
     });
