@@ -6,39 +6,78 @@ import config from '../config';
 export default Backbone.Model.extend({
 
   initialize() {
-    if(window.localStorage['user-token']) {
-      this.set({
-        auth: true,
-        'user-token': window.localStorage['user-token'],
-        ownerId: window.localStorage.ownerId
-      });
-    }
+         if (window.localStorage.getItem('user-token')) {
+             this.set({auth: true, 'user-token': window.localStorage.getItem('user-token')});
+         }
   },
 
-  idAttribute: '_id',
+  url: 'https://api.backendless.com/v1/data/Users',
+  idAttribute: 'objectId',
   defaults: {
-    authenticated: false,
+    auth: false,
     passwordReset: null
-    },
 
-    register(email, password, confirmPW) {
-      if(password === confirmPW) {
-        this.save(
-          {email, password},
-          {
-            url: 'https://api.backendless.com/v1/users/register',
-            success: (response) => {
-              console.log('Registration complete!');
-              this.login(email, password);
-            },
-            error: (response) => {
-              console.log('User data not svaed to server.');
-            }
-          }
-        );
-      } else {
-        alert('Passwords do not match');
+  },
+
+  register(email, password){
+    $.ajax({
+      type: 'POST',
+      url: 'https://api.backendless.com/v1/users/register',
+      contentType: 'application/json',
+      data: JSON.stringify({email, password}),
+      success: () => {
+        console.log('registered!')
+        this.login(email, password);
+      },
+      error: () => {
+        console.log('User data not saved to server.');
       }
+    });
+  },
+  login(email, password){
+    $.ajax({
+      type: 'POST',
+      url: 'https://api.backendless.com/v1/users/login',
+      contentType: 'application/json',
+      data: JSON.stringify({login: email, password}),
+      success: (response) => {
+        console.log('logged in!')
+        this.set({ auth: true});
+          window.localStorage.setItem('user-token',response['user-token']);
+          window.localStorage.setItem('email',response.email);
+          window.localStorage.setItem('ownerId',response.ownerId);
+          browserHistory.push('/home');
+        }
+      })
     },
+  logout(){
+    $.ajax({
+      contentType: 'application/json',
+      url: 'https://api.backendless.com/v1/users/logout',
+      success: ()=> {
+        this.clear();
+        window.localStorage.clear();
+        browserHistory.push('/');
+      }
+    })
+  },
+
+  newPassword(email) {
+    $.ajax({
+      url: 'https://api.backendless.com/v1/users/restorepassword/' + email ,
+      type: 'GET',
+      success: () => {
+        console.log('New Password Sent');
+        this.set({passwordReset: `A temporary password has been sent to ${email}.`});
+      },
+      error: (response) => {
+        console.log(response.responseJSON.code);
+        if (response.responseJSON.code === 3020) {
+          this.set({passwordReset: `I\'m sorry, that email was not found in our system.`});
+          console.log(this.get('passwordReset'));
+        }
+      }
+    });
+  },
 
 });

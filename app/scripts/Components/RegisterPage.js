@@ -8,7 +8,6 @@ export default React.createClass({
   <div className="landing-page-container">
         <div className="form-container">
           <form onSubmit={this.handleSubmit} className="register-form">
-            <input className="register-input" ref="name" type="text" placeholder="Name"/>
             <input className="register-input" ref="email" type="email" placeholder="Email"/>
             <input className="register-input" ref="password" type="password" placeholder="Password"/>
             <input className="register-input" ref="confirmPassword" type="password" placeholder="Confirm Password"/>
@@ -21,10 +20,9 @@ export default React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-      const name = this.refs.name.value;
       const email= this.refs.email.value;
       const password= this.refs.password.value;
       const confirmPassword= this.refs.confirmPassword.value;
-      store.session.register(name, email, password);
+      store.session.register(email, password);
   }
 });
