@@ -9,4 +9,8 @@ export default Backbone.Model.extend({
       description: ''
     },
 
+    deleteClient(objectId) {
+      console.log(objectId);
+      this.destroy({objectId});
+    }
 });
