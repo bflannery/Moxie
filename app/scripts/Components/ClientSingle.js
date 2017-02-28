@@ -8,11 +8,9 @@ export default React.createClass({
     console.log(this.props);
     return (
       <li>
-      <div>
-        <h4 className="client-name" ref="clientName"> {this.props.client.name}</h4>
+        <h4 className="client-name" ref="clientName" onClick={this.clientPage}> {this.props.client.name}</h4>
         <span className="client-description" ref="clientDescription"> {this.props.client.description}</span>
         <input onClick={this.removeClient} type="submit" value="delete" />
-      </div>
       </li>
     );
   },
@@ -21,5 +19,9 @@ export default React.createClass({
     e.preventDefault();
     let id = this.props.client.objectId;
     store.clients.get(id).deleteClient(id);
+  },
+
+  clientPage() {
+    browserHistory.push(`/clients/${this.props.client.name}`)
   }
 });

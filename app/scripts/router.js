@@ -7,6 +7,10 @@ import MoxieHome from './Components/Containers/MoxieHome';
 import Register from './Components/RegisterPage';
 import ForgotPassword from './Components/ForgotPassword';
 
+import ClientsPage from './Components/Containers/ClientsPage';
+import ClientHome from './Components/Containers/ClientHome';
+
+
 
 
 const router = (
@@ -16,6 +20,8 @@ const router = (
       <IndexRoute component={LandingPage}/>
        <Route path='/register' component={Register}/>
        <Route path='/home' component={MoxieHome}/>
+       <route path='/clients' component = {ClientsPage}/>
+       <route path='/clients/:name' component = {ClientHome}/>
        <Route path='/forgotpassword' component={ForgotPassword}/>
     </Route>
   </Router>
