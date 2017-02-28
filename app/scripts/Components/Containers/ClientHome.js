@@ -1,14 +1,41 @@
 import React from 'react';
-
 import store from '../../store';
-
+import {browserHistory} from 'react-router';
+import { Link } from 'react-router';
 
 export default React.createClass({
+
+  getInitialState() {
+    return {
+      client: {}
+    };
+  },
+
+  componentDidMount() {
+    store.client.fetch({url: 'https://api.backendless.com/v1/data/Clients/'+this.props.params.id});
+    store.client.on('update change', this.updateState);
+  },
+
+  componentWillUnmount() {
+    store.client.off('update chnage', this.updateState);
+  },
+
+  updateState() {
+    this.setState({
+      client: store.client.toJSON()
+    });
+  },
+
   render() {
-    return (
-      <div className="client-home">
-        <h1> Client Home </h1>
-      </div>
-    );
-  }
+    console.log(this.state);
+    console.log(this.props);
+       return (
+         <div className="main-container">
+            <input onClick={this.handlePhoto} type="button" value="Add a File"/>
+        </div>
+       );
+     },
+   handlePhoto() {
+     browserHistory.push('/clients/files/' + this.props.params.id)
+   }
 });

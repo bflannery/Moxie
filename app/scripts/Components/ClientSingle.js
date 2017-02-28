@@ -22,6 +22,6 @@ export default React.createClass({
   },
 
   clientPage() {
-    browserHistory.push(`/clients/${this.props.client.name}`)
+    browserHistory.push(`/clients/${this.props.client.objectId}`)
   }
 });

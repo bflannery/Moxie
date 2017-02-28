@@ -7,5 +7,6 @@ export default {
 
   session : new Session(),
   clients : new Clients(),
+  client : new Client()
 
 };
