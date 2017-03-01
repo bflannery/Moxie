@@ -36,7 +36,7 @@ export default React.createClass({
           <NewClientForm/>
           <ClientsList clients={this.state.clients}/>
         </div>
-        <input className="login-button" id="logout-button" type="submit" value="Log Out" onClick={this.handleLogout}/>
+        <input className="logout-button" id="logout-button" type="submit" value="Log Out" onClick={this.handleLogout}/>
       </div>
     );
   },

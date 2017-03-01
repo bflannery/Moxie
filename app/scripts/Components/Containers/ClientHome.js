@@ -7,6 +7,7 @@ export default React.createClass({
 
   getInitialState() {
     return {
+      files: [],
       client: {}
     };
   },
@@ -14,6 +15,8 @@ export default React.createClass({
   componentDidMount() {
     store.client.fetch({url: 'https://api.backendless.com/v1/data/Clients/'+this.props.params.id});
     store.client.on('update change', this.updateState);
+
+    
   },
 
   componentWillUnmount() {
@@ -25,8 +28,9 @@ export default React.createClass({
       client: store.client.toJSON()
     });
   },
-
   render() {
+    console.log(this.state);
+    console.log(this.props);
        return (
          <div className="main-container">
             <input onClick={this.handlePhoto} type="button" value="Add a File"/>
