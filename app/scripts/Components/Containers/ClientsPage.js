@@ -12,10 +12,14 @@ export default React.createClass({
     };
   },
 
-    componentDidMount() {
-      store.clients.fetch();
-      store.clients.on('update change', this.updateState);
-    },
+  componentDidMount() {
+    store.clients.fetch();
+    store.clients.on('update change', this.updateState);
+  },
+
+  componentWillUnmount() {
+    store.clients.off('update change', this.updateState);
+  },
 
   updateState() {
     this.setState({

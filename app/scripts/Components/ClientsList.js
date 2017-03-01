@@ -12,13 +12,13 @@ export default React.createClass({
     } else {
       clients = this.props.clients.map((client, i, arr)=> {
         if(window.localStorage.getItem('ownerId') === this.props.clients[i].ownerId)
-          return <ClientSingle key={i} client={client}/>
+          return <ClientSingle key={i} client={client}/>;
       });
     }
     return (
     <div className="client-list">
       {clients}
     </div>
-    )
+  );
   }
-})
+});

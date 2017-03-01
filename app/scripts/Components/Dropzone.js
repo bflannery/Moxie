@@ -23,13 +23,14 @@ export default React.createClass({
 
     render() {
       console.log(this.state);
+      console.log(this.props);
       return (
         <div className="image-upload-container">
           <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop}>
             <span>Try dropping some files here, or click to select files to upload. View Preview below.</span>
           </Dropzone>
           <input type="button" onClick={this.onOpenClick} value="Open Dropzone"/>
-          <div key={this.state.file}>{this.state.files.map((file, i) => <img key={i} src={file.preview} /> )}</div>
+          <div key={this.state.file}>{this.state.files.map((file, i) => <span> {file.name} </span> )}</div>
           <input type="button" onClick={this.upload} value="Upload File"/>
         </div>
       );
@@ -46,7 +47,7 @@ export default React.createClass({
     },
     upload() {
     let fd = new FormData();
-      fd.append('upload', this.state.files[0])
+      fd.append('upload', this.state.files[0]);
       $.ajax({
         type: 'POST',
         data: fd,
@@ -60,11 +61,10 @@ export default React.createClass({
         },
         success: (response)=>{
           response = JSON.parse(response);
-          console.log(response.fileURL);
           store.client.addFile(response.fileURL);
           browserHistory.push('/clients/'+this.props.params.id);
         }
-      })
+      });
     }
 
   });

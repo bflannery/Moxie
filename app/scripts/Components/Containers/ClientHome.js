@@ -27,8 +27,6 @@ export default React.createClass({
   },
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
        return (
          <div className="main-container">
             <input onClick={this.handlePhoto} type="button" value="Add a File"/>
