@@ -22,11 +22,11 @@ export default React.createClass({
  },
 
     render() {
-      console.log(this.state);
+      console.log(this.state.files);
       console.log(this.props);
       return (
         <div className="image-upload-container">
-          <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop}>
+          <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple>
             <span>Try dropping some files here, or click to select files to upload. View Preview below.</span>
           </Dropzone>
           <input type="button" onClick={this.onOpenClick} value="Open Dropzone"/>
@@ -47,13 +47,17 @@ export default React.createClass({
     },
     upload() {
     let fd = new FormData();
-      fd.append('upload', this.state.files[0]);
+    let filesArr = this.state.files;
+    let files = filesArr.map((file, i) => {
+
+
+      fd.append('upload', this.state.files[i]);
       $.ajax({
         type: 'POST',
         data: fd,
         processData: false,
         contentType: false,
-        url: 'https://api.backendless.com/v1/files/'+this.state.files[0].name,
+        url: 'https://api.backendless.com/v1/files/'+this.state.files[i].name,
         headers: {
           'application-id': config.appId,
           'secret-key': config.secret,
@@ -65,6 +69,6 @@ export default React.createClass({
           browserHistory.push('/clients/'+this.props.params.id);
         }
       });
-    }
-
+    });
+  }
   });
