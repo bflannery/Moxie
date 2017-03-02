@@ -20,5 +20,9 @@ export default Backbone.Model.extend({
           }
         }])
       });
+    },
+
+    addFile(fileUrl) {
+      this.save({file: fileUrl}, {type: 'PUT'});
     }
 });

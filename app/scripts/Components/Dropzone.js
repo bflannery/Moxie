@@ -24,7 +24,6 @@ export default React.createClass({
  },
 
     render() {
-      console.log(this.state.files);
       return (
         <div className="image-upload-container">
           <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple>
@@ -47,36 +46,25 @@ export default React.createClass({
     this.setState({user: store.clients.toJSON()});
     },
 
-
     uploadFiles() {
-      let files = this.state.files;
-      store.file.upload(files);
-      browserHistory.push('/clients/'+this.props.params.id);
-  }
+    let fd = new FormData();
+      fd.append('upload', this.state.files[0]);
+      $.ajax({
+        type: 'POST',
+        data: fd,
+        processData: false,
+        contentType: false,
+        url: 'https://api.backendless.com/v1/files/'+this.state.files[0].name,
+        headers: {
+          'application-id': config.appId,
+          'secret-key': config.secret,
+          'application-type': 'REST'
+        },
+        success: (response)=>{
+          response = JSON.parse(response);
+          store.client.addFile(response.fileURL);
+          browserHistory.push('/clients/'+this.props.params.id);
+        }
+      });
+    }
   });
-
-  // let fd = new FormData();
-  // console.log(fd);
-  // let filesArr = this.state.files;
-  // let files = filesArr.map((file, i) => {
-  //
-  //
-  //   fd.append('upload', this.state.files[i]);
-  //   $.ajax({
-  //     type: 'POST',
-  //     data: fd,
-  //     processData: false,
-  //     contentType: false,
-  //     url: 'https://api.backendless.com/v1/files/Moxie/'+this.state.files[i].name,
-  //     headers: {
-  //       'application-id': config.appId,
-  //       'secret-key': config.secret,
-  //       'application-type': 'REST'
-  //     },
-  //     success: (response)=>{
-  //       response = JSON.parse(response);
-  //       store.file.addFile(response.fileURL);
-  //       browserHistory.push('/clients/'+this.props.params.id);
-  //     }
-  // //   });
-  // });

@@ -5,7 +5,6 @@ import {browserHistory} from 'react-router';
 
 export default React.createClass({
   render() {
-    console.log(this.props);
     return (
       <li>
         <h4 className="client-name" ref="clientName" onClick={this.clientPage}> {this.props.client.name}</h4>
