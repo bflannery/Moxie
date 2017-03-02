@@ -9,11 +9,16 @@ export default Backbone.Model.extend({
       description: ''
     },
 
-    deleteClient(objectId) {
-      this.destroy({objectId});
-    },
-
-    addFile(fileUrl) {
-      this.save({file: fileUrl}, {type: 'PUT'});
+    addFileToClient({id, name}) {
+      this.save({
+        clientFiles: this.get('clientFiles').concat([{
+          ___class: 'ClientFiles',
+          client: name,
+          file: {
+            ___class: 'Files',
+            objectId: id
+          }
+        }])
+      });
     }
 });
