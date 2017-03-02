@@ -2,7 +2,7 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 
 export default Backbone.Model.extend({
-  url: 'https://api.backendless.com/v1/data/Clients',
+  urlRoot: 'https://api.backendless.com/v1/data/Clients',
     idAttribute: 'objectId',
     defaults: {
       name: '',
@@ -13,7 +13,7 @@ export default Backbone.Model.extend({
       this.save({
         clientFiles: this.get('clientFiles').concat([{
           ___class: 'ClientFiles',
-          client: name,
+          clientName: name,
           file: {
             ___class: 'Files',
             objectId: id
@@ -22,7 +22,4 @@ export default Backbone.Model.extend({
       });
     },
 
-    addFile(fileUrl) {
-      this.save({file: fileUrl}, {type: 'PUT'});
-    }
 });

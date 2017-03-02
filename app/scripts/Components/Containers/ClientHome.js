@@ -11,6 +11,7 @@ export default React.createClass({
 
   getInitialState() {
     return {
+        files: store.files.toJSON(),
         client: {
           clientFiles: []
         },
@@ -24,8 +25,8 @@ export default React.createClass({
         client = new Client({objectId: this.props.params.id});
         store.clients.add(client);
       }
-      store.client.fetch();
-      store.client.on('update change', this.updateState);
+      client.fetch();
+      client.on('update change', this.updateState);
 
       store.files.fetch();
       store.files.on('update change', this.updateState);
@@ -53,7 +54,7 @@ export default React.createClass({
 },
 
   render() {
-       return (
+      return (
          <div className="main-container">
             <input onClick={this.handleFile} type="button" value="Add a File"/>
           <ClientFiles clientFiles={this.state.files} client={this.state.client}/>
