@@ -10,12 +10,6 @@ export default Backbone.Model.extend({
       description: ''
     },
         addFile(fileUrl) {
-          this.save({file: fileUrl},{type: 'PUT'},
-          {
-          success: (file, response) => {
-            console.log(file);
-            this.trigger('change');
-          }
-      });
+          this.save({file: fileUrl},{type: 'PUT'});
     },
 });

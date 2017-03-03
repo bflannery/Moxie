@@ -17,7 +17,7 @@ export default React.createClass({
     };
   },
   componentDidMount(){
-   let client = store.clients.get(this.props.params.id)
+   let client = store.clients.get(this.props.params.id);
    if(!client) {
      client = new Client({objectId: this.props.params.id});
      store.clients.add(client);
@@ -25,15 +25,17 @@ export default React.createClass({
    client.fetch();
    client.on('update change', this.updateState);
 
+   store.files.fetch();
+   store.files.on('update change', this.updateState);
+
 
  },
  componentWillUnmount(){
    store.clients.off('update change', this.updateState);
+   store.files.off('update change', this.updateState);
  },
 
     render() {
-      console.log(this.state);
-      console.log(this.props);
       return (
         <div className="image-upload-container">
           <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple>
@@ -53,7 +55,10 @@ export default React.createClass({
       this.dropzone.open();
     },
     updateState(){
-    this.setState({client: store.clients.get(this.props.params.id).toJSON()});
+    this.setState({
+      client: store.clients.get(this.props.params.id).toJSON(),
+      files: store.files.toJSON()
+    });
     },
 
     uploadFiles() {
@@ -71,14 +76,12 @@ export default React.createClass({
           'application-type': 'REST'
         },
         success: (response)=>{
-          console.log(response);
           response = JSON.parse(response);
           store.file.addFile(response.fileURL);
-
+          browserHistory.push('/clients/'+this.props.params.id);
         }
       });
-    }
-  });
 
-      // 
-      // browserHistory.push('/clients/'+this.props.params.id);
+    }
+
+  });

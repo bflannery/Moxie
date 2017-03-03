@@ -7,7 +7,6 @@ export default Backbone.Collection.extend({
   url: 'https://api.backendless.com/v1/data/Files',
 
   parse(data) {
-    console.log(data.data);
     return data.data
   }
 });
