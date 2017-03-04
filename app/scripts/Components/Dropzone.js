@@ -62,6 +62,7 @@ export default React.createClass({
     },
 
     uploadFiles() {
+    let clientId = this.props.params.id;
     let fd = new FormData();
       fd.append('upload', this.state.files[0]);
       $.ajax({
@@ -77,7 +78,7 @@ export default React.createClass({
         },
         success: (response)=>{
           response = JSON.parse(response);
-          store.file.addFile(response.fileURL);
+          store.file.addFile(response.fileURL, clientId);
           browserHistory.push('/clients/'+this.props.params.id);
         }
       });

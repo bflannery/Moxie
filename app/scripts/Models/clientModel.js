@@ -8,18 +8,17 @@ export default Backbone.Model.extend({
       name: '',
       description: ''
     },
-
-    addFileToClient({id, name}) {
-      this.save({
-        clientFiles: this.get('clientFiles').concat([{
-          ___class: 'ClientFiles',
-          clientName: name,
-          file: {
-            ___class: 'Files',
-            objectId: id
-          }
-        }])
-      });
-    },
-
 });
+
+// addFileToClient({fileUrl, clientID}) {
+//   this.save({
+//     clientFiles: this.get('clientFiles').concat([{
+//       ___class: 'ClientFiles',
+//       client: clientID,
+//       file: {
+//         ___class: 'Files',
+//         objectId: fileUrl
+//       }
+//     }])
+//   });
+// },

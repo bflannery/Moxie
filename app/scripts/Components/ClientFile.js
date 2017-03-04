@@ -5,11 +5,18 @@ import store from '../store';
 
 export default React.createClass({
   render() {
-  return (
-    <div>
-      <span> {this.props.clientFile.file} </span>
-      </div>
-  );
+    console.log(this.props);
 
+    if(this.props.clientFile.clientId === this.props.clientId) {
+      return (
+        <div>
+          <span> {this.props.clientFile.file} </span>
+          </div>
+      );
+    } else {
+      return (
+        <div />
+      );
+    }
   }
 });
