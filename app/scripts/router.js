@@ -10,6 +10,7 @@ import Dropzone from './Components/Dropzone';
 
 import ClientsPage from './Components/Containers/ClientsPage';
 import ClientHome from './Components/Containers/ClientHome';
+import DocPreview from './Components/DocPreview';
 
 
 
@@ -24,6 +25,7 @@ const router = (
        <route path='/clients' component = {ClientsPage}/>
        <route path='/clients/:id' component = {ClientHome}/>
        <Route path='/clients/files/:id' component = {Dropzone}/>
+       <Route path='/preview/:id' component = {DocPreview}/>
        <Route path='/forgotpassword' component={ForgotPassword}/>
     </Route>
   </Router>

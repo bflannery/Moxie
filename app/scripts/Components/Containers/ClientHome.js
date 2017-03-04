@@ -6,6 +6,7 @@ import store from '../../store';
 import Client from '../../Models/clientModel';
 
 import ClientFiles from '../ClientFiles';
+import DocPreview from '../DocPreview';
 
 export default React.createClass({
 

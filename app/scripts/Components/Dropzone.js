@@ -36,6 +36,7 @@ export default React.createClass({
  },
 
     render() {
+      console.log(this.state);
       return (
         <div className="image-upload-container">
           <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple>
@@ -62,6 +63,7 @@ export default React.createClass({
     },
 
     uploadFiles() {
+    let file = this.state.files[0].name;
     let clientId = this.props.params.id;
     let fd = new FormData();
       fd.append('upload', this.state.files[0]);
@@ -70,7 +72,7 @@ export default React.createClass({
         data: fd,
         processData: false,
         contentType: false,
-        url: 'https://api.backendless.com/v1/files/Moxie/'+this.state.files[0].name,
+        url: 'https://api.backendless.com/v1/files/Moxie/' + file,
         headers: {
           'application-id': config.appId,
           'secret-key': config.secret,
@@ -78,7 +80,7 @@ export default React.createClass({
         },
         success: (response)=>{
           response = JSON.parse(response);
-          store.file.addFile(response.fileURL, clientId);
+          store.file.addFile(response.fileURL, file, clientId);
           browserHistory.push('/clients/'+this.props.params.id);
         }
       });
