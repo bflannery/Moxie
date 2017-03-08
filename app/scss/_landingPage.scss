@@ -1,0 +1,53 @@
+.login-container {
+  text-align: center;
+}
+
+.register-container {
+  text-align: center;
+}
+
+.forgot-pw-container {
+  text-align: center;
+}
+
+.landing-title {
+font-size: 6rem;
+}
+
+.login-register-form {
+  margin-top: 2rem;
+}
+
+input{
+
+  display: block;
+  outline: 0;
+  border: 1px solid white;
+  color: #50a3a2;
+  border-radius: 3px;
+  padding: 1rem 3rem;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  transition-duration: 0.25s;
+  font-weight: 300;
+}
+
+button{
+  appearance: none;
+  outline: 0;
+  background-color: white;
+  border: 0;
+  padding: 1rem 3rem;
+  color: #50a3a2;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 18px;
+  transition-duration: 0.25s;
+  margin-bottom: 1rem;
+
+  &:hover{
+    background-color: rgb(245, 247, 249);
+  }
+}

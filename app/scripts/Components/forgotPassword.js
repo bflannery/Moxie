@@ -33,10 +33,11 @@ export default React.createClass({
     }
     return (
       <div className="forgot-pw-container">
-      <h1> Forgot Password </h1>
-      <form className="login-register" onSubmit={ this.handleSubmit }>
+      <h1 className="landing-title"> Moxie</h1>
+      <h3> Forgot Password </h3>
+      <form className="login-register-form" onSubmit={ this.handleSubmit }>
        <input type="email" name="email" ref="email" placeholder="Your Email"/>
-       <input type="submit" id="submit" name="submit" value="Submit" />
+       <button type="submit" id="submit"> Submit </button>
        { message }
      </form>
      </div>
