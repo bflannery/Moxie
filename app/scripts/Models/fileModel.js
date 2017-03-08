@@ -9,8 +9,9 @@ export default Backbone.Model.extend({
       name: '',
       description: ''
     },
-    addFile(fileUrl, file, clientId) {
+
+    addFile(fileUrl, file, clientId, clientName) {
       console.log(file);
-      this.save({fileUrl: fileUrl, file: file, clientId: clientId},{type: 'PUT'});
+      this.save({fileUrl: fileUrl, file: file, clientId: clientId, clientName: clientName},{type: 'PUT'});
     },
 });

@@ -3,6 +3,7 @@ import store from '../../store';
 
 import NewClientForm from '../NewClientForm';
 import ClientsList from '../ClientsList';
+import Header from '../Header';
 
 export default React.createClass({
 
@@ -28,21 +29,16 @@ export default React.createClass({
   },
 
   render() {
+    console.log(this.state);
     return (
       <div className="moxie-home">
-        <h1> We.Moxie </h1>
-        <div className="client=list-container">
-          <h2> Add New Client </h2>
+        <Header/>
+        <div className="client-list-container">
+          <h2 className="client-form-title"> Add New Client </h2>
           <NewClientForm/>
           <ClientsList clients={this.state.clients}/>
         </div>
-        <input className="logout-button" id="logout-button" type="submit" value="Log Out" onClick={this.handleLogout}/>
       </div>
     );
-  },
-  handleLogout(e) {
-      e.preventDefault();
-      store.session.logout();
-    }
-
+  }
 });

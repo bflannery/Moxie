@@ -7,6 +7,7 @@ import Client from '../../Models/clientModel';
 
 import ClientFiles from '../ClientFiles';
 import DocPreview from '../DocPreview';
+import Header from '../Header';
 
 export default React.createClass({
 
@@ -55,10 +56,17 @@ export default React.createClass({
 },
 
   render() {
+    console.log(this.state);
       return (
-         <div className="main-container">
-            <input onClick={this.handleFile} type="button" value="Add a File"/>
+        <div className="client-file-page">
+        <Header />
+        <div className="title-add-container">
+          <h2 className="client-page-name"> {this.state.client.name} </h2>
+          <input onClick={this.handleFile} type="button" value="Add a File"/>
+        </div>
+          <div className="client-file-container">
           <ClientFiles clientFiles={this.state.files} client={this.state.client}/>
+        </div>
         </div>
        );
      },

@@ -5,14 +5,14 @@ import store from '../store';
 
 export default React.createClass({
   render() {
-    console.log(this.props);
-    if(this.props.clientFile.clientId === this.props.clientId) {
+    if(this.props.clientFile.clientId === this.props.client.objectId) {
       return (
-        <div>
-          <Link to={`/preview/${this.props.clientFile.objectId}`}>
+        <li className="client-file">
+        <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
+          <Link to={`/preview/${this.props.clientFile.objectId}`} className="file-link">
             <span> {this.props.clientFile.file} </span>
           </Link>
-          </div>
+          </li>
       );
     } else {
       return (

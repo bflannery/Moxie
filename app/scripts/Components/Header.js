@@ -6,7 +6,7 @@ export default React.createClass({
     return (
       <div className="header">
         <div className="header-logo-container">
-          <h2 className="header-logo"> Moxie </h2>
+          <h2 className="header-logo"> We.Moxie </h2>
         </div>
         <HeaderNav />
         </div>
