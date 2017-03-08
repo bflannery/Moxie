@@ -13,11 +13,11 @@ export default React.createClass({
         <ul className="moxie-items-list">
           <li className="moxie-item">
             <i className="fa fa-users client-item-icon" aria-hidden="true"></i>
-            <Link to="/clients"> Clients </Link>
+            <Link to="/clients" className="item-link"> Clients </Link>
           </li>
           <li className="moxie-item">
             <i className="fa fa-files-o client-item-icon" aria-hidden="true"></i>
-            <Link to="/documents"> Documents </Link>
+            <Link to="/documents" className="item-link"> Documents </Link>
           </li>
         </ul>
       </div>
