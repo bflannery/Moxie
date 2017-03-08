@@ -1,0 +1,41 @@
+.header-logo-container {
+  display:inline-block;
+    h2 {
+      font-size: 2rem;
+      margin: 1rem;
+    }
+}
+.nav-container {
+  display: inline-block;
+  background: transparent;
+  font-size: 1rem;
+  float: right;
+  margin: 1rem;
+
+}
+
+.moxie-items-list {
+  padding: 0;
+  text-align: center;
+}
+
+.client-item-icon {
+  font-size: 5rem;
+  display: block;
+}
+.nav-list {
+  float: left;
+}
+.nav-list a:hover {
+  border:2px solid pink;
+  color: blue;
+}
+
+a {
+  padding: .2rem;
+  text-decoration: none;
+}
+
+a:visited {
+  color: blue;
+}
