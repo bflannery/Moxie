@@ -62,10 +62,10 @@ export default React.createClass({
         <Header />
         <div className="title-add-container">
           <h2 className="client-page-name"> {this.state.client.name} </h2>
-          <input onClick={this.handleFile} type="button" value="Add a File"/>
         </div>
-          <div className="client-file-container">
+        <div className="client-files-container">
           <ClientFiles clientFiles={this.state.files} client={this.state.client}/>
+          <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
         </div>
         </div>
        );

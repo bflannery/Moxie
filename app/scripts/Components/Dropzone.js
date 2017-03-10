@@ -6,6 +6,7 @@ import config from '../config';
 import $ from 'jquery';
 import {browserHistory} from 'react-router';
 import Client from '../Models/clientModel';
+import Header from './Header';
 
 export default React.createClass({
   getInitialState() {
@@ -38,13 +39,16 @@ export default React.createClass({
     render() {
       console.log(this.state);
       return (
+        <div className="dropzone-page">
+        <Header />
         <div className="image-upload-container">
           <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple>
             <span>Try dropping some files here, or click to select files to upload. View Preview below.</span>
           </Dropzone>
-          <input type="button" onClick={this.onOpenClick} value="Open Dropzone"/>
-          <div key={this.state.file}>{this.state.files.map((file, i) => <span> {file.name} </span> )}</div>
-          <input type="button" onClick={this.uploadFiles} value="Upload File"/>
+          <input type="button" onClick={this.onOpenClick} value="Open Dropzone" className="add-button"/>
+          <div key={this.state.file} className="upload-file-container">{this.state.files.map((file, i) => <span className="file-name"> {file.name} </span> )}</div>
+          <input type="button" onClick={this.uploadFiles} value="Upload File" className="add-button"/>
+        </div>
         </div>
       );
     },

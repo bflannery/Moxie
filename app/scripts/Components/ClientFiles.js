@@ -16,7 +16,7 @@ export default React.createClass({
     }
 
     return (
-      <ul className ="client-file-list">
+      <ul className ="client-file-container">
         {clientFiles}
       </ul>
     );
