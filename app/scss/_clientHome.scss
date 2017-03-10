@@ -23,6 +23,8 @@
 }
 
 .file-link {
+  vertical-align: middle;
+  margin-left: .5rem;
     font-size: 2rem;
     position: relative;
     display: inline-block;
@@ -48,4 +50,12 @@
 .file-link:hover:before {
     visibility: visible;
     transform: scaleX(1);
+}
+
+.delete-file-button {
+  padding: 0;
+  background: transparent;
+  color: white;
+  margin: 0;
+  vertical-align: middle;
 }

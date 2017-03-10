@@ -18,8 +18,7 @@ font-size: 6rem;
   margin-top: 2rem;
 }
 
-input{
-
+.login-input{
   display: block;
   outline: 0;
   border: 1px solid white;
@@ -27,11 +26,11 @@ input{
   border-radius: 3px;
   padding: 1rem 3rem;
   margin: 0 auto 10px auto;
-  display: block;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   transition-duration: 0.25s;
   font-weight: 300;
+  width: 52%;
 }
 
 button{
@@ -49,5 +48,18 @@ button{
 
   &:hover{
     background-color: rgb(245, 247, 249);
+  }
+}
+
+@media(min-width:650px) {
+  .login-input{
+    width: 30%;
+  }
+}
+
+
+@media(min-width:800px) {
+  .login-input{
+    width: 15%;
   }
 }

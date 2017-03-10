@@ -7,17 +7,27 @@
 
 .add-new-client {
     text-align: center;
+    margin-left: 0.5rem;
 }
 
 .client-input {
     display: inline-block;
     padding: 0.5rem;
+  outline: 0;
+  border: 1px solid white;
+  color: #50a3a2;
+  border-radius: 3px;
+  margin: 0 auto 10px auto;
+  text-align: center;
+  font-size: 16px;
+  transition-duration: 0.25s;
+  font-weight: 300;
+  width: 52%;
 }
 
 .create-button {
-    padding: 0.5rem 2rem;
-    float: right;
-    margin-right: 1rem;
+    padding: 0.4rem 1.7rem;
+    margin-left: .5rem;
     font-size: 20px;
 }
 
@@ -44,6 +54,7 @@
 .client-name:before {
     content: "";
     position: absolute;
+    top: 3.5rem;
     width: 100%;
     height: 2px;
     bottom: 0;
@@ -63,4 +74,15 @@
     margin: 0;
     vertical-align: middle;
     padding: 0.5rem 1rem;
+}
+
+
+@media(min-width:600px) {
+  .client-input {
+    width: 30%;
+  }
+}
+
+@media(min-width: 850px) {
+  width: 15%;
 }

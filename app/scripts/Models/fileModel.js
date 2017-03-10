@@ -11,7 +11,10 @@ export default Backbone.Model.extend({
     },
 
     addFile(fileUrl, file, clientId, clientName) {
-      console.log(file);
       this.save({fileUrl: fileUrl, file: file, clientId: clientId, clientName: clientName},{type: 'PUT'});
     },
+
+    deleteFile(objectId) {
+    this.destroy ({ url: `https://api.backendless.com/v1/data/Files/${objectId}`});
+  },
 });

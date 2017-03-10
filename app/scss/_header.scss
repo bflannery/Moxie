@@ -1,3 +1,8 @@
+.header {
+  margin-top: 1rem;
+}
+
+
 .header-logo-container {
   display:inline-block;
   margin: 0 1rem;
@@ -11,7 +16,7 @@
   background: transparent;
   font-size: 1rem;
   float: right;
-
+  margin-right: .2rem;
 }
 
 .nav-list {
@@ -46,4 +51,20 @@ display: inline-block;
 
 a:visited {
   color: white;
+}
+
+
+@media(min-width:600px) {
+  .nav-list {
+    font-size: 1.5rem;
+    margin: 0.3rem 1rem;
+  }
+
+  .nav-container {
+    margin: .5rem 1rem;
+  }
+
+  .loggedIn-navContainer {
+    margin: 0;
+  }
 }

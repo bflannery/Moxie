@@ -6,7 +6,7 @@ export default React.createClass ({
 
   getInitialState() {
     return {
-      files: store.files.toJSON()
+      file: store.files.get(this.props.params.id).toJSON()
     };
   },
 
@@ -67,7 +67,7 @@ export default React.createClass ({
     }
     return (
       <div>
-        <PDF file={this.state.files[0].fileUrl} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
+        <PDF file={this.state.file.fileUrl} onDocumentComplete={this.onDocumentComplete} onPageComplete={this.onPageComplete} page={this.state.page} />
         {pagination}
       </div>
     );

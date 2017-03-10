@@ -5,15 +5,15 @@ import store from '../store';
 export default React.createClass({
   render() {
     return (
-  <div className="register-container">
+      <div className="register-container">
         <div className="form-container">
-          <h1 className="landing-title"> Moxie </h1>
+          <h1 className="landing-title"> We.Moxie </h1>
           <form onSubmit={this.handleSubmit} className="login-register-form">
-            <input className="register-input" ref="email" type="email" placeholder="Email"/>
-            <input className="register-input" ref="password" type="password" placeholder="Password"/>
-            <input className="register-input" ref="confirmPassword" type="password" placeholder="Confirm Password"/>
-            <button> Register </button>
-            <p className="message">Already A Member? <Link to="/"> Login!</Link></p>
+            <input className="login-input" ref="email" type="email" placeholder="Email"/>
+            <input className="login-input" ref="password" type="password" placeholder="Password"/>
+            <input className="login-input" ref="confirmPassword" type="password" placeholder="Confirm Password"/>
+            <button type="submit"> Register </button>
+            <p className="message">Already A Member? <Link to="/"><u>Login!</u></Link></p>
           </form>
         </div>
         </div>

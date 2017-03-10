@@ -9,13 +9,13 @@ export default React.createClass({
     return (
       <div className="login-container">
         <div className="form-container">
-          <h1 className="landing-title"> Moxie </h1>
+          <h1 className="landing-title"> We.Moxie </h1>
           <form onSubmit={this.handleSubmit} className="login-register-form">
             <input className="login-input" ref="email" type="email" placeholder="Email"/>
             <input className="login-input" ref="password" type="password" placeholder="Password"/>
-            <button> Login </button>
-            <p className="message"> Not A Member? <Link to="/register">Create An Account!</Link></p>
-            <p className="message"> Forgot Password? <Link to="/forgotpassword">Retrieve Password</Link></p>
+            <button type="submit"> Login </button>
+            <p className="message"> Not A Member? <Link to="/register"><u>Create An Account!</u></Link></p>
+            <p className="message"> Forgot Password? <Link to="/forgotpassword"><u>Retrieve Password</u></Link></p>
           </form>
         </div>
       </div>
