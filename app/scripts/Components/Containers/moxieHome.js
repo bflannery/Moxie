@@ -12,12 +12,16 @@ export default React.createClass({
       <div className="moxie-home-container">
         <ul className="moxie-items-list">
           <li className="moxie-item">
-            <i className="fa fa-users client-item-icon" aria-hidden="true"></i>
-            <Link to="/clients" className="item-link"> Clients </Link>
+            <Link to="/clients" className="item-link">
+              <i className="fa fa-users client-item-icon" aria-hidden="true"></i>
+              <span> Clients</span>
+            </Link>
           </li>
           <li className="moxie-item">
-            <i className="fa fa-files-o client-item-icon" aria-hidden="true"></i>
-            <Link to="/documents" className="item-link"> Documents </Link>
+            <Link to="/documents" className="item-link">
+              <i className="fa fa-files-o client-item-icon" aria-hidden="true"></i>
+              <span>Documents</span>
+            </Link>
           </li>
         </ul>
       </div>

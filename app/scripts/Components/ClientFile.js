@@ -9,9 +9,9 @@ export default React.createClass({
     if(this.props.clientFile.clientId === this.props.client.objectId) {
       return (
         <li className="client-file">
-        <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
         <div className="file-name-container">
           <Link to={`/preview/${this.props.clientFile.objectId}`} className="file-link">
+            <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
             <span> {this.props.clientFile.file} </span>
             </Link>
             <button onClick={this.removeFile} type="submit" className="delete-file-button">
