@@ -1,18 +1,18 @@
 .client-list-container {
     margin-top: 4rem;
+    text-align: center;
 }
 .client-form-title {
   margin-left: 1rem;
 }
 
 .add-new-client {
-    text-align: center;
     margin-left: 0.5rem;
 }
 
 .client-input {
-    display: inline-block;
-    padding: 0.5rem;
+  display: inline-block;
+  padding: 0.5rem;
   outline: 0;
   border: 1px solid white;
   color: #50a3a2;
@@ -32,7 +32,6 @@
 }
 
 .client-list {
-    text-align: center;
     margin: 3rem 0;
 }
 
@@ -81,8 +80,16 @@
   .client-input {
     width: 30%;
   }
+
 }
 
 @media(min-width: 850px) {
-  width: 15%;
+
+  .client-list-container {
+    text-align: left;
+  }
+
+  .delete-client-button {
+    margin-left: 3rem;
+  }
 }
