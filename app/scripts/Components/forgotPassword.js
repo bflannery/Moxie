@@ -47,7 +47,7 @@ export default React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     let email = this.refs.email.value;
-    store.session.newPassword(email);
+    store.session.forgotPassword(email);
     browserHistory.push('/');
   }
 });

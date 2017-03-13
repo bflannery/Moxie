@@ -18,21 +18,28 @@ export default Backbone.Model.extend({
     passwordReset: null
   },
 
-  register(email, password){
+  validatePassword(password, confirmPassword) {
+      if (password === confirmPassword) return true;
+      return false;
+  },
+
+  register(email, password, company){
     $.ajax({
       type: 'POST',
       url: 'https://api.backendless.com/v1/users/register',
       contentType: 'application/json',
-      data: JSON.stringify({email, password}),
-      success: () => {
-        console.log('registered!')
-        this.login(email, password);
+      data: JSON.stringify({email, password, company}),
+      success: (response) => {
+        console.log('registered!');
+        console.log(response);
+        this.login(email, password, company);
       },
       error: () => {
         console.log('User data not saved to server.');
       }
     });
   },
+
   login(email, password){
     $.ajax({
       type: 'POST',
@@ -40,15 +47,21 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       data: JSON.stringify({login: email, password}),
       success: (response) => {
-        console.log('logged in!')
+        console.log(response);
         this.set({ auth: true});
+          window.localStorage.setItem('company', response.company)
           window.localStorage.setItem('user-token',response['user-token']);
           window.localStorage.setItem('email',response.email);
           window.localStorage.setItem('ownerId',response.ownerId);
+          if(window.localStorage.company === 'Moxie') {
           browserHistory.push('/home');
+        } else {
+          console.log('no client home');
         }
-      })
+      }
+      });
     },
+
   logout(){
     $.ajax({
       contentType: 'application/json',
@@ -59,26 +72,14 @@ export default Backbone.Model.extend({
         window.localStorage.clear();
         browserHistory.push('/');
       }
-    })
-  },
-
-  newPassword(email) {
-    $.ajax({
-      url: 'https://api.backendless.com/v1/users/restorepassword/' + email ,
-      type: 'GET',
-      success: () => {
-        console.log('New Password Sent');
-        this.set({passwordReset: `A temporary password has been sent to ${email}.`});
-        alert(this.get('passwordReset'));
-      },
-      error: (response) => {
-        console.log(response.responseJSON.code);
-        if (response.responseJSON.code === 3020) {
-          this.set({passwordReset: `I\'m sorry, that email was not found in our system.`});
-          alert(this.get('passwordReset'));
-        }
-      }
     });
   },
 
+forgotPassword(email) {
+      $.ajax({
+        url:`https://api.backendless.com/v1/users/restorepassword/${email}`,
+        success:(response)=>{
+        }
+      });
+    }
 });

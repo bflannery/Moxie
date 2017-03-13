@@ -9,6 +9,7 @@ export default React.createClass({
         <div className="form-container">
           <h1 className="landing-title"> We.Moxie </h1>
           <form onSubmit={this.handleSubmit} className="login-register-form">
+            <input className="login-input" ref="company" type="text" placeholder="Company"/>
             <input className="login-input" ref="email" type="email" placeholder="Email"/>
             <input className="login-input" ref="password" type="password" placeholder="Password"/>
             <input className="login-input" ref="confirmPassword" type="password" placeholder="Confirm Password"/>
@@ -22,9 +23,14 @@ export default React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
+      const company= this.refs.company.value;
       const email= this.refs.email.value;
       const password= this.refs.password.value;
       const confirmPassword= this.refs.confirmPassword.value;
-      store.session.register(email, password);
+      if(store.session.validatePassword(password, confirmPassword)) {
+      store.session.register(email, password, company);
+  } else {
+    alert('passwords do not match');
   }
+}
 });
