@@ -5,10 +5,11 @@ import {browserHistory} from 'react-router';
 
 export default React.createClass({
   render() {
-    console.log(this.props)
     return (
       <li className="client-container">
-        <h4 className="client-name" ref="clientName" onClick={this.clientPage}> {this.props.client.name}</h4>
+      <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage}>
+        <h4 className="client-name"> {this.props.client.name} </h4>
+        </Link>
         <button onClick={this.removeClient} type="submit" className="delete-client-button"> Delete Client</button>
       </li>
     );
@@ -19,9 +20,5 @@ export default React.createClass({
     let id = this.props.client.objectId;
     store.clients.get(id).deleteClient(id);
 
-  },
-
-  clientPage() {
-    browserHistory.push(`/clients/${this.props.client.objectId}`);
   }
 });

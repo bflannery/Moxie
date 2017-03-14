@@ -29,7 +29,6 @@ export default React.createClass({
   },
 
   render() {
-    console.log(this.state);
     return (
       <div className="moxie-home">
         <Header/>

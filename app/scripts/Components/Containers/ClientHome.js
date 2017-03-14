@@ -23,10 +23,6 @@ export default React.createClass({
 
   componentDidMount() {
     let client = store.clients.get(this.props.params.id);
-      if(!client) {
-        client = new Client({objectId: this.props.params.id});
-        store.clients.add(client);
-      }
       client.fetch();
       client.on('update change', this.updateState);
 
@@ -56,6 +52,7 @@ export default React.createClass({
 },
 
   render() {
+    console.log(this.props);
     console.log(this.state);
       return (
         <div className="client-file-page">

@@ -2,6 +2,7 @@ import {browserHistory} from 'react-router';
 import Backbone from 'backbone';
 import $ from 'jquery';
 import config from '../config';
+import store from '../store';
 
 export default Backbone.Model.extend({
 
@@ -30,8 +31,6 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       data: JSON.stringify({email, password, company}),
       success: (response) => {
-        console.log('registered!');
-        console.log(response);
         this.login(email, password, company);
       },
       error: () => {
@@ -47,15 +46,16 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       data: JSON.stringify({login: email, password}),
       success: (response) => {
-        console.log(response);
         this.set({ auth: true});
-          window.localStorage.setItem('company', response.company)
+          window.localStorage.setItem('company', response.company);
           window.localStorage.setItem('user-token',response['user-token']);
           window.localStorage.setItem('email',response.email);
           window.localStorage.setItem('ownerId',response.ownerId);
+
           if(window.localStorage.company === 'Moxie') {
           browserHistory.push('/home');
         } else {
+          console.log(store.clients.get(window.localStorage.company));
           console.log('no client home');
         }
       }

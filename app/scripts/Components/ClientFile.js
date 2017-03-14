@@ -5,7 +5,6 @@ import store from '../store';
 
 export default React.createClass({
   render() {
-    console.log(this.props);
     if(this.props.clientFile.clientId === this.props.client.objectId) {
       return (
         <li className="client-file">

@@ -12,4 +12,5 @@ export default Backbone.Model.extend({
   deleteClient(objectId) {
   this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${objectId}`})
 },
+
 });
