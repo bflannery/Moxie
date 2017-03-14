@@ -55,7 +55,7 @@ export default Backbone.Model.extend({
           if(window.localStorage.company === 'Moxie') {
           browserHistory.push('/home');
         } else {
-          console.log(store.clients.get(window.localStorage.company));
+          store.clients.getClients(window.localStorage.company);
           console.log('no client home');
         }
       }
