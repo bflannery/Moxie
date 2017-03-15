@@ -9,7 +9,7 @@ export default React.createClass({
       <div className="header">
         <div className="header-logo-container">
           <h2 className="header-logo">
-            <Link to="/home">We.Moxie </Link>
+            <Link to="/home">we.moxie </Link>
           </h2>
         </div>
         <HeaderNav />

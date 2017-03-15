@@ -9,7 +9,7 @@ export default React.createClass({
     return (
       <div className="login-container">
         <div className="form-container">
-          <h1 className="landing-title"> We.Moxie </h1>
+          <h1 className="landing-title"> we.moxie </h1>
           <form onSubmit={this.handleSubmit} className="login-register-form">
             <input className="login-input" ref="email" type="email" placeholder="Email"/>
             <input className="login-input" ref="password" type="password" placeholder="Password"/>
@@ -28,5 +28,8 @@ export default React.createClass({
     const email = this.refs.email.value;
     const password = this.refs.password.value;
     store.session.login(email, password);
+    this.refs.email.value = '';
+    this.refs.password.value = '';
   }
+
 });

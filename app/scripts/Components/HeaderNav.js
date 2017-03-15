@@ -5,19 +5,42 @@ import store from '../store';
 
 export default React.createClass({
   getInitialState(){
-    return {auth: store.session.get('auth')};
+    return {
+      session: {
+      auth: store.session.get('auth')}
+      };
   },
 
   componentWillMount() {
     store.session.on('change', () => {
-      this.setState({auth: store.session.get('auth')});
+      this.setState({
+        session: {
+          auth: store.session.get('auth')
+        }
+      });
+    });
+    },
+
+  componentWillUnmount() {
+    store.session.off('change', () => {
+      this.setState({
+        session: {
+          auth: store.session.get('auth')
+        }
+      });
     });
   },
+
   render() {
+    console.log(this.state);
 
-  let nav = <ul className="logged-out-nav-container"></ul>;
+  let nav = <ul className="logged-out-nav-container">
+      <li className="nav-list">
+      <Link to="/landing-page" onClick={this.handleLogout}>Log Out</Link>
+      </li>
+  </ul>;
 
-  if(this.state.auth) {
+  if(this.state.session.auth) {
     nav = (
       <ul className="loggedIn-navContainer">
         <li className="nav-list">

@@ -7,7 +7,7 @@ export default React.createClass({
     return (
       <div className="register-container">
         <div className="form-container">
-          <h1 className="landing-title"> We.Moxie </h1>
+          <h1 className="landing-title"> we.moxie </h1>
           <form onSubmit={this.handleSubmit} className="login-register-form">
             <input className="login-input" ref="company" type="text" placeholder="Company"/>
             <input className="login-input" ref="email" type="email" placeholder="Email"/>
@@ -27,10 +27,15 @@ export default React.createClass({
       const email= this.refs.email.value;
       const password= this.refs.password.value;
       const confirmPassword= this.refs.confirmPassword.value;
-      if(store.session.validatePassword(password, confirmPassword)) {
-      store.session.register(email, password, company);
-  } else {
-    alert('passwords do not match');
-  }
+        if(store.session.validatePassword(password, confirmPassword)) {
+            store.session.register(email, password, company);
+          } else {
+            alert('passwords do not match');
+          }
+
+  this.refs.company.value = '';
+  this.refs.email.value = '';
+  this.refs.password.value = '';
+  this.refs.confirmPassword.value = '';
 }
 });

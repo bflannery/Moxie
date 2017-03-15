@@ -17,14 +17,15 @@ export default Backbone.Collection.extend({
       type: 'GET',
       url: 'https://api.backendless.com/v1/data/Clients',
       success: (clients) => {
-        console.log(clients.data);
-
         return clients.data.filter((client, i ,arr)=>{
             if(client.name === company) {
               browserHistory.push('/clients/' + client.objectId);
             }
-          });
-  }
-});
-}
+        });
+      },
+      error: () => {
+        console.log('no clients');
+      }
+      });
+    }
 });

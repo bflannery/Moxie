@@ -31,6 +31,7 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       data: JSON.stringify({email, password, company}),
       success: (response) => {
+
         this.login(email, password, company);
       },
       error: () => {
@@ -46,17 +47,18 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       data: JSON.stringify({login: email, password}),
       success: (response) => {
-        this.set({ auth: true});
+
           window.localStorage.setItem('company', response.company);
           window.localStorage.setItem('user-token',response['user-token']);
           window.localStorage.setItem('email',response.email);
           window.localStorage.setItem('ownerId',response.ownerId);
 
           if(window.localStorage.company === 'Moxie') {
+          this.set({ auth: true});
           browserHistory.push('/home');
         } else {
+          this.set({ auth: false});
           store.clients.getClients(window.localStorage.company);
-          console.log('no client home');
         }
       }
       });
