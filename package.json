@@ -57,6 +57,7 @@
     "parallelshell": "^2.0.0",
     "react-addons-test-utils": "^15.4.2",
     "should": "^11.2.0",
+    "sinon": "^2.0.0",
     "watchify": "^3.9.0"
   },
   "dependencies": {

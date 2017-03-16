@@ -9,8 +9,7 @@ export default Backbone.Model.extend({
       description: ''
     },
 
-  deleteClient(objectId) {
-  this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${objectId}`})
-},
-
+    deleteClient(objectId) {
+        this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${objectId}`});
+    },
 });
