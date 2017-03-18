@@ -23,7 +23,7 @@
     "start": "npm run build && npm run watch",
     "preinstall": "if ! command -v http-server; then npm install -g http-server; fi && if ! command -v mocha; then npm install -g mocha; fi",
     "postinstall": "npm start",
-    "test": "mocha --compilers js:babel-register --recursive"
+    "test": "mocha --compilers js:babel-register --recursive --require test/setup.js"
   },
   "browserify": {
     "transform": [
@@ -46,10 +46,12 @@
     "babelify": "^7.3.0",
     "browserify": "^14.1.0",
     "chai": "^3.5.0",
+    "chai-enzyme": "^0.6.1",
     "enzyme": "^2.7.1",
     "eslint": "^3.16.1",
     "eslint-plugin-react": "^6.10.0",
-    "jsdom": "^9.11.0",
+    "jsdom": "9.12.0",
+    "jsdom-global": "2.1.1",
     "json-scaffold": "^0.1.1",
     "mocha": "^3.2.0",
     "node-sass": "^4.5.0",
@@ -63,6 +65,7 @@
   "dependencies": {
     "backbone": "^1.3.3",
     "jquery": "^3.1.1",
+    "jsdom": "^9.8.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.11.0",
