@@ -9,10 +9,10 @@ export default React.createClass({
         <div className="form-container">
           <h1 className="landing-title"> we.moxie </h1>
           <form onSubmit={this.handleSubmit} className="login-register-form">
-            <input className="login-input" ref="company" type="text" placeholder="Company"/>
-            <input className="login-input" ref="email" type="email" placeholder="Email"/>
-            <input className="login-input" ref="password" type="password" placeholder="Password"/>
-            <input className="login-input" ref="confirmPassword" type="password" placeholder="Confirm Password"/>
+            <input className="login-input" ref="company" type="text" placeholder="Company" required/>
+            <input className="login-input" ref="email" type="email" placeholder="Email" required/>
+            <input className="login-input" ref="password" type="password" placeholder="Password" required/>
+            <input className="login-input" ref="confirmPassword" type="password" placeholder="Confirm Password" required/>
             <button type="submit"> Register </button>
             <p className="message">Already A Member? <Link to="/"><u>Login!</u></Link></p>
           </form>

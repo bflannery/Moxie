@@ -53,7 +53,7 @@ export default Backbone.Model.extend({
           window.localStorage.setItem('email',response.email);
           window.localStorage.setItem('ownerId',response.ownerId);
 
-          if(window.localStorage.company === 'Moxie') {
+          if(window.localStorage.company.toLowerCase() === 'we.moxie') {
           this.set({ auth: true});
           browserHistory.push('/home');
         } else {

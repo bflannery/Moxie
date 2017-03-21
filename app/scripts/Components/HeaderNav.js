@@ -11,29 +11,7 @@ export default React.createClass({
       };
   },
 
-  componentWillMount() {
-    store.session.on('change', () => {
-      this.setState({
-        session: {
-          auth: store.session.get('auth')
-        }
-      });
-    });
-    },
-
-  componentWillUnmount() {
-    store.session.off('change', () => {
-      this.setState({
-        session: {
-          auth: store.session.get('auth')
-        }
-      });
-    });
-  },
-
   render() {
-    console.log(this.state);
-
   let nav = <ul className="logged-out-nav-container">
       <li className="nav-list">
       <Link to="/landing-page" onClick={this.handleLogout}>Log Out</Link>

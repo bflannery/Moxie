@@ -56,17 +56,36 @@ export default React.createClass({
 },
 
   render() {
-    console.log(this.state);
-      return (
-        <div className="client-file-page">
-        <Header />
+    console.log(this.state.session.auth);
+
+    let clientPage = (
+      <div className= "client-body">
         <div className="title-add-container">
           <h2 className="client-page-name"> {this.state.client.name} </h2>
         </div>
         <div className="client-files-container">
           <ClientFiles clientFiles={this.state.files} client={this.state.client}/>
-          <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
         </div>
+      </div>
+    );
+
+    if(this.state.session.auth) {
+      clientPage = (
+        <div className= "client-body">
+          <div className="title-add-container">
+            <h2 className="client-page-name"> {this.state.client.name} </h2>
+          </div>
+          <div className="client-files-container">
+            <ClientFiles clientFiles={this.state.files} client={this.state.client}/>
+            <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
+          </div>
+        </div>
+      );
+    }
+      return (
+        <div className="client-file-page">
+            <Header />
+          {clientPage}
         </div>
        );
      },
