@@ -56,8 +56,6 @@ export default React.createClass({
 },
 
   render() {
-    console.log(this.state.session.auth);
-
     let clientPage = (
       <div className= "client-body">
         <div className="title-add-container">

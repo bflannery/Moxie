@@ -37,7 +37,6 @@ export default React.createClass({
  },
 
     render() {
-      console.log(this.state);
       return (
         <div className="dropzone-page">
         <Header />
@@ -68,8 +67,9 @@ export default React.createClass({
 
     uploadFiles() {
     let file = this.state.files[0].name;
-    let clientId = this.props.params.id;
-    let clientName = this.props.name;
+    let clientId = this.state.client.objectId;
+    let clientName = this.state.client.name;
+
     let fd = new FormData();
       fd.append('upload', this.state.files[0]);
       $.ajax({
@@ -77,7 +77,7 @@ export default React.createClass({
         data: fd,
         processData: false,
         contentType: false,
-        url: 'https://api.backendless.com/v1/files/Moxie/' + file,
+        url: 'https://api.backendless.com/v1/files/Moxie/' + this.state.client.name + '/' + file,
         headers: {
           'application-id': config.appId,
           'secret-key': config.secret,
@@ -87,9 +87,13 @@ export default React.createClass({
           response = JSON.parse(response);
           store.file.addFile(response.fileURL, file, clientId, clientName);
           browserHistory.push('/clients/'+this.props.params.id);
+        },
+        error: (response) => {
+          if(response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
+            alert('File Already Exists');
+          }
+
         }
       });
-
     }
-
   });

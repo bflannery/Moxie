@@ -16,9 +16,8 @@ export default React.createClass({
      e.preventDefault();
      let clientName = this.refs.clientName.value;
 
-     store.clients.create({
-       name : clientName
-     });
+     store.clients.create({ name : clientName});
+
   }
 
 });
