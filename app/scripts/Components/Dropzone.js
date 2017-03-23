@@ -12,15 +12,13 @@ export default React.createClass({
   getInitialState() {
     return {
       files: store.files.toJSON(),
-      client: {
-        clientFiles: []
-      }
+      client: store.clients.get(this.props.params.id).toJSON()
     };
   },
   componentDidMount(){
    let client = store.clients.get(this.props.params.id);
    if(!client) {
-     client = new Client({objectId: this.props.params.id});
+     client = new Client({clientId: this.props.params.id});
      store.clients.add(client);
    }
    client.fetch();
@@ -55,6 +53,7 @@ export default React.createClass({
     onDrop(acceptedFiles, rejectedFiles){
       this.setState({files: acceptedFiles});
     },
+
     onOpenClick(){
       this.dropzone.open();
     },
@@ -67,7 +66,7 @@ export default React.createClass({
 
     uploadFiles() {
     let file = this.state.files[0].name;
-    let clientId = this.state.client.objectId;
+    let clientId = this.props.params.id;
     let clientName = this.state.client.name;
 
     let fd = new FormData();
