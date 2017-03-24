@@ -56,13 +56,15 @@ export default React.createClass({
 },
 
   render() {
+    console.log(this.state);
+
     let clientPage = (
       <div className= "client-body">
         <div className="title-add-container">
           <h2 className="client-page-name"> {this.state.client.name} </h2>
         </div>
         <div className="client-files-container">
-          <ClientFiles clientFiles={this.state.files} client={this.state.client}/>
+          <ClientFiles clientFiles={this.state.files} client={this.state.client} session={this.state.session}/>
         </div>
       </div>
     );
@@ -74,7 +76,7 @@ export default React.createClass({
             <h2 className="client-page-name"> {this.state.client.name} </h2>
           </div>
           <div className="client-files-container">
-            <ClientFiles clientFiles={this.state.files} client={this.state.client}/>
+            <ClientFiles clientFiles={this.state.files} client={this.state.client} session={this.state.session}/>
             <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
           </div>
         </div>

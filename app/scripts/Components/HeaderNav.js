@@ -6,8 +6,7 @@ import store from '../store';
 export default React.createClass({
   getInitialState(){
     return {
-      session: {
-      auth: store.session.get('auth')}
+      session: {auth: store.session.get('auth')}
       };
   },
 
