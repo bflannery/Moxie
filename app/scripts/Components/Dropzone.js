@@ -11,8 +11,8 @@ import Header from './Header';
 export default React.createClass({
   getInitialState() {
     return {
-      files: store.files.toJSON(),
-      client: store.clients.get(this.props.params.id).toJSON()
+      client: store.clients.get(this.props.params.id).toJSON(),
+      files: []
     };
   },
   componentDidMount(){
@@ -24,14 +24,9 @@ export default React.createClass({
    client.fetch();
    client.on('update change', this.updateState);
 
-   store.files.fetch();
-   store.files.on('update change', this.updateState);
-
-
  },
  componentWillUnmount(){
-   store.clients.off('update change', this.updateState);
-   store.files.off('update change', this.updateState);
+   store.client.off('update change', this.updateState);
  },
 
     render() {
@@ -60,7 +55,6 @@ export default React.createClass({
     updateState(){
     this.setState({
       client: store.clients.get(this.props.params.id).toJSON(),
-      files: store.files.toJSON()
     });
     },
 
@@ -85,7 +79,6 @@ export default React.createClass({
         success: (response)=>{
           response = JSON.parse(response);
           store.file.addFile(response.fileURL, file, clientId, clientName);
-          browserHistory.push('/clients/'+this.props.params.id);
         },
         error: (response) => {
           if(response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {

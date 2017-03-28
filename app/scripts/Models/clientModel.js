@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
+import {browserHistory} from 'react-router';
 
 export default Backbone.Model.extend({
   urlRoot: 'https://api.backendless.com/v1/data/Clients',
@@ -11,8 +12,6 @@ export default Backbone.Model.extend({
 
 
     addFileToClient({id, name}) {
-      console.log(id);
-      console.log(name);
           this.save({
               clientFiles: this.get('clientFiles').concat([{
                 ___class: 'ClientFiles',
@@ -21,7 +20,13 @@ export default Backbone.Model.extend({
                   objectId: id,
                   name: name
                 }
-              }])
+              }]),
+            }, {
+              success: (client, response) => {
+                console.log(client);
+                this.trigger('change');
+                browserHistory.push('/clients/'+ client.id);
+              }
             });
           },
 

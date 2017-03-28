@@ -13,11 +13,14 @@ export default Backbone.Model.extend({
     },
 
     addFile(fileUrl, file, clientId, clientName) {
-      this.save({fileUrl: fileUrl, file: file, clientId: clientId, clientName: clientName },
-      {
+      $.ajax({
+        type: 'POST',
+        url: 'https://api.backendless.com/v1/data/Files',
+        contentType: 'application/json',
+        data: JSON.stringify({fileUrl, file, clientId, clientName}),
         success: (file)=> {
-          store.clients.get(file.attributes.clientId).addFileToClient({id: file.attributes.objectId, name: file.attributes.file});
-          console.log(file);
+          store.clients.get(file.clientId).addFileToClient({id: file.objectId, name: file.file});
+          this.trigger('change');
         }
       });
   },
