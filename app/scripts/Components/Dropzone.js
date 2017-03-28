@@ -15,6 +15,7 @@ export default React.createClass({
       files: []
     };
   },
+
   componentDidMount(){
    let client = store.clients.get(this.props.params.id);
    if(!client) {
@@ -30,7 +31,6 @@ export default React.createClass({
  },
 
     render() {
-      console.log(this.state);
       return (
         <div className="dropzone-page">
         <Header />
@@ -55,15 +55,15 @@ export default React.createClass({
     },
     updateState(){
     this.setState({
-      client: store.clients.get(this.props.params.id).toJSON(),
-    });
+      client: store.clients.get(this.props.params.id).toJSON()
+      });
     },
 
     uploadFiles() {
-    let file = this.state.files[0];
-    let fileName = this.state.files[0].name;
-    let clientId = this.props.params.id;
-    let clientName = this.state.client.name;
-    store.file.uploadFile(file, fileName, clientId, clientName);
-    }
+      let file = this.state.files[0];
+      let fileName = this.state.files[0].name;
+      let clientId = this.props.params.id;
+      let clientName = this.state.client.name;
+      store.file.uploadFile(file, fileName, clientId, clientName);
+      }
   });

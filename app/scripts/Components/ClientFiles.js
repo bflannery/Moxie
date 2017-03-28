@@ -7,11 +7,11 @@ export default React.createClass({
   render() {
     let clientFiles;
 
-    if(!this.props.clientFiles) {
+    if(!this.props.client.clientFiles) {
       clientFiles = <div />;
     } else {
-      clientFiles = this.props.clientFiles.map((clientFile, i, arr) => {
-        return <ClientFile key={i} clientFile={clientFile} client= {this.props.client}/>
+      clientFiles = this.props.client.clientFiles.map((clientFile, i, arr) => {
+        return <ClientFile key={i} clientFile={clientFile}/>
       });
     }
 
