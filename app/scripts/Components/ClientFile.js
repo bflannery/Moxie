@@ -6,6 +6,7 @@ import store from '../store';
 export default React.createClass({
 
   render() {
+    console.log(this.props);
     if(this.props.clientFile) {
       return (
           <li className="client-file">
@@ -29,9 +30,10 @@ export default React.createClass({
 
   removeFile(e) {
     e.preventDefault();
-    let id = this.props.clientFile.objectId;
-    let fileName = this.props.clientFile.file;
-    store.files.get(id).deleteFileFromData(id);
-    store.files.get(id).deleteFileFromFiles(fileName);
+    let fileId = this.props.clientFile.files.objectId;
+    let fileUrl = this.props.clientFile.files.fileUrl;
+    let clientId = this.props.clientFile.files.clientId
+    let clientFileId = this.props.clientFile.objectId;
+    store.files.get(fileId).deleteFileFromData(fileId, fileUrl, clientId, clientFileId);
 }
 });

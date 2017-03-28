@@ -56,13 +56,12 @@ uploadFile(file, fileName, clientId, clientName) {
       });
   },
 //Delete File from table Files
-    deleteFileFromData(objectId) {
-    this.destroy ({ url: `https://api.backendless.com/v1/data/Files/${objectId}`}
-    );
+    deleteFileFromData(objectId, fileUrl, clientId, clientFileId) {
+      console.log(clientFileId)
+      console.log(clientId)
+    store.clients.get(clientId).deleteFileFromClient(clientFileId);
+    this.destroy ({ url: fileUrl });
+    this.destroy ({ url: `https://api.backendless.com/v1/data/Files/${objectId}`});
   },
 
-    deleteFileFromFiles(clientName, fileName) {
-      console.log(clientName);
-      console.log(fileName);
-    }
 });

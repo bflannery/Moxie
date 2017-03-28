@@ -23,7 +23,6 @@ export default Backbone.Model.extend({
               }]),
             }, {
               success: (client, response) => {
-                console.log(client);
                 this.trigger('change');
                 browserHistory.push('/clients/'+ client.id);
               }
@@ -33,4 +32,8 @@ export default Backbone.Model.extend({
     deleteClient(objectId) {
         this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${objectId}`});
     },
+
+    deleteFileFromClient(clientFileId) {
+      console.log(clientFileId);
+    }
 });
