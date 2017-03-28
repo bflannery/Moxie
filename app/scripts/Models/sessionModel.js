@@ -8,7 +8,7 @@ export default Backbone.Model.extend({
 
   initialize() {
          if (window.localStorage.getItem('user-token')) {
-             this.set({'user-token': window.localStorage.getItem('user-token')});
+             this.set({auth: true, 'user-token': window.localStorage.getItem('user-token')});
          }
   },
 

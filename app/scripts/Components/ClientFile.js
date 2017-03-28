@@ -6,20 +6,9 @@ import store from '../store';
 export default React.createClass({
 
   render() {
-    console.log(this.props)
-
     if(this.props.clientFile.clientId === this.props.client.objectId) {
-
-      let clientFile = (
-          <div className="file-name-container">
-            <Link to={`/preview/${this.props.clientFile.objectId}`} className="file-link">
-              <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
-              <span> {this.props.clientFile.file} </span>
-            </Link>
-          </div>
-      );
-        if(this.props.session.auth) {
-          clientFile = (
+      return (
+          <li className="client-file">
             <div className="file-name-container">
               <Link to={`/preview/${this.props.clientFile.objectId}`} className="file-link">
                 <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
@@ -29,14 +18,8 @@ export default React.createClass({
                 </button>
               </Link>
             </div>
+          </li>
         );
-      }
-
-      return (
-        <li className="client-file">
-          {clientFile}
-        </li>
-      );
     } else {
       return (
         <div />

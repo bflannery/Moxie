@@ -9,6 +9,22 @@ export default Backbone.Model.extend({
       description: ''
     },
 
+
+    addFileToClient({id, name}) {
+      console.log(id);
+      console.log(name);
+          this.save({
+              clientFiles: this.get('clientFiles').concat([{
+                ___class: 'ClientFiles',
+                client: {
+                  ___class: 'Files',
+                  objectId: id,
+                  name: name
+                }
+              }])
+            });
+          },
+
     deleteClient(objectId) {
         this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${objectId}`});
     },
