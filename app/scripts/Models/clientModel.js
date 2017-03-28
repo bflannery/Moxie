@@ -15,7 +15,7 @@ export default Backbone.Model.extend({
           this.save({
               clientFiles: this.get('clientFiles').concat([{
                 ___class: 'ClientFiles',
-                client: {
+                files: {
                   ___class: 'Files',
                   objectId: id,
                   name: name
