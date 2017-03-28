@@ -60,33 +60,10 @@ export default React.createClass({
     },
 
     uploadFiles() {
-    let file = this.state.files[0].name;
+    let file = this.state.files[0];
+    let fileName = this.state.files[0].name;
     let clientId = this.props.params.id;
     let clientName = this.state.client.name;
-
-    let fd = new FormData();
-      fd.append('upload', this.state.files[0]);
-      $.ajax({
-        type: 'POST',
-        data: fd,
-        processData: false,
-        contentType: false,
-        url: 'https://api.backendless.com/v1/files/Moxie/' + this.state.client.name + '/' + file,
-        headers: {
-          'application-id': config.appId,
-          'secret-key': config.secret,
-          'application-type': 'REST'
-        },
-        success: (response)=>{
-          response = JSON.parse(response);
-          store.file.addFile(response.fileURL, file, clientId, clientName);
-        },
-        error: (response) => {
-          if(response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
-            alert('File Already Exists');
-          }
-
-        }
-      });
+    store.file.uploadFile(file, fileName, clientId, clientName);
     }
   });
