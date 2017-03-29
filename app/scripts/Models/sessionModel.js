@@ -19,10 +19,14 @@ export default Backbone.Model.extend({
     passwordReset: null
   },
 
+  // Validate User Password
   validatePassword(password, confirmPassword) {
       if (password === confirmPassword) return true;
       return false;
   },
+
+//Register New User
+// On Success, call Login on Session
 
   register(email, password, company){
     $.ajax({
@@ -39,6 +43,14 @@ export default Backbone.Model.extend({
       }
     });
   },
+
+
+//Log In Existing User
+// On Success, store user info in local storage
+// If Moxie user, set auth true
+    // push user to Moxie Home
+// If Moxie client, set auth false
+    // call getClients on Clients collection
 
   login(email, password){
     $.ajax({
@@ -64,6 +76,10 @@ export default Backbone.Model.extend({
       });
     },
 
+
+//Log Out Current User
+// On Success, clear local Storage and push to Landing Page
+
   logout(){
     $.ajax({
       contentType: 'application/json',
@@ -76,6 +92,8 @@ export default Backbone.Model.extend({
       }
     });
   },
+
+// Send Password to Existing User
 
 forgotPassword(email) {
       $.ajax({

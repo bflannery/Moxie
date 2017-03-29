@@ -34,6 +34,6 @@ export default React.createClass({
     let fileUrl = this.props.clientFile.files.fileUrl;
     let clientId = this.props.clientFile.files.clientId
     let clientFileId = this.props.clientFile.objectId;
-    store.files.get(fileId).deleteFileFromData(fileId, fileUrl, clientId, clientFileId);
+    store.files.get(fileId).deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
 }
 });

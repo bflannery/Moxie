@@ -15,6 +15,8 @@ export default Backbone.Model.extend({
 
 //Dropzone Upload to Backendless File Storage
 //On Success call addFileToData
+//Alert File Exists if Response Code 6003
+
 uploadFile(file, fileName, clientId, clientName) {
     let fd = new FormData();
       fd.append('upload', file);
@@ -42,7 +44,11 @@ uploadFile(file, fileName, clientId, clientName) {
       });
     },
 
-//Create table location for file to link with clientFiles
+
+// Add File To All Files Table
+// On Success, call AddFileToClientFiles on Clients Collections
+// Trigger Change on File Model
+
     addFileToData(fileUrl, file, clientId, clientName) {
       $.ajax({
         type: 'POST',
@@ -50,18 +56,36 @@ uploadFile(file, fileName, clientId, clientName) {
         contentType: 'application/json',
         data: JSON.stringify({fileUrl, file, clientId, clientName}),
         success: (file)=> {
-          store.clients.get(file.clientId).addFileToClient({id: file.objectId, name: file.file});
-          this.trigger('change');
+          store.clients.get(file.clientId).addFileToClientFiles({id: file.objectId, name: file.file});
         }
       });
   },
-//Delete File from table Files
-    deleteFileFromData(objectId, fileUrl, clientId, clientFileId) {
-      console.log(clientFileId)
-      console.log(clientId)
-    store.clients.get(clientId).deleteFileFromClient(clientFileId);
-    this.destroy ({ url: fileUrl });
-    this.destroy ({ url: `https://api.backendless.com/v1/data/Files/${objectId}`});
+
+// Delete File From Data Table
+// On Success, call deleteFileFromClients on Clients Collections
+
+deleteFileFromDataTable(objectId, clientId, clientFileId) {
+  $.ajax({
+    type: 'DELETE',
+    url: `https://api.backendless.com/v1/data/Files/${objectId}`,
+    success: () => {
+      console.log('deleted File From Table');
+      store.clients.get(clientId).deleteFileFromClient(clientFileId);
+      }
+    });
   },
 
+  // Call deleteFileFromClient on Clients Collections
+  // Delete File from File Storage and Files Data Table
+
+    deleteFileFromStorage(objectId, fileUrl, clientId, clientFileId) {
+      $.ajax({
+        type: 'DELETE',
+        url: fileUrl,
+        success: () => {
+          console.log('deleted File From Storage');
+          this.deleteFileFromDataTable(objectId, clientId, clientFileId);
+        }
+    });
+  },
 });

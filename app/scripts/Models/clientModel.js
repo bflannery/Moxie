@@ -1,6 +1,7 @@
 import Backbone from 'backbone';
 import $ from 'jquery';
 import {browserHistory} from 'react-router';
+import store from '../store';
 
 export default Backbone.Model.extend({
   urlRoot: 'https://api.backendless.com/v1/data/Clients',
@@ -10,8 +11,10 @@ export default Backbone.Model.extend({
       description: ''
     },
 
-
-    addFileToClient({id, name}) {
+//All File To ClientFiles Data Table
+// Trigger Update To Client for ClientHome render
+// Push to ClientHome
+    addFileToClientFiles({id, name}) {
           this.save({
               clientFiles: this.get('clientFiles').concat([{
                 ___class: 'ClientFiles',
@@ -29,11 +32,36 @@ export default Backbone.Model.extend({
             });
           },
 
+  // Delete File From ClientFiles Data Table
+  // Update ClientFiles Table
+  // On Success, Trigger Update Change
+      deleteFileFromClient(clientFileId) {
+        let newClientFiles = this.get('clientFiles').filter((clientFile, i, arr)=>{
+          if(clientFileId !== clientFile.objectId) {
+            return true;
+            }
+          });
+        this.save({
+          clientFiles: newClientFiles
+          }, {
+          success: () => {
+            $.ajax({
+              type: 'DELETE',
+              url: `https://api.backendless.com/v1/data/ClientFiles/${clientFileId}`,
+              success: () => {
+                console.log('deleted from ClientFiles')
+              },
+              error: () => {
+                console.log('not deleted from ClientFiles');
+              }
+            });
+          }
+        });
+      },
+
+//Delete Client From Client Table
     deleteClient(objectId) {
         this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${objectId}`});
-    },
-
-    deleteFileFromClient(clientFileId) {
-      console.log(clientFileId);
     }
+
 });

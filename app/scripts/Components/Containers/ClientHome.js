@@ -46,16 +46,15 @@ export default React.createClass({
   updateState() {
     if(store.clients.get(this.props.params.id) !== undefined) {
     this.setState({
-      client: store.clients.get(this.props.params.id).toJSON()
-    });
-  }
-  this.setState({
-    files: store.files.toJSON(),
-    session: store.session.toJSON()
+      client: store.clients.get(this.props.params.id).toJSON(),
+      files: store.files.toJSON(),
+      session: store.session.toJSON()
   });
+  }
 },
 
   render() {
+    console.log(this.state);
     let clientPage = (
       <div className= "client-body">
         <div className="title-add-container">
