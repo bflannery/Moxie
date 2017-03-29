@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import store from '../store';
+import fileDownload from 'react-file-download';
+import $ from 'jquery';
 
 
 export default React.createClass({
@@ -19,6 +21,9 @@ export default React.createClass({
                 </button>
               </Link>
             </div>
+            <div className="download-button">
+            <button onClick={this.downloadFile} className="download-file">Download</button>
+            </div>
           </li>
         );
     } else {
@@ -35,5 +40,14 @@ export default React.createClass({
     let clientId = this.props.clientFile.files.clientId
     let clientFileId = this.props.clientFile.objectId;
     store.files.get(fileId).deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
-}
+},
+
+  downloadFile(e) {
+    e.preventDefault();
+  }
 });
+
+
+// let fileId = this.props.clientFile.files.objectId;
+// let fileUrl = this.props.clientFile.files.fileUrl;
+// store.files.get(fileId).downloadFileFromStorage(fileId, fileUrl);

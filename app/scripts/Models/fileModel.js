@@ -49,16 +49,16 @@ uploadFile(file, fileName, clientId, clientName) {
 // On Success, call AddFileToClientFiles on Clients Collections
 // Trigger Change on File Model
 
-    addFileToData(fileUrl, file, clientId, clientName) {
-      $.ajax({
-        type: 'POST',
-        url: 'https://api.backendless.com/v1/data/Files',
-        contentType: 'application/json',
-        data: JSON.stringify({fileUrl, file, clientId, clientName}),
-        success: (file)=> {
-          store.clients.get(file.clientId).addFileToClientFiles({id: file.objectId, name: file.file});
-        }
-      });
+  addFileToData(fileUrl, file, clientId, clientName) {
+    $.ajax({
+      type: 'POST',
+      url: 'https://api.backendless.com/v1/data/Files',
+      contentType: 'application/json',
+      data: JSON.stringify({fileUrl, file, clientId, clientName}),
+      success: (file)=> {
+        store.clients.get(file.clientId).addFileToClientFiles({id: file.objectId, name: file.file});
+      }
+    });
   },
 
 // Delete File From Data Table
@@ -87,5 +87,5 @@ deleteFileFromDataTable(objectId, clientId, clientFileId) {
           this.deleteFileFromDataTable(objectId, clientId, clientFileId);
         }
     });
-  },
+  }
 });
