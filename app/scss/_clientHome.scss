@@ -83,8 +83,19 @@
 }
 
 @media(min-width:800px) {
+
+  .title-add-container {
+    margin: 5rem 0 1rem 0;
+  }
+
+  .client-files-container {
+        margin-top: 1rem;
+  }
+
   .client-file-container {
     text-align: left;
+    width: 75%;
+    display: inline-block;
   }
 
   .client-file {

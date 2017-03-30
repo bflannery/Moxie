@@ -61,22 +61,8 @@ uploadFile(file, fileName, clientId, clientName) {
     });
   },
 
-// Delete File From Data Table
-// On Success, call deleteFileFromClients on Clients Collections
-
-deleteFileFromDataTable(objectId, clientId, clientFileId) {
-  $.ajax({
-    type: 'DELETE',
-    url: `https://api.backendless.com/v1/data/Files/${objectId}`,
-    success: () => {
-      console.log('deleted File From Table');
-      store.clients.get(clientId).deleteFileFromClient(clientFileId);
-      }
-    });
-  },
-
-  // Call deleteFileFromClient on Clients Collections
-  // Delete File from File Storage and Files Data Table
+  //Delete File From Client Folder in File Storage
+  // On Success , call deleteFileFromDataTable
 
     deleteFileFromStorage(objectId, fileUrl, clientId, clientFileId) {
       $.ajax({
@@ -86,6 +72,30 @@ deleteFileFromDataTable(objectId, clientId, clientFileId) {
           console.log('deleted File From Storage');
           this.deleteFileFromDataTable(objectId, clientId, clientFileId);
         }
-    });
-  }
+      });
+    },
+
+
+// Delete File From Data Files Table
+// On Success, call deleteFileFromClients on Clients Collections
+
+    deleteFileFromDataTable(objectId, clientId, clientFileId) {
+      $.ajax({
+        type: 'DELETE',
+        url: `https://api.backendless.com/v1/data/Files/${objectId}`,
+        success: () => {
+          console.log('deleted File From Table');
+          store.clients.get(clientId).deleteFileFromClient(clientFileId);
+          }
+        });
+      },
+
+
+//Delete Client Folder and ClientFiles From File Storage
+// On Success , call detelClientFromDataTable
+// If No Client in File Storage
+  deleteClientFilesFromFileTable(clientName, clientId) {
+          console.log(clientName);
+          console.log(clientId);
+        }
 });

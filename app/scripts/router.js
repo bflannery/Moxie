@@ -3,7 +3,7 @@ import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 
 import App from './Components/Containers/App';
 import LandingPage from './Components/Containers/LandingPage';
-import MoxieHome from './Components/Containers/MoxieHome';
+// import MoxieHome from './Components/Containers/MoxieHome';
 import Register from './Components/RegisterPage';
 import ForgotPassword from './Components/ForgotPassword';
 import Dropzone from './Components/Dropzone';
@@ -21,8 +21,7 @@ const router = (
     <Route path='/' component={App}>
       <IndexRoute component={LandingPage}/>
        <Route path='/register' component={Register}/>
-       <Route path='/home' component={MoxieHome}/>
-       <route path='/clients' component = {ClientsPage}/>
+       <Route path='/home' component={ClientsPage}/>
        <route path='/clients/:id' component = {ClientHome}/>
        <Route path='/clients/files/:id' component = {Dropzone}/>
        <Route path='/preview/:id' component = {DocPreview}/>
@@ -32,3 +31,5 @@ const router = (
 );
 
 export default router;
+
+      //  <route path='/clients' component = {ClientsPage}/>

@@ -21,10 +21,7 @@ export default React.createClass({
     nav = (
       <ul className="loggedIn-navContainer">
         <li className="nav-list">
-            <Link to="/clients"> Clients</Link>
-        </li>
-        <li className="nav-list">
-            <Link to="/documents"> Documents</Link>
+            <Link to="/home"> Clients</Link>
         </li>
         <li className="nav-list">
             <Link to="/landing-page" onClick={this.handleLogout}>Log Out</Link>

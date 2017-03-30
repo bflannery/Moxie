@@ -59,9 +59,12 @@ export default Backbone.Model.extend({
         });
       },
 
-//Delete Client From Client Table
-    deleteClient(objectId) {
-        this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${objectId}`});
-    }
 
+
+//Delete Client From Clients Table
+// On Succes, call deleteClientFromStorage
+
+  deleteClientFromDataTable(clientName, clientId) {
+    this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${clientId}`});
+  },
 });
