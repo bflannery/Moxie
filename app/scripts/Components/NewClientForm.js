@@ -14,7 +14,8 @@ export default React.createClass({
 
   addClient(e) {
      e.preventDefault();
-     let clientName = this.refs.clientName.value;
+     let clientName = this.refs.clientName.value.toLowerCase();
+     console.log(clientName);
 
      store.clients.create({ name : clientName});
 

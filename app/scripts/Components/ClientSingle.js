@@ -9,7 +9,7 @@ export default React.createClass({
     return (
       <li className="client-container">
       <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage}>
-      <i className="fa fa-folder-o" aria-hidden="true"></i>
+      <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
         <h4 className="client-name"> {this.props.client.name} </h4>
         </Link>
         <button onClick={this.removeClient} type="submit" className="delete-client-button"> Delete Client</button>

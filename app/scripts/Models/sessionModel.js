@@ -65,11 +65,12 @@ export default Backbone.Model.extend({
           window.localStorage.setItem('email',response.email);
           window.localStorage.setItem('ownerId',response.ownerId);
 
-          if(window.localStorage.company.toLowerCase() === 'we.moxie') {
-          this.set({ auth: true});
+
+          if(window.localStorage.email.toLowerCase().includes('wemoxie')) {
+          this.set({auth: true});
           browserHistory.push('/home');
         } else {
-          this.set({ auth: false});
+          this.set({auth: false});
           store.clients.getClients(window.localStorage.company);
         }
       }
