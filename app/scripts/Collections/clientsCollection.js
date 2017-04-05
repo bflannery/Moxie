@@ -12,6 +12,10 @@ export default Backbone.Collection.extend({
     return data.data;
   },
 
+  // Get All Clients
+  // Filter Client based on Client name
+  // Push to Client Page
+
   getClients(company) {
     $.ajax({
       type: 'GET',
@@ -26,6 +30,38 @@ export default Backbone.Collection.extend({
       error: () => {
         console.log('no clients');
       }
+      });
+    },
+
+
+    //Delete Client From Clients Collection
+    //On Success, trigger change
+    
+    deleteClientFromClientsCollections(clientId) {
+      // console.log(clientId);
+      $.ajax({
+        type: 'GET',
+        url: 'https://api.backendless.com/v1/data/Clients',
+        success: (clients) => {
+          return clients.data.filter((client, i ,arr)=>{
+            // console.log(client);
+            if(client.objectId != clientId) {
+              return true;
+            } else {
+              $.ajax({
+                type: 'DELETE',
+                url: `https://api.backendless.com/v1/data/Clients/${client.objectId}`,
+                success: () => {
+                  this.trigger('change');
+                  console.log('client deleted from clients collection');
+                },
+                error: () => {
+                  console.log('client not deleted from clients collections');
+                }
+              });
+            }
+          });
+        }
       });
     }
 });

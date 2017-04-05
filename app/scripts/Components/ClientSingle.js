@@ -22,7 +22,7 @@ export default React.createClass({
     let clientName = this.props.client.name;
     let clientId = this.props.client.objectId;
 
-    store.clients.get(clientId).deleteClientFromDataTable(clientName, clientId);
+    store.file.deleteClientFolderFromStorage(clientName, clientId);
 
   }
 });

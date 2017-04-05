@@ -31,7 +31,7 @@ uploadFile(file, fileName, clientId, clientName) {
           'secret-key': config.secret,
           'application-type': 'REST'
         },
-        success: (response)=>{
+        success: (response) =>{
           response = JSON.parse(response);
           this.addFileToData(response.fileURL, fileName, clientId, clientName);
         },
@@ -91,11 +91,22 @@ uploadFile(file, fileName, clientId, clientName) {
       },
 
 
-//Delete Client Folder and ClientFiles From File Storage
-// On Success , call detelClientFromDataTable
-// If No Client in File Storage
-  deleteClientFilesFromFileTable(clientName, clientId) {
-          console.log(clientName);
-          console.log(clientId);
-        }
+//Delete Client Folder and Client Files From File Storage
+// On Success , call detelClientFilesFromFilesCollection on Files Collection
+// If No Client Folder in file storage ...
+
+  deleteClientFolderFromStorage(clientName, clientId) {
+    $.ajax({
+      type: 'DELETE',
+      url: 'https://api.backendless.com/v1/files/Moxie/' + clientName,
+      success: () => {
+        console.log('client folder and files deleted from storage');
+      },
+      error: () => {
+        console.log('client folder and files not deleted from storage');
+      }
+    });
+
+    store.files.deleteClientFilesFromFilesCollection(clientId);
+      }
 });
