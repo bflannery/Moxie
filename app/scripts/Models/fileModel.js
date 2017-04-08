@@ -9,7 +9,7 @@ export default Backbone.Model.extend({
     idAttribute: 'objectId',
     defaults: {
       name: '',
-      description: ''
+      description: '',
     },
 
 
@@ -18,6 +18,7 @@ export default Backbone.Model.extend({
 //Alert File Exists if Response Code 6003
 
 uploadFile(file, fileName, clientId, clientName) {
+  console.log(file);
     let fd = new FormData();
       fd.append('upload', file);
       $.ajax({
@@ -32,8 +33,10 @@ uploadFile(file, fileName, clientId, clientName) {
           'application-type': 'REST'
         },
         success: (response) =>{
+          console.log('on files storage success...');
           response = JSON.parse(response);
           this.addFileToData(response.fileURL, fileName, clientId, clientName);
+          store.client.set({addFileModal: false});
         },
         error: (response) => {
           if(response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
@@ -56,6 +59,7 @@ uploadFile(file, fileName, clientId, clientName) {
       contentType: 'application/json',
       data: JSON.stringify({fileUrl, file, clientId, clientName}),
       success: (file)=> {
+        console.log('on file to data success...')
         store.clients.get(file.clientId).addFileToClientFiles({id: file.objectId, name: file.file});
       }
     });

@@ -6,7 +6,7 @@ import store from '../../store';
 import Client from '../../Models/clientModel';
 
 import ClientFiles from '../ClientFiles';
-import DocPreview from '../DocPreview';
+import DropzoneModal from '../DropzoneModal';
 import Header from '../Header';
 
 export default React.createClass({
@@ -17,7 +17,8 @@ export default React.createClass({
         client: {
           clientFiles: []
         },
-        session: store.session.toJSON()
+        session: store.session.toJSON(),
+        dropzoneFiles: []
     };
   },
 
@@ -66,6 +67,7 @@ export default React.createClass({
     );
 
     if(this.state.session.auth) {
+
       clientPage = (
         <div className= "client-body">
           <div className="title-add-container">
@@ -77,6 +79,22 @@ export default React.createClass({
           </div>
         </div>
       );
+
+        if(this.state.client.addFileModal) {
+          clientPage = (
+            <div className= "client-body">
+              <div className="title-add-container">
+                <h2 className="client-page-name"> {this.state.client.name} </h2>
+              </div>
+              <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
+              <div className="client-files-container">
+                <ClientFiles client={this.state.client}/>
+                <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
+              </div>
+            </div>
+          );
+        }
+
     }
       return (
         <div className="client-file-page">
@@ -86,6 +104,6 @@ export default React.createClass({
        );
      },
    handleFile() {
-     browserHistory.push('/clients/files/' + this.props.params.id);
+     store.clients.get(this.state.client.objectId).set({addFileModal: true});
    }
 });

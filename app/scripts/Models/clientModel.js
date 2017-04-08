@@ -9,7 +9,8 @@ export default Backbone.Model.extend({
     defaults: {
       name: '',
       description: '',
-      editing: false
+      addFolder: false,
+      addFileModal : false
     },
 
 //All File To ClientFiles Data Table
@@ -27,6 +28,7 @@ export default Backbone.Model.extend({
               }]),
             }, {
               success: (client, response) => {
+                console.log('file to file clientfiles success...')
                 this.trigger('change');
                 browserHistory.push('/clients/'+ client.id);
               }

@@ -4,7 +4,7 @@ import store from '../../store';
 import NewClientForm from '../NewClientForm';
 import ClientsList from '../ClientsList';
 import Header from '../Header';
-import Sidebar from '../Sidebar';
+import Sidebar from './Sidebar';
 
 export default React.createClass({
 
@@ -43,7 +43,7 @@ export default React.createClass({
         </div>
     );
 
-    if(this.state.session.editing) {
+    if(this.state.session.addFolder) {
        newClientFormState = (
         <div className="client-list-container">
           <NewClientForm/>
@@ -55,6 +55,7 @@ export default React.createClass({
     return (
       <div className="moxie-home">
         <Header/>
+        <h3> Home </h3>
         {newClientFormState}
         <Sidebar session={this.state.session}/>
       </div>
