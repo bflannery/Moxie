@@ -36,14 +36,13 @@ export default React.createClass({
   },
 
   render() {
-    console.log(this.state);
     let newClientFormState = (
         <div className="client-list-container">
           <ClientsList clients={this.state.clients}/>
         </div>
     );
 
-    if(this.state.session.addFolder) {
+    if(this.state.session.addFolder === true) {
        newClientFormState = (
         <div className="client-list-container">
           <NewClientForm/>

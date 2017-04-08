@@ -28,9 +28,9 @@ export default Backbone.Model.extend({
               }]),
             }, {
               success: (client, response) => {
-                console.log('file to file clientfiles success...')
+                this.set({addFileModal: false});
                 this.trigger('change');
-                browserHistory.push('/clients/'+ client.id);
+
               }
             });
           },

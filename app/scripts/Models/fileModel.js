@@ -36,7 +36,6 @@ uploadFile(file, fileName, clientId, clientName) {
           console.log('on files storage success...');
           response = JSON.parse(response);
           this.addFileToData(response.fileURL, fileName, clientId, clientName);
-          store.client.set({addFileModal: false});
         },
         error: (response) => {
           if(response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {

@@ -65,5 +65,6 @@ export default React.createClass({
       let clientId = this.props.params.id;
       let clientName = this.state.client.name;
       store.file.uploadFile(file, fileName, clientId, clientName);
+      
       }
   });
