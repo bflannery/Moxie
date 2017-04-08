@@ -3,22 +3,17 @@ import store from '../store';
 
 
 export default React.createClass({
+
   render() {
     return (
-      <form className="add-new-client">
-        <input type="text" ref="clientName" className="client-input" placeholder="Client Name"/>
-        <button type="submit" className="create-button" onClick={this.addClient}> Add Client </button>
+      <form className="add-new-client" onSubmit={this.addClient}>
+        <input type="text" ref="clientName" className="client-input" placeholder="Add Client"/>
       </form>
     );
   },
 
-  addClient(e) {
-     e.preventDefault();
+  addClient() {
      let clientName = this.refs.clientName.value.toLowerCase();
-     console.log(clientName);
-
      store.clients.create({ name : clientName});
-
   }
-
 });

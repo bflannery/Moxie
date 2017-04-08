@@ -1,13 +1,20 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-import { Link } from 'react-router';
+import store from '../store';
 
 export default React.createClass({
-  render () {
-    return (
+render() {
+  console.log(this.props);
+
+  return(
         <div>
-          <h1> Sidebar </h1>
+          <button className="add-client-button" onClick={this.toggleNewClient}>Add Client</button>
         </div>
     );
+  },
+
+  toggleNewClient(e) {
+    store.session.set({ editing: true });
   }
+
 });

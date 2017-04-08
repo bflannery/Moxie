@@ -16,7 +16,9 @@ export default Backbone.Model.extend({
   idAttribute: 'objectId',
   defaults: {
     auth: false,
-    passwordReset: null
+    passwordReset: null,
+    editing: false
+
   },
 
   // Validate User Password

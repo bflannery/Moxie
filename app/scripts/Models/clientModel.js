@@ -8,7 +8,8 @@ export default Backbone.Model.extend({
     idAttribute: 'objectId',
     defaults: {
       name: '',
-      description: ''
+      description: '',
+      editing: false
     },
 
 //All File To ClientFiles Data Table
