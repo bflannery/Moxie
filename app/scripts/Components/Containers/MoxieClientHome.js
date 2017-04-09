@@ -61,6 +61,7 @@ export default React.createClass({
     console.log(this.props);
     let clientContainer = (
         <div className="clients-files-container">
+          <h2> {this.state.client.name} </h2>
           <ClientFiles client={this.state.client} session={this.state.session}/>
         </div>
     );
@@ -68,9 +69,12 @@ export default React.createClass({
     if(this.state.session.addFileModal === true) {
           clientContainer = (
               <div className="clients-files-container">
+              <div className="modal-background"/>
+              <div className="modal-container">
                 <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
+              </div>
+                <h2> {this.state.client.name} </h2>
                 <ClientFiles client={this.state.client}/>
-                <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
               </div>
 
           );
