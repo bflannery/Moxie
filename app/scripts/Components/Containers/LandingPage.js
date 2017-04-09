@@ -22,7 +22,7 @@ export default React.createClass({
   render() {
     return (
 
-      <div className="main-container">
+      <div className="landingPage-container">
           <Login session={this.state.session}/>
          </div>
 
@@ -32,7 +32,7 @@ export default React.createClass({
 
 //updateStatus
     //sets the Session state to current session
-    
+
   updateStatus(){
     this.setState({session: store.session.toJSON()});
   }

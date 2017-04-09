@@ -1,7 +1,6 @@
 import React from 'react';
-import HeaderNav from './HeaderNav';
-import {Link} from 'react-router';
-import {browserHistory} from 'react-router';
+import {browserHistory, Link} from 'react-router';
+import Logout from './Logout';
 
 export default React.createClass({
   render() {
@@ -12,8 +11,8 @@ export default React.createClass({
             <Link to="/home">we.moxie </Link>
           </h2>
         </div>
-        <HeaderNav />
-        </div>
+        <Logout />
+      </div>
     );
   }
 });

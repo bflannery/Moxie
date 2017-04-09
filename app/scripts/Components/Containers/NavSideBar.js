@@ -5,8 +5,7 @@ import store from '../../store';
 export default React.createClass({
   render() {
     return(
-      <div className=" sidebard sidebar-1">
-        <nav className = "navSideBar-container">
+        <nav className = "sidebar sidebar-1">
           <ul className = "navSideBar-links-container">
             <Link to="#" className ="navSieBar-links">Recent</Link>
             <Link to="#" className ="navSieBar-links">Recent</Link>
@@ -14,7 +13,6 @@ export default React.createClass({
             <Link to="#" className ="navSieBar-links">Recent</Link>
             </ul>
         </nav>
-      </div>
     );
   },
 });
