@@ -45,8 +45,10 @@ export default React.createClass({
 
         return (
           <div className="dropzone-modal">
+            <div className="dropzone-content">
             <h3> Upload Files </h3>
             {dropzoneFiles}
+          </div>
           </div>
         );
     },

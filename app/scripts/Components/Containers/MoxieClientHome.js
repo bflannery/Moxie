@@ -8,6 +8,8 @@ import Client from '../../Models/clientModel';
 import ClientFiles from '../ClientFiles';
 import DropzoneModal from '../DropzoneModal';
 import Header from '../Header';
+import Sidebar from './Sidebar';
+import NavSideBar from './NavSideBar';
 
 export default React.createClass({
 
@@ -50,47 +52,37 @@ export default React.createClass({
       client: store.clients.get(this.props.params.id).toJSON(),
       files: store.files.toJSON(),
       session: store.session.toJSON(),
-
-
   });
   }
 },
 
   render() {
     console.log(this.state);
-    let clientPage = (
-      <div className= "client-body">
-        <div className="title-add-container">
-          <h2 className="client-page-name"> {this.state.client.name} </h2>
-        </div>
-        <div className="client-files-container">
+    let clientContainer = (
+        <div className="main-container">
+        <div className="clients-files-container">
           <ClientFiles client={this.state.client} session={this.state.session}/>
         </div>
-      </div>
+        </div>
+
     );
 
     if(this.state.session.auth) {
-
-      clientPage = (
-        <div className= "client-body">
-          <div className="title-add-container">
-            <h2 className="client-page-name"> {this.state.client.name} </h2>
-          </div>
-          <div className="client-files-container">
+      clientContainer = (
+        <div className="main-container">
+          <div className="clients-files-container">
             <ClientFiles client={this.state.client}/>
-            <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
           </div>
+            <NavSideBar session={this.state.session} />
+            <Sidebar session={this.state.session}/>
         </div>
       );
 
         if(this.state.client.addFileModal === true) {
-          clientPage = (
-            <div className= "client-body">
-              <div className="title-add-container">
-                <h2 className="client-page-name"> {this.state.client.name} </h2>
-              </div>
+          clientContainer = (
+            <div className="main-container">
               <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
-              <div className="client-files-container">
+              <div className="clients-files-container">
                 <ClientFiles client={this.state.client}/>
                 <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
               </div>
@@ -102,8 +94,8 @@ export default React.createClass({
       return (
 
         <div className="client-file-page">
-            <Header />
-          {clientPage}
+          <Header/>
+          {clientContainer}
         </div>
        );
      },

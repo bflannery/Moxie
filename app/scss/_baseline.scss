@@ -27,8 +27,61 @@ body{
   background: -moz-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
   background: -o-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
   background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
-    width: 100%;
-    overflow: hidden;
-    height: 50rem;
+	width: 100%;
+  overflow: hidden;
+}
+
+.main-container {
+	min-height: 800px;
+			 margin: 0;
+			 padding: 0;
+			 display: flex;
+			 flex-flow: row;
+}
+
+.main-container > .clients-files-container {
+	margin: 4px;
+        padding: 5px;
+        border: 1px solid #cccc33;
+        border-radius: 7pt;
+        background: #dddd88;
+        flex: 3 1 60%;
+        order: 2;
+}
+
+.main-container > .sidebar-1 {
+	margin: 4px;
+	 padding: 5px;
+	 border: 1px solid #8888bb;
+	 border-radius: 7pt;
+	 background: #ccccff;
+	 flex: 1 6 20%;
+	 order: 1;
+}
+
+.main-container > aside {
+	margin: 4px;
+			padding: 5px;
+			border: 1px solid #8888bb;
+			border-radius: 7pt;
+			background: #ccccff;
+			flex: 1 6 20%;
+			order: 3;
 
 }
+
+@media all and (max-width: 640px) {
+			 .main-container{
+					 flex-direction: column;
+			 }
+
+			 .main-container > .clients-files-container, .main-container > .sidebar-1, .main-container > aside {
+			 /* Return them to document order */
+					 order: 0;
+			 }
+
+			 .main-container > .sidebar-1, .main-container > aside, header {
+					 min-height: 50px;
+					 max-height: 50px;
+			 }
+	 }

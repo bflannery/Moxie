@@ -5,10 +5,10 @@ import store from '../../store';
 export default React.createClass({
   render() {
     return(
-      <div>
+      <aside className="sidebar sidebar-2">
         <button className="add-client-button" onClick={this.toggleNewClient}>Add Client</button>
         <button className="add-file-button" onClick={this.dropZoneModal}> Add Files </button>
-      </div>
+      </aside>
     );
   },
 

@@ -1,31 +1,67 @@
 import React from 'react';
 import store from '../../store';
-import {Link} from 'react-router';
-import {browserHistory} from 'react-router';
+
+import NewClientForm from '../NewClientForm';
+import ClientsList from '../ClientsList';
 import Header from '../Header';
+import Sidebar from './Sidebar';
+import NavSideBar from './NavSideBar';
 
 export default React.createClass({
+
+  getInitialState() {
+    return {
+      clients: store.clients.toJSON(),
+      session: store.session.toJSON()
+    };
+  },
+
+  componentDidMount() {
+    store.clients.fetch();
+    store.clients.on('update change', this.updateState);
+
+    store.session.fetch();
+    store.session.on('update change', this.updateState);
+  },
+
+  componentWillUnmount() {
+    store.clients.off('update change', this.updateState);
+    store.session.off('update change', this.updateState);
+  },
+
+  updateState() {
+    this.setState({
+      clients: store.clients.toJSON(),
+      session: store.session.toJSON()
+    });
+  },
+
   render() {
+    let newClientFormState = (
+        <div className="clients-files-container">
+          <ClientsList clients={this.state.clients}/>
+        </div>
+    );
+
+    if(this.state.session.addFolder === true) {
+       newClientFormState = (
+        <div className="clients-files-container">
+          <NewClientForm/>
+          <ClientsList clients={this.state.clients}/>
+        </div>
+      );
+    }
+
     return (
-      <div className="moxie-homepage">
-      <Header/>
-      <div className="moxie-home-container">
-        <ul className="moxie-items-list">
-          <li className="moxie-item">
-            <Link to="/clients" className="item-link">
-              <i className="fa fa-users client-item-icon" aria-hidden="true"></i>
-              <span> Clients</span>
-            </Link>
-          </li>
-          <li className="moxie-item">
-            <Link to="/documents" className="item-link">
-              <i className="fa fa-files-o client-item-icon" aria-hidden="true"></i>
-              <span>Documents</span>
-            </Link>
-          </li>
-        </ul>
+
+      <div className="moxie-home">
+        <Header/>
+        <div className="main-container">
+        {newClientFormState}
+        <NavSideBar session={this.state.session} />
+        <Sidebar session={this.state.session}/>
+        </div>
       </div>
-    </div>
     );
   }
 });

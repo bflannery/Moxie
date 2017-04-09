@@ -6,11 +6,10 @@ import LandingPage from './Components/Containers/LandingPage';
 
 import Register from './Components/RegisterPage';
 import ForgotPassword from './Components/ForgotPassword';
-import Dropzone from './Components/Dropzone';
 
-import ClientsPage from './Components/Containers/ClientsPage';
-import ClientHome from './Components/Containers/ClientHome';
-import DocPreview from './Components/DocPreview';
+
+import MoxieHome from './Components/Containers/MoxieHome';
+import MoxieClientHome from './Components/Containers/MoxieClientHome';
 
 
 
@@ -21,10 +20,8 @@ const router = (
     <Route path='/' component={App}>
       <IndexRoute component={LandingPage}/>
        <Route path='/register' component={Register}/>
-       <Route path='/home' component={ClientsPage}/>
-       <route path='/clients/:id' component = {ClientHome}/>
-       <Route path='/clients/files/:id' component = {Dropzone}/>
-       <Route path='/preview/:id' component = {DocPreview}/>
+       <Route path='/home' component={MoxieHome}/>
+       <route path='/clients/:id' component = {MoxieClientHome}/>
        <Route path='/forgotpassword' component={ForgotPassword}/>
     </Route>
   </Router>

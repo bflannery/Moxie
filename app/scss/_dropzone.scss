@@ -1,20 +1,38 @@
 .image-upload-container {
-  text-align: center;
-  margin: 7rem auto;
+    text-align: right;
+    margin: 2rem auto;
+}
+
+.dropzone-modal {
+    position: fixed;
+    width: 75%;
+}
+
+.dropzone-content {
+  width: 75%;
+  position: absolute;
+  border:1px solid #ccc;
+  background:#fff;
+  overflow:auto;
+  outline:none;
+  padding: 20px;
+    h3 {
+      color: black;
+    }
 }
 
 #dropzone {
-  margin: 2rem auto;
+  display: none;
 }
 
-.upload-file-container{
-  font-size: 1.5rem;
-  margin: 1rem 0;
+.upload-file-container {
+    font-size: 1.5rem;
+    margin: 1rem 0;
 }
 
 .dropzone-file-icon {
-  margin: 1rem 0;
-  vertical-align: middle;
-  display: inline-block;
-  font-size: 2rem;
+    margin: 1rem 0;
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 2rem;
 }
