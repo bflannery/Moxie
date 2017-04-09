@@ -17,7 +17,8 @@ export default Backbone.Model.extend({
   defaults: {
     auth: false,
     passwordReset: null,
-    addFolder: false
+    addFolder: false,
+    addFileModal: false
 
   },
 

@@ -58,47 +58,36 @@ export default React.createClass({
 
   render() {
     console.log(this.state);
+    console.log(this.props);
     let clientContainer = (
-        <div className="main-container">
         <div className="clients-files-container">
           <ClientFiles client={this.state.client} session={this.state.session}/>
         </div>
-        </div>
-
     );
 
-    if(this.state.session.auth) {
-      clientContainer = (
-        <div className="main-container">
-          <div className="clients-files-container">
-            <ClientFiles client={this.state.client}/>
-          </div>
-            <NavSideBar session={this.state.session} />
-            <Sidebar session={this.state.session}/>
-        </div>
-      );
-
-        if(this.state.client.addFileModal === true) {
+    if(this.state.session.addFileModal === true) {
           clientContainer = (
-            <div className="main-container">
-              <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
               <div className="clients-files-container">
+                <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
                 <ClientFiles client={this.state.client}/>
                 <input onClick={this.handleFile} type="button" className="add-button" value="Add a File"/>
               </div>
-            </div>
+
           );
         }
 
-    }
       return (
-
         <div className="client-file-page">
           <Header/>
+          <div className="main-container">
           {clientContainer}
+          <NavSideBar session={this.state.session}/>
+          <Sidebar session={this.state.session} clientId={this.props.params.id}/>
+        </div>
         </div>
        );
      },
+
    handleFile() {
      store.clients.get(this.state.client.objectId).set({addFileModal: true});
    }

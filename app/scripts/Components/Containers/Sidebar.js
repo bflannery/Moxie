@@ -4,11 +4,26 @@ import store from '../../store';
 
 export default React.createClass({
   render() {
-    return(
-      <aside className="sidebar sidebar-2">
+    let sideBar = (
+      <div className = "modal-button-container">
         <button className="add-client-button" onClick={this.toggleNewClient}>Add Client</button>
         <button className="add-file-button" onClick={this.dropZoneModal}> Add Files </button>
-      </aside>
+      </div>
+    );
+
+    if(this.props.clientId) {
+      sideBar = (
+        <div className = "modal-button-container">
+          <button className="add-client-button" onClick={this.toggleNewClient}>Add Folder</button>
+          <button className="add-file-button" onClick={this.dropZoneModal}> Add Files </button>
+        </div>
+      );
+    }
+    return(
+        <aside className="sidebar sidebar-2">
+        {sideBar}
+        </aside>
+
     );
   },
 
@@ -19,7 +34,7 @@ export default React.createClass({
     store.session.set({ addFolder: true });
   },
 
-  dropZoneModal() {
-
+  dropZoneModal(e) {
+    store.session.set({ addFileModal: true});
   }
 });

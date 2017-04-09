@@ -4,7 +4,6 @@ import store from '../../store';
 
 export default React.createClass({
   render() {
-    console.log(this.props);
     return(
       <div className=" sidebard sidebar-1">
         <nav className = "navSideBar-container">
