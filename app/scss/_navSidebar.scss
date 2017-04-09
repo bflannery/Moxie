@@ -1,0 +1,12 @@
+.navSideBar-links-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 2.5rem;
+}
+
+@media (min-width: 650px) {
+  .navSideBar-links-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

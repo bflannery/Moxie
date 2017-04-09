@@ -11,7 +11,6 @@ export default React.createClass({
     if(this.props.clientFile) {
       return (
           <li className="client-file">
-            <div className="file-name-container">
               <Link to={this.props.clientFile.files.fileUrl} target="_blank" className="file-link">
                 <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
                 <span> {this.props.clientFile.files.file} </span>
@@ -19,7 +18,6 @@ export default React.createClass({
                   <i className="fa fa-times-circle" aria-hidden="true"></i>
                 </button>
               </Link>
-            </div>
           </li>
         );
     } else {
@@ -33,7 +31,7 @@ export default React.createClass({
 //removeFile
     //Create local variables for clientFile values
     //Call deleteFileFromStorage through Files Collection
-    
+
   removeFile(e) {
     e.preventDefault();
     let fileId = this.props.clientFile.files.objectId;

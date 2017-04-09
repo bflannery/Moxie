@@ -7,21 +7,28 @@
     margin-left: 1rem;
 }
 
+.clients-files-container {
+  h2 {
+    font-size: 2rem;
+  }
+}
 .client-files-container {
   margin-top: 4rem;
   padding: 0;
   text-align: center;
+
 }
 
 
 .client-file {
-    margin: 4rem auto;
+    margin: 1rem auto;
+    border-bottom: 1px solid white;
 }
 
 .file-icon {
     margin: 1rem 0;
-    font-size: 5rem;
-    display: block;
+    font-size: 2rem;
+    display: inline-block;
 }
 
 .file-link {
@@ -32,25 +39,7 @@
 }
 
 .file-link:hover {
-    color: white;
-}
-
-.file-link:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    visibility: hidden;
-    transform: scaleX(0);
-    transition: all 0.3s ease-in-out 0s;
-}
-
-.file-link:hover:before {
-    visibility: visible;
-    transform: scaleX(1);
+    color: blue;
 }
 
 .delete-file-button {
@@ -74,12 +63,6 @@
 
   .client-file-container {
     text-align: left;
-    width: 75%;
-    display: inline-block;
-  }
-
-  .client-file {
-    margin: 4rem 1rem;
   }
 
   .file-icon {
