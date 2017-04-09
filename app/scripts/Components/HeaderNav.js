@@ -4,6 +4,7 @@ import store from '../store';
 
 
 export default React.createClass({
+
   getInitialState(){
     return {
       session: {auth: store.session.get('auth')}
@@ -35,6 +36,9 @@ export default React.createClass({
       </nav>
     );
   },
+
+  //handleLogout
+    //Call logout() through Session Model
 
   handleLogout(e) {
     e.preventDefault();

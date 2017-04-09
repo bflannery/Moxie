@@ -38,7 +38,6 @@ export default Backbone.Model.extend({
 
   // Delete File From ClientFiles Data Table
   // Update ClientFiles Table
-  // On Success, Trigger Update Change
       deleteFileFromClient(clientFileId) {
         let newClientFiles = this.get('clientFiles').filter((clientFile, i, arr)=>{
           if(clientFileId !== clientFile.objectId) {
@@ -66,8 +65,7 @@ export default Backbone.Model.extend({
 
 
 //Delete Client From Clients Table
-// On Succes, call deleteClientFromStorage
-
+// Triggers('change')
   deleteClientFromDataTable(clientName, clientId) {
     this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${clientId}`});
   },

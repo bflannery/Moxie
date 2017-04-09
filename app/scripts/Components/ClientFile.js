@@ -29,6 +29,11 @@ export default React.createClass({
     }
   },
 
+
+//removeFile
+    //Create local variables for clientFile values
+    //Call deleteFileFromStorage through Files Collection
+    
   removeFile(e) {
     e.preventDefault();
     let fileId = this.props.clientFile.files.objectId;

@@ -44,6 +44,11 @@ export default React.createClass({
     );
   },
 
+  //handleSubmit
+    //Create local variable for email value
+    //Call forgotPassword on Session Model
+    //Push to Home
+
   handleSubmit(e) {
     e.preventDefault();
     let email = this.refs.email.value;

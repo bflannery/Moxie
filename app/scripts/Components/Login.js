@@ -23,6 +23,11 @@ export default React.createClass({
     );
   },
 
+//handleSubmit
+  //Grabs login values
+  //Calls login() on the Session Model
+  //Clear Inputs
+
   handleSubmit(e){
     e.preventDefault();
     const email = this.refs.email.value;

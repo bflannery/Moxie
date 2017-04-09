@@ -12,6 +12,10 @@ export default React.createClass({
     );
   },
 
+// addClient
+    // Create a new client through Clients Collection
+    // Set addFolder: false through Session model
+    
   addClient(e) {
     e.preventDefault();
      let clientName = this.refs.clientName.value.toLowerCase();

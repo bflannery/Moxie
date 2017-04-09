@@ -30,7 +30,10 @@ export default React.createClass({
     );
   },
 
-  updateStats(){
+//updateStatus
+    //sets the Session state to current session
+    
+  updateStatus(){
     this.setState({session: store.session.toJSON()});
   }
 

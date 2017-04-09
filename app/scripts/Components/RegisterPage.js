@@ -21,6 +21,14 @@ export default React.createClass({
 
     );
   },
+
+  //handleSubmit
+      //Craete local variables for Register input values
+      //Call validatePassword on Session Model
+          //if validatePassword returns true call register() on Session Model
+          // Else Passwords Don't match
+      //Clear Input form
+          
   handleSubmit(e) {
     e.preventDefault();
       const company= this.refs.company.value;

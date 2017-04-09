@@ -12,6 +12,9 @@ export default React.createClass({
     );
   },
 
+//toggleNewClient
+  //Set addFolder : true through Session Model
+
   toggleNewClient(e) {
     store.session.set({ addFolder: true });
   },
@@ -19,7 +22,4 @@ export default React.createClass({
   dropZoneModal() {
 
   }
-
-
-
 });

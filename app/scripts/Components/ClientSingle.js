@@ -17,6 +17,10 @@ export default React.createClass({
     );
   },
 
+//removeClient
+    //Create local variables for client values
+    //Call deleteClientFolderFromStorage
+    
   removeClient(e) {
     e.preventDefault();
     let clientName = this.props.client.name;
