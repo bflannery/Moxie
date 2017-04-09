@@ -17,6 +17,7 @@ export default Backbone.Model.extend({
 // Trigger Update To Client for ClientHome render
 // Push to ClientHome
     addFileToClientFiles({id, name}) {
+          this.set({addFileModal: false});
           this.save({
               clientFiles: this.get('clientFiles').concat([{
                 ___class: 'ClientFiles',
@@ -27,8 +28,8 @@ export default Backbone.Model.extend({
                 }
               }]),
             }, {
-              success: (client, response) => {
-                this.set({addFileModal: false});
+              success: (response) => {
+                console.log(response);
                 this.trigger('change');
 
               }

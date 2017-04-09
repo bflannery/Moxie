@@ -16,6 +16,6 @@ export default React.createClass({
     e.preventDefault();
      let clientName = this.refs.clientName.value.toLowerCase();
      store.clients.create({ name : clientName});
-     store.session.set({ editing: false});
+     store.session.set({ addFolder: false});
   }
 });

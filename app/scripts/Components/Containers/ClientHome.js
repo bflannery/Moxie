@@ -13,19 +13,19 @@ export default React.createClass({
 
   getInitialState() {
     return {
+
         files: store.files.toJSON(),
         client: {
           clientFiles: []
         },
         session: store.session.toJSON(),
-        dropzoneFiles: []
     };
   },
 
   componentDidMount() {
     let client = store.clients.get(this.props.params.id);
     if(!client) {
-          client = new Client({objectId: this.props.params.id});
+          client = new Client({objectId: this.props.params.id , addFileModal: false});
           store.clients.add(client);
         }
       client.fetch();
@@ -49,12 +49,15 @@ export default React.createClass({
     this.setState({
       client: store.clients.get(this.props.params.id).toJSON(),
       files: store.files.toJSON(),
-      session: store.session.toJSON()
+      session: store.session.toJSON(),
+
+
   });
   }
 },
 
   render() {
+    console.log(this.state);
     let clientPage = (
       <div className= "client-body">
         <div className="title-add-container">
@@ -80,7 +83,7 @@ export default React.createClass({
         </div>
       );
 
-        if(this.state.client.addFileModal) {
+        if(this.state.client.addFileModal === true) {
           clientPage = (
             <div className= "client-body">
               <div className="title-add-container">
@@ -97,6 +100,7 @@ export default React.createClass({
 
     }
       return (
+
         <div className="client-file-page">
             <Header />
           {clientPage}

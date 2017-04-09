@@ -12,7 +12,7 @@ export default React.createClass({
   getInitialState() {
     return {
       dropzoneFiles: []
-    }
+    };
   },
 
     render() {

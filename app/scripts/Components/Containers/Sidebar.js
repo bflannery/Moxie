@@ -3,14 +3,12 @@ import {browserHistory} from 'react-router';
 import store from '../../store';
 
 export default React.createClass({
-render() {
-  console.log(this.props);
-
-  return(
-        <div>
-          <button className="add-client-button" onClick={this.toggleNewClient}>Add Client</button>
-          <button className="add-file-button" onClick={this.dropZoneModal}> Add Files </button>
-        </div>
+  render() {
+    return(
+      <div>
+        <button className="add-client-button" onClick={this.toggleNewClient}>Add Client</button>
+        <button className="add-file-button" onClick={this.dropZoneModal}> Add Files </button>
+      </div>
     );
   },
 

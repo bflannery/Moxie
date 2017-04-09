@@ -18,7 +18,6 @@ export default Backbone.Model.extend({
 //Alert File Exists if Response Code 6003
 
 uploadFile(file, fileName, clientId, clientName) {
-  console.log(file);
     let fd = new FormData();
       fd.append('upload', file);
       $.ajax({

@@ -52,6 +52,7 @@ export default React.createClass({
     }
 
     return (
+
       <div className="moxie-home">
         <Header/>
         <h3> Home </h3>
