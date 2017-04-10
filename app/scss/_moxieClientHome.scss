@@ -19,8 +19,8 @@
 
 }
 
-
 .client-file {
+    width: 88%;
     margin: 1rem auto;
     border-bottom: 1px solid white;
 }
@@ -36,6 +36,10 @@
   margin-left: .5rem;
     font-size: 1.5rem;
     display: inline-block;
+    span {
+      font-size: 1.2rem;
+      margin: 1rem 0 1rem 1rem;
+    }
 }
 
 .file-link:hover {
@@ -43,12 +47,12 @@
 }
 
 .delete-file-button {
-  top: 3.7rem;
+  float: right;
   padding: 0;
+  margin-right: 2rem;
+  margin-top: 1.5rem;
   background: transparent;
   color: white;
-  margin-left: 1rem;
-
 }
 
 @media(min-width:800px) {

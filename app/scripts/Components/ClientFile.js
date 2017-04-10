@@ -14,10 +14,10 @@ export default React.createClass({
               <Link to={this.props.clientFile.files.fileUrl} target="_blank" className="file-link">
                 <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
                 <span> {this.props.clientFile.files.file} </span>
-                <button onClick={this.removeFile} type="submit" className="delete-file-button">
-                  <i className="fa fa-times-circle" aria-hidden="true"></i>
-                </button>
               </Link>
+              <button onClick={this.removeFile} type="submit" className="delete-file-button">
+                <i className="fa fa-times-circle" aria-hidden="true"></i>
+              </button>
           </li>
         );
     } else {

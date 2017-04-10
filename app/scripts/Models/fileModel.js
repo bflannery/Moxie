@@ -97,14 +97,18 @@ uploadFile(file, fileName, clientId, clientName) {
 // On Success , call detelClientFilesFromFilesCollection on Files Collection
 // If No Client Folder in file storage ...
 
-  deleteClientFolderFromStorage(clientName, clientId) {
+  deleteClientFolderFromStorage(clientName, clientId, folder) {
+    console.log('This is the ' + folder);
     $.ajax({
       type: 'DELETE',
       url: 'https://api.backendless.com/v1/files/Moxie/' + clientName,
       success: () => {
         console.log('client folder and files deleted from storage');
       },
-      error: () => {
+      error: (response) => {
+        if(response.responseText === '{"code":6000,"message":"File or directory cannot be found."}') {
+        console.log('client folder does not exist on storage');
+        }
         console.log('client folder and files not deleted from storage');
       }
     });

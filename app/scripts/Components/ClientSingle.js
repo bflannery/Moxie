@@ -5,7 +5,6 @@ import {browserHistory} from 'react-router';
 
 export default React.createClass({
   render() {
-    console.log(this.props)
     return (
       <li className="client-container">
       <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage}>
@@ -20,13 +19,12 @@ export default React.createClass({
 //removeClient
     //Create local variables for client values
     //Call deleteClientFolderFromStorage
-    
+
   removeClient(e) {
     e.preventDefault();
     let clientName = this.props.client.name;
     let clientId = this.props.client.objectId;
 
     store.file.deleteClientFolderFromStorage(clientName, clientId);
-
   }
 });

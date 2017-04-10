@@ -52,13 +52,13 @@ export default Backbone.Collection.extend({
                 type: 'DELETE',
                 url: `https://api.backendless.com/v1/data/Clients/${client.objectId}`,
                 success: () => {
-                  this.trigger('change');
                   console.log('client deleted from clients collection');
                 },
                 error: () => {
                   console.log('client not deleted from clients collections');
                 }
               });
+              this.trigger('change');
             }
           });
         }

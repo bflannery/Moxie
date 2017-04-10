@@ -46,11 +46,9 @@ export default React.createClass({
   },
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     let newClientFormState = (
         <div className="clients-files-container">
-          <ClientsList clients={this.state.clients}/>
+          <ClientsList clients={this.state.clients} files={this.state.files}/>
         </div>
     );
 
@@ -58,7 +56,7 @@ export default React.createClass({
        newClientFormState = (
         <div className="clients-files-container">
           <NewClientForm/>
-          <ClientsList clients={this.state.clients}/>
+          <ClientsList clients={this.state.clients} files={this.state.files}/>
         </div>
       );
     }
@@ -66,7 +64,7 @@ export default React.createClass({
       newClientFormState = (
         <div className="clients-files-container">
           <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session}/>
-          <ClientsList clients={this.state.clients}/>
+          <ClientsList clients={this.state.clients} files={this.state.files}/>
         </div>
     );
     }
