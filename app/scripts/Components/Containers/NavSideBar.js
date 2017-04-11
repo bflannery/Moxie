@@ -7,9 +7,10 @@ export default React.createClass({
     return(
         <nav className = "sidebar sidebar-1">
           <ul className = "navSideBar-links-container">
-            <Link to="/home" onClick={this.resetState} className ="navSideBar-links">Files</Link>
-            <Link to="#" className ="navSideBar-links">Recent</Link>
-            <Link to="#" className ="navSideBar-links">Trash</Link>
+            <Link to="/home" onClick={this.resetState} className ="navSideBar-links">Clients</Link>
+            <Link to="/files" onClick={this.resetState} className="navSideBar-links">Files</Link>
+            <Link to="/recent" onClick={this.resetState} className ="navSideBar-links">Recent</Link>
+            <Link to="/trash" onClick={this.resetState} className ="navSideBar-links">Trash</Link>
             </ul>
         </nav>
     );

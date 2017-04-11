@@ -14,7 +14,8 @@ export default React.createClass({
     return {
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
-      session: store.session.toJSON()
+      session: store.session.toJSON(),
+      azSort: true
     };
   },
 
@@ -84,5 +85,10 @@ export default React.createClass({
         </div>
       </div>
     );
+  },
+
+  toggleSort(e) {
+    e.preventDefault();
+    store.clients.toggleClientsSort();
   }
 });

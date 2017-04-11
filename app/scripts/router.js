@@ -11,7 +11,9 @@ import ForgotPassword from './Components/ForgotPassword';
 import MoxieHome from './Components/Containers/MoxieHome';
 import MoxieClientHome from './Components/Containers/MoxieClientHome';
 
-
+import Files from './Components/Containers/Files';
+import Recent from './Components/Containers/Recent';
+import Trash from './Components/Containers/Trash';
 
 
 const router = (
@@ -23,6 +25,9 @@ const router = (
        <Route path='/home' component={MoxieHome}/>
        <route path='/clients/:id' component = {MoxieClientHome}/>
        <Route path='/forgotpassword' component={ForgotPassword}/>
+       <Route path='/files' component = {Files}/>
+       <Route path='/recent' component = {Recent}/>
+       <Route path='/trash' component = {Trash} />
     </Route>
   </Router>
 );

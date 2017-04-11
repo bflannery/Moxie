@@ -10,7 +10,7 @@ export default Backbone.Model.extend({
       name: '',
       description: '',
       addFolder: false,
-      addFileModal : false
+      addFileModal : false,
     },
 
 // ----------------------------

@@ -57,7 +57,6 @@ export default React.createClass({
 },
 
   render() {
-    console.log(this.state);
     let clientContainer = (
         <div className="clients-files-container">
           <h2> {this.state.client.name} </h2>

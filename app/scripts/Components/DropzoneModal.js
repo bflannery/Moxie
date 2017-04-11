@@ -16,6 +16,8 @@ export default React.createClass({
   },
 
     render() {
+      console.log(this.state)
+      console.log(this.props)
       let dropzoneFiles = (
               <div className="files-container">
                 <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple/>
@@ -65,16 +67,22 @@ export default React.createClass({
     },
 
     uploadFiles() {
+      if(this.props.client) {
       let file = this.state.dropzoneFiles[0];
       let fileName = this.state.dropzoneFiles[0].name;
       let clientId = this.props.client.objectId;
       let clientName = this.props.client.name;
       store.file.uploadFile(file, fileName, clientId, clientName);
       store.session.set({addFileModal: false});
+    } else {
+      let file = this.state.dropzoneFiles[0];
+      let fileName = this.state.dropzoneFiles[0].name;
+      store.file.uploadFile(file, fileName);
+      store.session.set({addFileModal: false});
+    }
     },
 
     closeModal() {
       store.session.set({addFileModal: false});
-      store.session.trigger('change');
     }
   });

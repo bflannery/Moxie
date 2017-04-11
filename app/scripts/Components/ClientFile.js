@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import store from '../store';
-import fileDownload from 'react-file-download';
 import $ from 'jquery';
 
 

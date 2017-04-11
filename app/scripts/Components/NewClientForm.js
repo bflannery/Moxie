@@ -7,7 +7,8 @@ export default React.createClass({
   render() {
     return (
       <form className="add-new-client" onSubmit={this.addClient}>
-        <input type="text" ref="clientName" className="client-input" placeholder="Add Client"/>
+        <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
+        <input type="text" ref="clientName" className="client-input"/>
       </form>
     );
   },
@@ -15,7 +16,7 @@ export default React.createClass({
 // addClient
     // Create a new client through Clients Collection
     // Set addFolder: false through Session model
-    
+
   addClient(e) {
     e.preventDefault();
      let clientName = this.refs.clientName.value.toLowerCase();

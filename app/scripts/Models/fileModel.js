@@ -19,6 +19,37 @@ export default Backbone.Model.extend({
     // ----------------------------
 
     uploadFile(file, fileName, clientId, clientName) {
+      if(!clientId && !clientName) {
+        let fd = new FormData();
+        fd.append('upload', file);
+        $.ajax({
+            type: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            url: 'https://api.backendless.com/v1/files/Moxie/' + fileName,
+            headers: {
+                'application-id': config.appId,
+                'secret-key': config.secret,
+                'application-type': 'REST'
+            },
+            success: (response) => {
+                console.log('success on files storage to Moxie...');
+                response = JSON.parse(response);
+                let client = 'moxie';
+                this.addFileToData(response.fileURL, fileName, clientId, client);
+            },
+            error: (response) => {
+                if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
+                    alert('File Already Exists');
+                } else {
+                  console.log('ya messed up');
+                }
+
+            }
+        });
+
+      } else {
         let fd = new FormData();
         fd.append('upload', file);
         $.ajax({
@@ -33,7 +64,7 @@ export default Backbone.Model.extend({
                 'application-type': 'REST'
             },
             success: (response) => {
-                console.log('on files storage success...');
+                console.log('success on files storage to Moxie/client:id...');
                 response = JSON.parse(response);
                 this.addFileToData(response.fileURL, fileName, clientId, clientName);
             },
@@ -44,6 +75,7 @@ export default Backbone.Model.extend({
 
             }
         });
+      }
     },
 
     // ----------------------------
@@ -53,6 +85,7 @@ export default Backbone.Model.extend({
     // ----------------------------
 
     addFileToData(fileUrl, file, clientId, clientName) {
+      if(clientId) {
         $.ajax({
             type: 'POST',
             url: 'https://api.backendless.com/v1/data/Files',
@@ -64,13 +97,30 @@ export default Backbone.Model.extend({
                 clientName
             }),
             success: (file) => {
-                console.log('on file to data success...')
+                console.log('on file to data success with clientId...')
                 store.clients.get(file.clientId).addFileToClientFiles({
                     id: file.objectId,
                     name: file.file
                 });
+                this.trigger('change');
             }
         });
+      } else {
+        $.ajax({
+            type: 'POST',
+            url: 'https://api.backendless.com/v1/data/Files',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                fileUrl,
+                file,
+                clientName
+            }),
+            success: (file) => {
+                console.log('on file to data success without clientId...');
+                this.trigger('change');
+      }
+    });
+  }
     },
 
     // ----------------------------
