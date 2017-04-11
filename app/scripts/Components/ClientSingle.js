@@ -24,7 +24,7 @@ export default React.createClass({
     e.preventDefault();
     let clientName = this.props.client.name;
     let clientId = this.props.client.objectId;
-
-    store.file.deleteClientFolderFromStorage(clientName, clientId);
+    let clientFiles = this.props.client.clientFiles;
+    store.file.deleteClientFolderFromStorage(clientName, clientId, clientFiles);
   }
 });

@@ -97,22 +97,81 @@ uploadFile(file, fileName, clientId, clientName) {
 // On Success , call detelClientFilesFromFilesCollection on Files Collection
 // If No Client Folder in file storage ...
 
-  deleteClientFolderFromStorage(clientName, clientId, folder) {
-    console.log('This is the ' + folder);
+  deleteClientFolderFromStorage(clientName, clientId, clientFiles) {
     $.ajax({
       type: 'DELETE',
       url: 'https://api.backendless.com/v1/files/Moxie/' + clientName,
       success: () => {
         console.log('client folder and files deleted from storage');
+        console.log('calling deleteClientFilesFromFilesCollection');
+        store.clientFile.deleteClientFilesFromClientFilesCollection(clientId, clientFiles);
       },
       error: (response) => {
-        if(response.responseText === '{"code":6000,"message":"File or directory cannot be found."}') {
-        console.log('client folder does not exist on storage');
+        console.log(response.responseText);
+          if(response.responseText === '{"code":6000,"message":"File or directory cannot be found."}') {
+              console.log('client folder does not exist on storage');
+              console.log('calling deleteClientFilesFromFilesCollection')
+              store.clientFile.deleteClientFilesFromClientFilesCollection(clientId, clientFiles);
+          } else {
+              console.log('client folder and files not deleted from storage');
+          }
         }
-        console.log('client folder and files not deleted from storage');
+    });
+  },
+
+  //Delete Client Files From Files Table
+  //On Success, call deleteClientFilesFromClientFilesCollection on Client Files Collection
+  //If no client files in file collection ...
+
+  deleteClientFilesFromAllFilesCollection(clientId, fileObjectId) {
+    console.log('this is the clientId: ');
+    console.log(clientId);
+    console.log('this is the fileObjectId: ');
+    console.log(fileObjectId);
+
+    $.ajax({
+      type: 'GET',
+      url: 'https://api.backendless.com/v1/data/Files',
+      success: (allFiles) => {
+        console.log(allFiles);
+        let newTotalFiles = allFiles.data.filter((file, i, arr) => {
+            if (file.clientId != clientId) {
+                return true;
+          } else {
+                if(!file) {
+                    console.log('no files for client exists in collection');
+                } else {
+                    $.ajax({
+                    type: 'DELETE',
+                    url: `https://api.backendless.com/v1/data/Files/${file.objectId}`,
+                    success: (response) => {
+                      console.log('file deleted from files collection');
+                      console.log('calling deleteClientFromClientCollection')
+                      store.clients.get(clientId).deleteClientFromDataTable(clientId);
+                    }
+                  });
+                }
+              }
+            });
+          }
+        });
       }
     });
 
-    store.files.deleteClientFilesFromFilesCollection(clientId);
-      }
-});
+
+//
+//               console.log('calling deleteClientFilesFromClientFilesCollection')
+//               store.clientFile.deleteClientFilesFromClientFilesCollection(clientId, clientFiles);
+//             },
+//             error: () => {
+//               console.log('file not deleted from files collections');
+//             }
+//           });
+//           }
+//         }
+//       });
+//     },
+//   error: () => {
+//     console.log('no clients');
+//     }
+// });

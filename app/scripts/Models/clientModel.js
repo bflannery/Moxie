@@ -66,7 +66,7 @@ export default Backbone.Model.extend({
 
 //Delete Client From Clients Table
 // Triggers('change')
-  deleteClientFromDataTable(clientName, clientId) {
+  deleteClientFromDataTable(clientId) {
     this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${clientId}`});
   },
 });

@@ -58,10 +58,13 @@ export default Backbone.Collection.extend({
                   console.log('client not deleted from clients collections');
                 }
               });
-              this.trigger('change');
+
             }
           });
         }
       });
+      console.log(this);
+        this.trigger('update change');
     }
+
 });
