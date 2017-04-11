@@ -7,18 +7,23 @@ export default React.createClass({
   render() {
     return (
       <li className="client-container">
-      <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage}>
+      <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage} className="folder-link">
       <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
         <h4 className="client-name"> {this.props.client.name} </h4>
         </Link>
-        <button onClick={this.removeClient} type="submit" className="delete-client-button"> Delete Client</button>
+        <button onClick={this.removeClient} type="submit" className="delete-file-button">
+          <i className="fa fa-times-circle" aria-hidden="true"></i>
+        </button>
       </li>
     );
   },
 
+// ----------------------------
 //removeClient
     //Create local variables for client values
     //Call deleteClientFolderFromStorage
+// ----------------------------
+
 
   removeClient(e) {
     e.preventDefault();

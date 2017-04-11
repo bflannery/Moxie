@@ -25,7 +25,6 @@ export default Backbone.Model.extend({
           type: 'GET',
           url: 'https://api.backendless.com/v1/data/ClientFiles',
           success: (clientFiles) => {
-            console.log(clientFiles)
             let newTotalClientFiles = clientFiles.data.filter((clientFile, i, arr) => {
               if (clientFile.files.clientId != clientId) {
                 return true;
@@ -52,6 +51,7 @@ export default Backbone.Model.extend({
             }
           });
       } else {
+        console.log('object length is < 0');
         console.log('calling deleteClientFilesFromAllFilesCollection');
         store.file.deleteClientFilesFromAllFilesCollection(clientId, clientFilesObject);
 

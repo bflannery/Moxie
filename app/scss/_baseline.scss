@@ -31,7 +31,7 @@ body{
 }
 
 .main-container {
-	min-height: 800px;
+	min-height: 650px;
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -74,7 +74,7 @@ body{
   border: 0;
   padding: .5rem 1.5rem;
   color: #50a3a2;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
   transition-duration: 0.25s;
@@ -85,7 +85,7 @@ body{
   }
 }
 
-@media all and (max-width: 640px) {
+@media all and (max-width: 650px) {
 			 .main-container{
 					 flex-direction: column;
 			 }
@@ -100,3 +100,8 @@ body{
 					 max-height: 50px;
 			 }
 	 }
+@media (min-width: 650px) {
+	.main-container{
+		height: 650px;
+	}
+}

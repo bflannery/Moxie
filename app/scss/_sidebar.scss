@@ -4,6 +4,23 @@
 }
 
 .side-button {
-  margin: .5rem 1rem;
-  padding: .5rem 1rem;
+  margin: .1rem 1.2rem;
+  padding: .8rem 2rem;
+}
+
+@media (min-width: 650px) {
+  .sidebar-button-container {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    margin: 1rem auto;
+  }
+
+  .side-button {
+    margin: .2rem auto;
+    font-size: .75rem;
+    width: 85%;
+    padding: .5rem;
+  }
+
 }

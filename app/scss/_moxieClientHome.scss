@@ -8,15 +8,11 @@
 }
 
 .clients-files-container {
+    overflow: scroll;
   h2 {
     font-size: 2rem;
+    margin: 1rem;
   }
-}
-.client-files-container {
-  margin-top: 4rem;
-  padding: 0;
-  text-align: center;
-
 }
 
 .client-file {
@@ -27,15 +23,14 @@
 
 .file-icon {
     margin: 1rem 0;
-    font-size: 2rem;
     display: inline-block;
 }
 
 .file-link {
   vertical-align: middle;
   margin-left: .5rem;
-    font-size: 1.5rem;
-    display: inline-block;
+  font-size: 1.5rem;
+  display: inline-block;
     span {
       font-size: 1.2rem;
       margin: 1rem 0 1rem 1rem;
@@ -50,7 +45,7 @@
   float: right;
   padding: 0;
   margin-right: 2rem;
-  margin-top: 1.5rem;
+  margin-top: 1.3rem;
   background: transparent;
   color: white;
 }

@@ -32,26 +32,30 @@
 }
 
 .client-list {
-    margin: 3rem 0;
-}
-
-.folder-icon {
-  font-size: 2rem;
-  vertical-align: middle;
+    margin: 1rem 0;
 }
 
 .client-container {
-  margin: 1rem 2rem;
+  width: 88%;
+  margin: 1rem auto;
   border-bottom: 1px solid white;
-  padding-bottom: 1rem;
 }
 
-.client-name {
-    vertical-align: middle;
-    position: relative;
-    display: inline-block;
-    font-size: 2.0rem;
-    margin: 0 1rem;
+.folder-link {
+  vertical-align: middle;
+  margin-left: .5rem;
+  font-size: 1.5rem;
+  display: inline-block;
+    h4 {
+      display:inline-block;
+      font-size: 1.2rem;
+      margin: 1rem 0 1rem 1rem;
+    }
+}
+
+.folder-icon {
+  margin: 1rem 0;
+  display: inline-block;
 }
 
 .client-name:hover {
@@ -62,6 +66,10 @@
     margin: 0;
     vertical-align: middle;
     padding: 0.5rem 1rem;
+}
+
+.file-link:visited {
+  color: white;
 }
 
 

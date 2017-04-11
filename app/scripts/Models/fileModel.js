@@ -117,7 +117,7 @@ export default Backbone.Model.extend({
             url: 'https://api.backendless.com/v1/files/Moxie/' + clientName,
             success: () => {
                 console.log('client folder and files deleted from storage');
-                // console.log('calling deleteClientFilesFromFilesCollection');
+                console.log('calling deleteClientFilesFromFilesCollection');
                 store.clientFile.deleteClientFilesFromClientFilesCollection(clientId, clientFiles);
             },
             error: (response) => {
@@ -167,6 +167,7 @@ export default Backbone.Model.extend({
             }
         });
     } else {
+      console.log('object length is < 0')
       console.log('calling deleteClientFromDataTable from else statement');
       store.clients.get(clientId).deleteClientFromDataTable(clientId);
     }

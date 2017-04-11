@@ -6,8 +6,8 @@ export default React.createClass({
   render() {
     let sideBar = (
       <div className = "sidebar-button-container">
-        <button className="add-client-button" onClick={this.toggleNewClient}>Add Client</button>
-        <button className="add-file-button" onClick={this.dropZoneModal}> Add Files </button>
+        <button className="side-button add-client-button" onClick={this.toggleNewClient}>Add Client</button>
+        <button className="side-button add-file-button" onClick={this.dropZoneModal}> Add Files </button>
       </div>
     );
 

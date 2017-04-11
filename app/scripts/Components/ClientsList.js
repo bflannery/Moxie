@@ -15,9 +15,9 @@ export default React.createClass({
       });
     }
     return (
-    <div className="client-list">
+    <ul className="client-file-container">
       {clients}
-    </div>
+    </ul>
   );
   }
 });
