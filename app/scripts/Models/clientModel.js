@@ -14,7 +14,7 @@ export default Backbone.Model.extend({
     },
 
 // ----------------------------
-//All File To ClientFiles Data Table
+// All File To ClientFiles Data Table
 // Trigger Update To Client for ClientHome render
 // Push to ClientHome
 // ----------------------------
@@ -39,6 +39,39 @@ export default Backbone.Model.extend({
               }
             });
           },
+
+  // ----------------------------
+  // All Folder To ClientFolders Data Table
+  // Trigger Update To Client for ClientHome render
+  // Push to ClientHome
+  // ----------------------------
+
+  addFolderToClientFolders(id, name) {
+    console.log(id);
+    console.log(name);
+    this.set({addFolder: false});
+    this.save({
+        clientFolders: this.get('clientFolders').concat([{
+          ___class: 'ClientFolders',
+          folders: {
+            ___class: 'Folders',
+            objectId: id,
+            name: name
+          }
+        }]),
+      },
+      {
+        success: (response) => {
+        console.log(response);
+        this.trigger('change');
+      },
+        error: () => {
+          console.log('not added');
+        }
+    });
+  },
+
+
 
   // ----------------------------
   // Delete File From ClientFiles Data Table

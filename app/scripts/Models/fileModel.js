@@ -13,43 +13,6 @@ export default Backbone.Model.extend({
     },
 
 
-    createClientFolder(clientName) {
-      let folder = 'moxie';
-      let fd = new FormData();
-      fd.append('upload', folder);
-      $.ajax({
-          type: 'POST',
-          data: fd,
-          processData: false,
-          contentType: false,
-          url: 'https://api.backendless.com/v1/files/Moxie/' + clientName + '/' + 'moxie' ,
-          headers: {
-              'application-id': config.appId,
-              'secret-key': config.secret,
-              'application-type': 'REST'
-          },
-          success: (response) => {
-            response = JSON.parse(response);
-            console.log(response);
-            let responseFile = response.fileURL;
-              console.log('create Client Folder passed');
-              console.log('calling createClient');
-              store.clients.create({name: clientName, folderURL : responseFile},
-                { success: (response)=> {
-                    console.log(responseFile)
-                    console.log('client created');
-                    store.folder.addFolderToData(responseFile , clientName);
-                }, error: ()=> {
-                    console.log('client not created');
-                }
-              });
-          },
-              error: (response) => {
-              console.log('create Client Folder failed')
-              }
-          });
-        },
-
     // ----------------------------
     // Dropzone Upload to Backendless File Storage
     // On Success call addFileToData

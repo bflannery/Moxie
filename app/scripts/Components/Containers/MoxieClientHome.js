@@ -61,10 +61,20 @@ export default React.createClass({
     console.log(this.state);
     let clientContainer = (
         <div className="main primary-container">
-          <h2> {this.state.client.name} </h2>
+          <h2> {this.state.client.clientName} </h2>
           <ClientFiles client={this.state.client} session={this.state.session}/>
         </div>
     );
+
+    if(this.state.session.addFolder === true) {
+      clientContainer = (
+       <div className="main primary-container">
+         <h2> {this.state.client.clientName} </h2>
+         <NewClientForm client={this.state.client}/>
+         <ClientFiles client={this.state.client} session={this.state.session}/>
+       </div>
+     );
+   }
 
     if(this.state.session.addFileModal === true) {
           clientContainer = (
@@ -73,7 +83,7 @@ export default React.createClass({
               <div className="modal-container">
                 <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
               </div>
-                <h2> {this.state.client.name} </h2>
+                <h2> {this.state.client.clientName} </h2>
                 <ClientFiles client={this.state.client}/>
               </div>
 

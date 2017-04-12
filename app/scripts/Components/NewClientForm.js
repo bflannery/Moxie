@@ -5,11 +5,12 @@ import store from '../store';
 export default React.createClass({
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
+
     return (
-      <form className="add-new-client" onSubmit={this.addClient}>
+      <form className="add-new-client" onSubmit={this.addFolder}>
         <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
-        <input type="text" ref="clientName" className="client-input"/>
+        <input type="text" ref="folderName" className="client-input"/>
       </form>
     );
   },
@@ -18,10 +19,19 @@ export default React.createClass({
     // Create a new client through Clients Collection
     // Set addFolder: false through Session model
 
-  addClient(e) {
+  addFolder(e) {
     e.preventDefault();
-     let clientName = this.refs.clientName.value.toLowerCase();
-     store.file.createClientFolder(clientName);
+    if(this.props.client) {
+      let client = this.props.client;
+      let clientName = this.props.client.clientName;
+      let clientId = this.props.client.objectId;
+      let clientURL = this.props.client.folderURL;
+      let folderName = this.refs.folderName.value.toLowerCase();
+      store.fileStore.createSubFolder(client, clientName, clientId, clientURL, folderName);
+    } else {
+     let clientName = this.refs.folderName.value.toLowerCase();
+     store.fileStore.createClientFolder(clientName);
      store.session.set({ addFolder: false});
+   }
   }
 });

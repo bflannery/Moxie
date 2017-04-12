@@ -14,19 +14,23 @@ export default Backbone.Model.extend({
 
 
 
-    addFolderToData(folderURL , clientName) {
-      console.log(folderURL);
+    addFolderToData(folderURL , folderName, clientName, clientId) {
       $.ajax({
           type: 'POST',
           url: 'https://api.backendless.com/v1/data/Folders',
           contentType: 'application/json',
           data: JSON.stringify({
               folderURL,
-              clientName
+              folderName,
+              clientName,
+              clientId
           }),
-          success: (folder) => {
-            console.log(folder);
+          success: (response) => {
+              console.log(response);
               console.log('folder added to folder table...');
+              let folderName = response.folderName;
+              let folderId = response.objectId;
+              store.clients.get(response.clientId).addFolderToClientFolders(folderId, folderName)
           },
           error: () => {
               console.log('no folder to data table')

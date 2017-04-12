@@ -6,14 +6,14 @@ export default React.createClass({
   render() {
     let sideBar = (
       <div className = "sidebar-button-container">
-        <button className="side-button add-client-button" onClick={this.toggleNewClient}>Add Client</button>
+        <button className="side-button add-client-button" onClick={this.toggleNewFolder}>Add Client</button>
       </div>
     );
 
     if(this.props.clientId) {
       sideBar = (
         <div className = "sidebar-button-container">
-          <button className="side-button add-client-button" onClick={this.toggleNewClient}>Add Folder</button>
+          <button className="side-button add-client-button" onClick={this.toggleNewFolder}>Add Folder</button>
           <button className="side-button add-file-button" onClick={this.dropZoneModal}> Add Files </button>
         </div>
       );
@@ -29,9 +29,8 @@ export default React.createClass({
 //toggleNewClient
   //Set addFolder : true through Session Model
 
-  toggleNewClient(e) {
+  toggleNewFolder(e) {
     store.session.set({ addFolder: true });
-    store.fileStorage;
   },
 
   dropZoneModal(e) {

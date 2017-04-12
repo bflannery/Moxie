@@ -43,6 +43,7 @@ export default Backbone.Collection.extend({
       }
       });
     },
+    
 
     //Delete Client From Clients Collection
     //On Success, trigger change
