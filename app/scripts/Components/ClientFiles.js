@@ -16,7 +16,7 @@ export default React.createClass({
     }
 
     return (
-      <ul className ="client-file-container">
+      <ul className ="secondary-container">
         {clientFiles}
       </ul>
     );

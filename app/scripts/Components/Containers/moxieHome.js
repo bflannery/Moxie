@@ -15,7 +15,6 @@ export default React.createClass({
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
       session: store.session.toJSON(),
-      azSort: true
     };
   },
 
@@ -49,7 +48,7 @@ export default React.createClass({
   render() {
     console.log(this.state);
     let newClientFormState = (
-        <div className="clients-files-container">
+        <div className="main primary-container">
         <h2> moxie </h2>
           <ClientsList clients={this.state.clients} files={this.state.files}/>
         </div>
@@ -57,7 +56,7 @@ export default React.createClass({
 
     if(this.state.session.addFolder === true) {
        newClientFormState = (
-        <div className="clients-files-container">
+        <div className="main primary-container">
           <h2> moxie </h2>
           <NewClientForm/>
           <ClientsList clients={this.state.clients} files={this.state.files}/>
@@ -66,7 +65,7 @@ export default React.createClass({
     }
     if(this.state.session.addFileModal === true) {
       newClientFormState = (
-        <div className="clients-files-container">
+        <div className="main primary-container">
           <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session}/>
           <h2> moxie </h2>
           <ClientsList clients={this.state.clients} files={this.state.files}/>

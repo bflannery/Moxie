@@ -21,7 +21,7 @@ export default React.createClass({
 
       files = this.props.files.filter((file, i ,arr)=> {
         if(file.clientName !== 'moxie') {
-          return true;  
+          return true;
         } else {
           return <MoxieFile key={i} file={file}/>;
         }
@@ -31,7 +31,7 @@ export default React.createClass({
       console.log(clients);
     }
     return (
-    <ul className="client-file-container">
+    <ul className="secondary-container">
       {clients}
     </ul>
   );

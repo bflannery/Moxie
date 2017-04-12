@@ -1,3 +1,7 @@
+.landingPage-container {
+  height: 500px;
+}
+
 .login-container {
   text-align: center;
 }
@@ -54,6 +58,10 @@ button{
 @media(min-width:650px) {
   .login-input{
     width: 30%;
+  }
+
+  .landingPage-container {
+      height: 800px
   }
 }
 

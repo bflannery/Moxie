@@ -38,7 +38,7 @@ body{
 	flex-flow: row;
 }
 
-.main-container > .clients-files-container {
+.main-container > .primary-container {
 	margin: 4px;
   padding: 5px;
   border: 1px solid #cccc33;
@@ -68,6 +68,19 @@ body{
 	order: 3;
 
 }
+
+.main {
+    overflow: scroll;
+  h2 {
+    font-size: 2rem;
+    margin: 1rem;
+  }
+}
+
+.secondary-container {
+	text-align: left;
+}
+
 .button {
 	outline: 0;
   background-color: white;
@@ -90,7 +103,7 @@ body{
 					 flex-direction: column;
 			 }
 
-			 .main-container > .clients-files-container, .main-container > .sidebar-1, .main-container > aside {
+			 .main-container > .primary-container, .main-container > .sidebar-1, .main-container > aside {
 			 /* Return them to document order */
 					 order: 0;
 			 }
