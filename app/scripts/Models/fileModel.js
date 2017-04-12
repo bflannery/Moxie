@@ -12,6 +12,33 @@ export default Backbone.Model.extend({
         description: '',
     },
 
+
+    createClientFolder(clientName) {
+      let file = 'moxie';
+      let fd = new FormData();
+      fd.append('upload', file);
+      $.ajax({
+          type: 'POST',
+          data: fd,
+          processData: false,
+          contentType: false,
+          url: 'https://api.backendless.com/v1/files/Moxie/' + clientName + '/' + 'moxie',
+          headers: {
+              'application-id': config.appId,
+              'secret-key': config.secret,
+              'application-type': 'REST'
+          },
+          success: (response) => {
+              console.log('create Client Folder passed');
+              console.log('calling createClient');
+              store.clients.create({name : clientName});
+          },
+          error: (response) => {
+              console.log('create Client Folder failed')
+              }
+          });
+        },
+
     // ----------------------------
     // Dropzone Upload to Backendless File Storage
     // On Success call addFileToData
@@ -102,9 +129,10 @@ export default Backbone.Model.extend({
                     id: file.objectId,
                     name: file.file
                 });
-                this.trigger('change');
+                store.client.get(clientId).trigger('change');
             }
         });
+
       } else {
         $.ajax({
             type: 'POST',
@@ -117,7 +145,7 @@ export default Backbone.Model.extend({
             }),
             success: (file) => {
                 console.log('on file to data success without clientId...');
-                this.trigger('change');
+
       }
     });
   }

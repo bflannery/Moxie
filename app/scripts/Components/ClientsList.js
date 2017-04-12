@@ -18,17 +18,6 @@ export default React.createClass({
         if(window.localStorage.getItem('ownerId') === this.props.clients[i].ownerId)
           return <ClientSingle key={i} client={client} files={this.props.files}/>;
       });
-
-      files = this.props.files.filter((file, i ,arr)=> {
-        if(file.clientName !== 'moxie') {
-          return true;
-        } else {
-          return <MoxieFile key={i} file={file}/>;
-        }
-      });
-
-      console.log(files);
-      console.log(clients);
     }
     return (
     <ul className="secondary-container">

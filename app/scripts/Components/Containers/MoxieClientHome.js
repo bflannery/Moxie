@@ -10,6 +10,7 @@ import DropzoneModal from '../DropzoneModal';
 import Header from '../Header';
 import Sidebar from './Sidebar';
 import NavSideBar from './NavSideBar';
+import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
 
@@ -57,6 +58,7 @@ export default React.createClass({
 },
 
   render() {
+    console.log(this.state);
     let clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.name} </h2>
