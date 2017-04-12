@@ -5,6 +5,7 @@ import store from '../store';
 export default React.createClass({
 
   render() {
+    console.log(this.props)
     return (
       <form className="add-new-client" onSubmit={this.addClient}>
         <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>

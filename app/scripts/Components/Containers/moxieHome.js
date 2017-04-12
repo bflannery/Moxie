@@ -15,6 +15,7 @@ export default React.createClass({
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
       session: store.session.toJSON(),
+      fileStorage: store.fileStorage.toJSON()
     };
   },
 
@@ -27,6 +28,8 @@ export default React.createClass({
 
     store.session.fetch();
     store.session.on('update change', this.updateState);
+
+    store.fileStorage.fetch();
   },
 
   componentWillUnmount() {

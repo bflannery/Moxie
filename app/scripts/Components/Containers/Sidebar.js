@@ -31,6 +31,7 @@ export default React.createClass({
 
   toggleNewClient(e) {
     store.session.set({ addFolder: true });
+    store.fileStorage;
   },
 
   dropZoneModal(e) {

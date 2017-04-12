@@ -8,9 +8,9 @@ export default Backbone.Model.extend({
     idAttribute: 'objectId',
     defaults: {
       name: '',
-      description: '',
       addFolder: false,
       addFileModal : false,
+      folderURL : ''
     },
 
 // ----------------------------

@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import clientFileModel from '../Models/clientFilesModel';
+import clientFolderModel from '../Models/fileModel';
 import store from '../store';
 import $ from 'jquery';
 

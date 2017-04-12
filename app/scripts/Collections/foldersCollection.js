@@ -1,13 +1,14 @@
 import Backbone from 'backbone';
-import clientFileModel from '../Models/clientFilesModel';
+import fileStorageModel from '../Models/fileStorageModel';
 import store from '../store';
 import $ from 'jquery';
 
 export default Backbone.Collection.extend({
-  model: clientFileModel,
-  url: 'https://api.backendless.com/v1/data/ClientFiles',
+  model: fileStorageModel,
+  url: 'https://api.backendless.com/v1/data/Folders',
 
   parse(data) {
+    console.log(data);
     return data.data;
   },
 
