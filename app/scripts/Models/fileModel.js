@@ -58,7 +58,7 @@ export default Backbone.Model.extend({
             data: fd,
             processData: false,
             contentType: false,
-            url: 'https://api.backendless.com/v1/files/Moxie/' + clientName + '/' + fileName,
+            url: 'https://api.backendless.com/v1/files/Moxie/clients/' + clientName + '/' + fileName,
             headers: {
                 'application-id': config.appId,
                 'secret-key': config.secret,
