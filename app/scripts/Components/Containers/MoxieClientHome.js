@@ -22,6 +22,7 @@ export default React.createClass({
           clientFiles: []
         },
         session: store.session.toJSON(),
+        folders: store.folders.toJSON(),
     };
   },
 
@@ -39,12 +40,16 @@ export default React.createClass({
 
       store.session.fetch();
       store.session.on('update change', this.updateState);
+
+      store.folders.fetch();
+      store.folders.on('update change'. this.updateState);
   },
 
   componentWillUnmount() {
     store.clients.get(this.props.params.id).off('update change', this.updateState);
     store.files.off('update change', this.updateState);
     store.session.off('update change', this.updateState);
+    store.folders.off('update change', this.updateState);
   },
 
   updateState() {
@@ -53,6 +58,7 @@ export default React.createClass({
       client: store.clients.get(this.props.params.id).toJSON(),
       files: store.files.toJSON(),
       session: store.session.toJSON(),
+      folders: store.folders.toJSON(),
   });
   }
 },

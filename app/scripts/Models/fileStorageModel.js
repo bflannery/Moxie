@@ -67,7 +67,6 @@ export default Backbone.Model.extend({
               },
               success: (response) => {
                 response = JSON.parse(response);
-                console.log(response);
                   store.folder.addFolderToData(response.fileURL, folderName, clientName, clientId);
                     console.log('on success...')
                   },

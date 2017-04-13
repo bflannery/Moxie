@@ -47,8 +47,6 @@ export default Backbone.Model.extend({
   // ----------------------------
 
   addFolderToClientFolders(id, name) {
-    console.log(id);
-    console.log(name);
     this.set({addFolder: false});
     this.save({
         clientFolders: this.get('clientFolders').concat([{
@@ -62,8 +60,9 @@ export default Backbone.Model.extend({
       },
       {
         success: (response) => {
-        console.log(response);
+          console.log('added folder to clientFolders');
         this.trigger('change');
+        store.session.set({addFolder: false});
       },
         error: () => {
           console.log('not added');

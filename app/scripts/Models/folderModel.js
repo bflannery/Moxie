@@ -26,7 +26,6 @@ export default Backbone.Model.extend({
               clientId
           }),
           success: (response) => {
-              console.log(response);
               console.log('folder added to folder table...');
               let folderName = response.folderName;
               let folderId = response.objectId;

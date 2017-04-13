@@ -6,7 +6,6 @@ import {browserHistory} from 'react-router';
 export default React.createClass({
 
   render() {
-      console.log(this.props);
     return (
       <li className="client-container">
       <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage} className="folder-link">

@@ -4,8 +4,6 @@ import MoxieFile from './MoxieFile';
 
 export default React.createClass({
   render() {
-    console.log(this.props);
-
     let clients;
     let files;
 
