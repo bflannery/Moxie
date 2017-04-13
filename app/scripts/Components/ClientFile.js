@@ -5,7 +5,6 @@ import $ from 'jquery';
 
 
 export default React.createClass({
-
   render() {
     if(this.props.clientFile) {
       return (
@@ -26,17 +25,16 @@ export default React.createClass({
     }
   },
 
-
 //removeFile
     //Create local variables for clientFile values
     //Call deleteFileFromStorage through Files Collection
 
-  removeFile(e) {
-    e.preventDefault();
-    let fileId = this.props.clientFile.files.objectId;
-    let fileUrl = this.props.clientFile.files.fileUrl;
-    let clientId = this.props.clientFile.files.clientId;
-    let clientFileId = this.props.clientFile.objectId;
-    store.files.get(fileId).deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
-  }
+removeFile(e) {
+  e.preventDefault();
+  let fileId = this.props.clientFile.files.objectId;
+  let fileUrl = this.props.clientFile.files.fileUrl;
+  let clientId = this.props.clientFile.files.clientId;
+  let clientFileId = this.props.clientFile.objectId;
+  store.files.get(fileId).deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
+}
 });

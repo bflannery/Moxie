@@ -5,6 +5,7 @@ import store from '../store';
 export default React.createClass({
 
   render() {
+    console.log(this.props);
     return (
       <form className="add-new-client" onSubmit={this.addFolder}>
         <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
@@ -26,7 +27,7 @@ export default React.createClass({
       let clientURL = this.props.client.folderURL;
       let folderName = this.refs.folderName.value.toLowerCase();
       store.fileStore.createSubFolder(client, clientName, clientId, clientURL, folderName);
-      
+
     } else {
      let clientName = this.refs.folderName.value.toLowerCase();
      store.fileStore.createClientFolder(clientName);

@@ -7,7 +7,7 @@ export default Backbone.Model.extend({
   urlRoot: 'https://api.backendless.com/v1/data/Clients',
     idAttribute: 'objectId',
     defaults: {
-      name: '',
+      clientName: '',
       addFolder: false,
       addFileModal : false,
       folderURL : ''
@@ -47,7 +47,9 @@ export default Backbone.Model.extend({
   // ----------------------------
 
   addFolderToClientFolders(id, name) {
-    this.set({addFolder: false});
+    console.log('made it to clientFolders');
+    console.log(id);
+    console.log(name);
     this.save({
         clientFolders: this.get('clientFolders').concat([{
           ___class: 'ClientFolders',

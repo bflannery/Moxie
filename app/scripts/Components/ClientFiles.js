@@ -6,11 +6,14 @@ import store from '../store';
 export default React.createClass({
   render() {
     let clientFiles;
-    let clientFolders;
-    let AllFiles = [];
+
+    if(!this.props.client.clientFiles) {
+      clientFiles = <div />;
+    } else {
       clientFiles = this.props.client.clientFiles.map((clientFile, i, arr) => {
-        console.log(clientFile);
+        return <ClientFile key={i} clientFile={clientFile}/>
       });
+    }
 
     return (
       <ul className ="secondary-container">
@@ -19,5 +22,3 @@ export default React.createClass({
     );
   }
 });
-//
-// return <ClientFile key={i} clientFile={clientFile}/>

@@ -6,6 +6,7 @@ import store from '../../store';
 import Client from '../../Models/clientModel';
 
 import ClientFiles from '../ClientFiles';
+import ClientFolders from '../ClientFolders';
 import DropzoneModal from '../DropzoneModal';
 import Header from '../Header';
 import Sidebar from './Sidebar';
@@ -69,6 +70,7 @@ export default React.createClass({
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>
           <ClientFiles client={this.state.client} session={this.state.session}/>
+          <ClientFolders client={this.state.client} session={this.state.session}/>
         </div>
     );
 
@@ -78,6 +80,7 @@ export default React.createClass({
          <h2> {this.state.client.clientName} </h2>
          <NewClientForm client={this.state.client}/>
          <ClientFiles client={this.state.client} session={this.state.session}/>
+         <ClientFolders client={this.state.client} session={this.state.session}/>
        </div>
      );
    }
@@ -91,6 +94,7 @@ export default React.createClass({
               </div>
                 <h2> {this.state.client.clientName} </h2>
                 <ClientFiles client={this.state.client}/>
+                <ClientFolders client={this.state.client} session={this.state.session}/>
               </div>
 
           );

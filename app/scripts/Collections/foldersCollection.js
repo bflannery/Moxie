@@ -8,7 +8,6 @@ export default Backbone.Collection.extend({
   url: 'https://api.backendless.com/v1/data/Folders',
 
   parse(data) {
-    console.log(data);
     return data.data;
   },
 

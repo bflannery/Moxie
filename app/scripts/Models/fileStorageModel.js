@@ -28,16 +28,21 @@ export default Backbone.Model.extend({
           },
           success: (response) => {
             response = JSON.parse(response);
+            let responseURL = response.fileURL;
+            let splitURL = responseURL.split('/');
+            let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
+            console.log(folderURL);
+
               console.log('create Client Folder passed');
               console.log('calling createClient');
               store.clients.create(
                 {
                   clientName: clientName,
-                  folderURL : response.fileUrl
+                  folderURL : folderURL
                 },
                 { success: (response)=> {
                     console.log('client created');
-                    store.folder.addFolderToData(response.fileUrl , clientName);
+                    store.folder.addFolderToData(folderURL , clientName);
                 }, error: ()=> {
                     console.log('client not created');
                 }
@@ -67,7 +72,12 @@ export default Backbone.Model.extend({
               },
               success: (response) => {
                 response = JSON.parse(response);
-                  store.folder.addFolderToData(response.fileURL, folderName, clientName, clientId);
+                let responseURL = response.fileURL;
+                let splitURL = responseURL.split('/');
+                let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
+                console.log(folderURL);
+
+                  store.folder.addFolderToData(folderURL, folderName, clientName, clientId);
                     console.log('on success...')
                   },
               error: (response) => {
