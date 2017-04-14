@@ -13,7 +13,7 @@ export default React.createClass({
           <li className="client-file">
               <Link to={'#'} className="file-link">
                 <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
-                <span> {this.props.clientFolder.folders.name} </span>
+                <span> {this.props.clientFolder.folders.folderName} </span>
               </Link>
               <button onClick={this.removeFile} type="submit" className="delete-file-button">
                 <i className="fa fa-times-circle" aria-hidden="true"></i>

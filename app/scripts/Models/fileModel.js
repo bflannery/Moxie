@@ -8,7 +8,7 @@ export default Backbone.Model.extend({
     url: 'https://api.backendless.com/v1/data/Files',
     idAttribute: 'objectId',
     defaults: {
-        name: '',
+        fileName: '',
         description: '',
     },
 
@@ -37,7 +37,6 @@ export default Backbone.Model.extend({
             success: (response) => {
                 console.log('success on files storage to Moxie...');
                 response = JSON.parse(response);
-                let client = 'moxie';
                 this.addFileToData(response.fileURL, fileName, clientId, client);
             },
             error: (response) => {
@@ -85,7 +84,8 @@ export default Backbone.Model.extend({
     // Trigger Change on File Model
     // ----------------------------
 
-    addFileToData(fileUrl, file, clientId, clientName) {
+    addFileToData(fileUrl, fileName, clientId, folderName) {
+      console.log(clientId);
       if(clientId) {
         $.ajax({
             type: 'POST',
@@ -93,15 +93,16 @@ export default Backbone.Model.extend({
             contentType: 'application/json',
             data: JSON.stringify({
                 fileUrl,
-                file,
+                fileName,
                 clientId,
-                clientName
+                folderName
             }),
-            success: (file) => {
+            success: (response) => {
+              console.log('addFileToData success response: ' + response );
                 console.log('on file to data success with clientId...')
-                store.clients.get(file.clientId).addFileToClientFiles({
-                    id: file.objectId,
-                    name: file.file
+                store.clients.get(response.clientId).addFileToClientFiles({
+                    fileId: response.objectId,
+                    folderName: response.folderName
                 });
             }
         });
@@ -113,10 +114,9 @@ export default Backbone.Model.extend({
             contentType: 'application/json',
             data: JSON.stringify({
                 fileUrl,
-                file,
-                clientName
+                fileName,
             }),
-            success: (file) => {
+            success: (response) => {
                 console.log('on file to data success without clientId...');
 
       }

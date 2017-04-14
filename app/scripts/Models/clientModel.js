@@ -20,15 +20,15 @@ export default Backbone.Model.extend({
 // ----------------------------
 
 
-    addFileToClientFiles({id, name}) {
+    addFileToClientFiles({fileId, folderName}) {
           this.set({addFileModal: false});
           this.save({
               clientFiles: this.get('clientFiles').concat([{
                 ___class: 'ClientFiles',
                 files: {
                   ___class: 'Files',
-                  objectId: id,
-                  name: name
+                  objectId: fileId,
+                  folderName: folderName
                 }
               }]),
             }, {
@@ -46,17 +46,14 @@ export default Backbone.Model.extend({
   // Push to ClientHome
   // ----------------------------
 
-  addFolderToClientFolders(id, name) {
-    console.log('made it to clientFolders');
-    console.log(id);
-    console.log(name);
+  addFolderToClientFolders(id, folderName) {
     this.save({
         clientFolders: this.get('clientFolders').concat([{
           ___class: 'ClientFolders',
           folders: {
             ___class: 'Folders',
             objectId: id,
-            name: name
+            folderName: folderName
           }
         }]),
       },

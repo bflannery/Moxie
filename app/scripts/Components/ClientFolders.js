@@ -6,7 +6,6 @@ import store from '../store';
 export default React.createClass({
   render() {
     let clientFolders;
-    console.log(this.props);
     if(!this.props.client.clientFolders) {
       clientFolders = <div />;
     } else {
