@@ -8,8 +8,8 @@ export default Backbone.Collection.extend({
   model: clientModel,
   url: 'https://api.backendless.com/v1/data/Clients',
 
-  parse(data) {
 
+  parse(data) {
     return data.data.sort(function(a,b){
       let nameA = a.name;
       let nameB = b.name;
@@ -33,7 +33,7 @@ export default Backbone.Collection.extend({
       url: 'https://api.backendless.com/v1/data/Clients',
       success: (clients) => {
         return clients.data.filter((client, i ,arr)=>{
-            if(client.name === company) {
+            if(client.clientName === company) {
               browserHistory.push('/clients/' + client.objectId);
             }
         });
@@ -43,7 +43,7 @@ export default Backbone.Collection.extend({
       }
       });
     },
-    
+
 
     //Delete Client From Clients Collection
     //On Success, trigger change

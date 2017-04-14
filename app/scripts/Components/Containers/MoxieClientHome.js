@@ -15,6 +15,7 @@ import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
 
+
   getInitialState() {
     return {
 
@@ -22,8 +23,8 @@ export default React.createClass({
         client: {
           clientFiles: []
         },
-        session: store.session.toJSON(),
         folders: store.folders.toJSON(),
+        session: store.session.toJSON()
     };
   },
 
@@ -38,6 +39,7 @@ export default React.createClass({
 
       store.files.fetch();
       store.files.on('update change', this.updateState);
+
 
       store.session.fetch();
       store.session.on('update change', this.updateState);
@@ -58,14 +60,15 @@ export default React.createClass({
     this.setState({
       client: store.clients.get(this.props.params.id).toJSON(),
       files: store.files.toJSON(),
-      session: store.session.toJSON(),
       folders: store.folders.toJSON(),
+      session: store.session.toJSON()
   });
   }
 },
 
   render() {
     console.log(this.state);
+    console.log(this.props);
     let clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>
@@ -116,3 +119,9 @@ export default React.createClass({
      store.clients.get(this.state.client.objectId).set({addFileModal: true});
    }
 });
+
+
+// if(!store.session.company) {
+// let session = store.session.getLastSession();
+// console.log(session);
+// }

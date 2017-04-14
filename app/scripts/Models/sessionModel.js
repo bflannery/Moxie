@@ -6,11 +6,19 @@ import store from '../store';
 
 export default Backbone.Model.extend({
 
-  initialize() {
-         if (window.localStorage.getItem('user-token')) {
-             this.set({auth: true, 'user-token': window.localStorage.getItem('user-token')});
-         }
-  },
+initialize() {
+  if (window.localStorage['user-token']) {
+			this.set({
+        'user-token': window.localStorage['user-token'],
+        'company': window.localStorage.company,
+        'email' : window.localStorage.email
+      });
+      if(window.localStorage.company === 'wemoxie') {
+        this.set({auth: true});
+        }
+      }
+    },
+
 
   url: 'https://api.backendless.com/v1/data/Users',
   idAttribute: 'objectId',
@@ -18,8 +26,9 @@ export default Backbone.Model.extend({
     auth: false,
     passwordReset: null,
     addFolder: false,
-    addFileModal: false
-
+    addFileModal: false,
+    email: '',
+    company: '',
   },
   // ----------------------------
   // Validate User Password
@@ -42,6 +51,7 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       data: JSON.stringify({email, password, company}),
       success: (response) => {
+        console.log(response);
 
         this.login(email, password, company);
       },
@@ -68,6 +78,12 @@ export default Backbone.Model.extend({
       contentType: 'application/json',
       data: JSON.stringify({login: email, password}),
       success: (response) => {
+          this.set({
+            company: response.company,
+            email: response.email,
+            objectId: response.objectId,
+            lastLogin: new Date(),
+            });
 
           window.localStorage.setItem('company', response.company);
           window.localStorage.setItem('user-token',response['user-token']);
@@ -75,13 +91,16 @@ export default Backbone.Model.extend({
           window.localStorage.setItem('ownerId',response.ownerId);
 
 
-          if(window.localStorage.email.toLowerCase().includes('wemoxie')) {
+          if(response.email.toLowerCase().includes('wemoxie')) {
           this.set({auth: true});
           browserHistory.push('/home');
         } else {
           this.set({auth: false});
-          store.clients.getClients(window.localStorage.company);
+          store.clients.getClients(response.company);
         }
+      },
+      error: () => {
+        console.log('failed login');
       }
       });
     },
@@ -114,5 +133,5 @@ forgotPassword(email) {
         success:(response)=>{
         }
       });
-    }
+    },
 });

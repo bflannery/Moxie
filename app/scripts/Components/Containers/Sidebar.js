@@ -3,21 +3,31 @@ import {browserHistory} from 'react-router';
 import store from '../../store';
 
 export default React.createClass({
-  render() {
-    let sideBar = (
-      <div className = "sidebar-button-container">
-        <button className="side-button add-client-button" onClick={this.toggleNewFolder}>Add Client</button>
-      </div>
-    );
 
-    if(this.props.clientId) {
+
+  render() {
+    console.log(this.props);
+    let sideBar;
+
+    if(this.props.session.auth === false) {
+      sideBar = <div />;
+    } else {
+      if(this.props.clientId) {
+        sideBar = (
+          <div className = "sidebar-button-container">
+            <button className="side-button add-client-button" onClick={this.toggleNewFolder}>Add Folder</button>
+            <button className="side-button add-file-button" onClick={this.dropZoneModal}> Add Files </button>
+          </div>
+        );
+      } else {
       sideBar = (
         <div className = "sidebar-button-container">
-          <button className="side-button add-client-button" onClick={this.toggleNewFolder}>Add Folder</button>
-          <button className="side-button add-file-button" onClick={this.dropZoneModal}> Add Files </button>
+          <button className="side-button add-client-button" onClick={this.toggleNewFolder}>Add Client</button>
         </div>
       );
     }
+  }
+
     return(
         <aside className="sidebar sidebar-2">
         {sideBar}

@@ -12,24 +12,23 @@ export default React.createClass({
 
   getInitialState() {
     return {
+      session: store.session.toJSON(),
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
-      session: store.session.toJSON(),
       fileStorage: store.fileStorage.toJSON()
     };
   },
 
   componentDidMount() {
+    store.session.fetch();
+    store.session.on('update change', this.updateState);
+
     store.files.fetch();
     store.files.on('update change', this.updateState);
 
     store.clients.fetch();
     store.clients.on('update change', this.updateState);
 
-    store.session.fetch();
-    store.session.on('update change', this.updateState);
-
-    store.fileStorage.fetch();
   },
 
   componentWillUnmount() {
@@ -49,6 +48,7 @@ export default React.createClass({
   },
 
   render() {
+      console.log(this.state);
     let newClientFormState = (
         <div className="main primary-container">
         <h2> moxie </h2>
