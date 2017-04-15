@@ -45,19 +45,16 @@ initialize() {
 // ----------------------------
 
   register(email, password, company){
-    $.ajax({
-      type: 'POST',
-      url: 'https://api.backendless.com/v1/users/register',
-      contentType: 'application/json',
-      data: JSON.stringify({email, password, company}),
-      success: (response) => {
-        console.log(response);
-
-        this.login(email, password, company);
-      },
-      error: () => {
-        console.log('User data not saved to server.');
-      }
+    this.save({
+      email, password, company},{
+      url:'https://api.backendless.com/v1/users/register'
+    })
+    .done((response)=> {
+      console.log('when true: ', response);
+      this.login(email, password);
+    })
+    .fail((xhr)=> {
+      console.log('error: ' , xhr);
     });
   },
 
@@ -70,38 +67,29 @@ initialize() {
     // call getClients on Clients collection
 // ----------------------------
 
-
-  login(email, password){
-    $.ajax({
+  login(login, password){
+    this.save({ login, password }, {
       type: 'POST',
-      url: 'https://api.backendless.com/v1/users/login',
-      contentType: 'application/json',
-      data: JSON.stringify({login: email, password}),
-      success: (response) => {
-          this.set({
-            company: response.company,
-            email: response.email,
-            objectId: response.objectId,
-            lastLogin: new Date(),
-            });
+      url: 'https://api.backendless.com/v1/users/login'
+    }).done((response)=> {
+      console.log(response);
 
-          window.localStorage.setItem('company', response.company);
-          window.localStorage.setItem('user-token',response['user-token']);
-          window.localStorage.setItem('email',response.email);
-          window.localStorage.setItem('ownerId',response.ownerId);
+      window.localStorage.setItem('company', response.company);
+      window.localStorage.setItem('user-token',response['user-token']);
+      window.localStorage.setItem('email',response.email);
+      window.localStorage.setItem('ownerId',response.ownerId);
 
-
-          if(response.email.toLowerCase().includes('wemoxie')) {
+        if(response.email.toLowerCase().includes('wemoxie')) {
           this.set({auth: true});
+          console.log('logged in!');
           browserHistory.push('/home');
         } else {
           this.set({auth: false});
+          console.log('logged in!')
           store.clients.getClients(response.company);
         }
-      },
-      error: () => {
-        console.log('failed login');
-      }
+      }).fail((xhr)=>{
+        console.log('login error: ' , xhr);
       });
     },
 
@@ -127,11 +115,11 @@ initialize() {
 // Send Password to Existing User
 // ----------------------------
 
-forgotPassword(email) {
-      $.ajax({
-        url:`https://api.backendless.com/v1/users/restorepassword/${email}`,
-        success:(response)=>{
-        }
-      });
-    },
+// forgotPassword(email) {
+//       $.ajax({
+//         url:`https://api.backendless.com/v1/users/restorepassword/${email}`,
+//         success:(response)=>{
+//         }
+//       });
+//     },
 });

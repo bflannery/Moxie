@@ -28,7 +28,7 @@ export default React.createClass({
           //if validatePassword returns true call register() on Session Model
           // Else Passwords Don't match
       //Clear Input form
-          
+
   handleSubmit(e) {
     e.preventDefault();
       const company= this.refs.company.value;
