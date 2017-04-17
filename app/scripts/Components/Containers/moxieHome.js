@@ -48,7 +48,6 @@ export default React.createClass({
   },
 
   render() {
-      console.log(this.state);
     let newClientFormState = (
         <div className="main primary-container">
         <h2> moxie </h2>

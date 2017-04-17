@@ -8,8 +8,7 @@ let appContainer = document.getElementById('app-container');
 
 $(document).ajaxSend((evt, xhr, opts) => {
 
-console.log('intercepted');
-console.log(opts.type);
+console.log('HTTP Request: ', opts.type);
 
 xhr.setRequestHeader('application-id', config.appId);
 xhr.setRequestHeader('secret-key', config.secretKey);

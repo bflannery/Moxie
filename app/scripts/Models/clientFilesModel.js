@@ -18,43 +18,25 @@ export default Backbone.Model.extend({
     // If no clientFiles ...
     // ----------------------------
 
-    deleteClientFilesFromClientFilesCollection(clientId, clientFilesObject) {
-
-      if(clientFilesObject.length > 0) {
+    deleteClientFiles(client) {
+      console.log(client);
+      let emptyClientFiles = client.clientFiles.forEach((clientFile, i, arr)=> {
         $.ajax({
-          type: 'GET',
-          url: 'https://api.backendless.com/v1/data/ClientFiles',
-          success: (clientFiles) => {
-            let newTotalClientFiles = clientFiles.data.filter((clientFile, i, arr) => {
-              if (clientFile.files.clientId != clientId) {
-                return true;
-              } else {
-                let fileObjectId = clientFile.files.objectId;
-                  $.ajax({
-                    type: 'DELETE',
-                    url: `https://api.backendless.com/v1/data/ClientFiles/${clientFile.objectId}`,
-                    success: () => {
-                      console.log('file deleted from client files collection');
-                      console.log('calling deleteClientFilesFromAllFilesCollection');
-                      store.file.deleteClientFilesFromAllFilesCollection(clientId, clientFilesObject);
-                    },
-                    error: () => {
-                      console.log('file not deleted from client files collections');
-                    }
-                  });
-                }
-              });
-
-            },
-          error: () => {
-            console.log('no client files');
-            }
-          });
+          type: 'DELETE',
+          url: `https://api.backendless.com/v1/data/ClientFiles/${clientFile.objectId}`,
+          success: (response) => {
+            console.log('file deleted, response: ' , response);
+          },
+          error: (xhr)=>{
+            console.log('file delete error: ', xhr);
+          }
+        });
+      if(emptyClientFiles === undefined) {
+        console.log('all clientFiles deleted');
+        store.folder.deleteClientFolder(client);
       } else {
-        console.log('object length is < 0');
-        console.log('calling deleteClientFilesFromAllFilesCollection');
-        store.file.deleteClientFilesFromAllFilesCollection(clientId, clientFilesObject);
-
+        console.log('not all clientFiles deleted');
       }
-    }
+    });
+  }
 });

@@ -145,6 +145,7 @@ export default Backbone.Model.extend({
     // On Success, call deleteFileFromClients on Clients Collections
     // ----------------------------
 
+
     deleteFileFromDataTable(objectId, clientId, clientFileId) {
         $.ajax({
             type: 'DELETE',
@@ -156,33 +157,6 @@ export default Backbone.Model.extend({
         });
     },
 
-    // ----------------------------
-    //Delete Client Folder and Client Files From File Storage
-    // On Success , call detelClientFilesFromFilesCollection on Files Collection
-    // If No Client Folder in file storage ...
-    // ----------------------------
-
-    deleteClientFolderFromStorage(clientName, clientId, clientFiles) {
-        $.ajax({
-            type: 'DELETE',
-            url: 'https://api.backendless.com/v1/files/Moxie/' + clientName,
-            success: () => {
-                console.log('client folder and files deleted from storage');
-                console.log('calling deleteClientFilesFromFilesCollection');
-                store.clientFile.deleteClientFilesFromClientFilesCollection(clientId, clientFiles);
-            },
-            error: (response) => {
-                console.log(response.responseText);
-                if (response.responseText === '{"code":6000,"message":"File or directory cannot be found."}') {
-                    console.log('client folder does not exist on storage');
-                    console.log('calling deleteClientFilesFromFilesCollection')
-                    store.clientFile.deleteClientFilesFromClientFilesCollection(clientId, clientFiles);
-                } else {
-                    console.log('client folder and files not deleted from storage');
-                }
-            }
-        });
-    },
 
     // ----------------------------
     //Delete Client Files From Files Table
@@ -190,14 +164,16 @@ export default Backbone.Model.extend({
     //If no client files in file collection ...
     // ----------------------------
 
-    deleteClientFilesFromAllFilesCollection(clientId, fileObject) {
-        if(fileObject.length > 0) {
+    deleteClientFilesFromFiles(client) {
+      console.log(client);
+        if(client.clientFiles.length > 0) {
         $.ajax({
             type: 'GET',
             url: 'https://api.backendless.com/v1/data/Files',
-            success: (allFiles) => {
-                let newTotalFiles = allFiles.data.filter((file, i, arr) => {
-                    if (file.clientId != clientId) {
+            success: (files) => {
+              console.log(files);
+                let newTotalFiles = files.data.filter((file, i, arr) => {
+                    if (file.clientId != client.objectId) {
                         return true;
                     } else {
                         if (!file) {
@@ -207,9 +183,10 @@ export default Backbone.Model.extend({
                                 type: 'DELETE',
                                 url: `https://api.backendless.com/v1/data/Files/${file.objectId}`,
                                 success: (response) => {
+                                  console.log(response);
                                     console.log('file deleted from files collection');
-                                    console.log('calling deleteClientFromClientCollection from success')
-                                    store.clients.get(clientId).deleteClientFromDataTable(clientId);
+                                    console.log('calling deleteClientFolderFromFolderCollection from success');
+                                    store.clientFile.deleteClientFiles(client);
                                 }
                             });
                         }
@@ -219,8 +196,8 @@ export default Backbone.Model.extend({
         });
     } else {
       console.log('object length is < 0')
-      console.log('calling deleteClientFromDataTable from else statement');
-      store.clients.get(clientId).deleteClientFromDataTable(clientId);
+      console.log('calling deleteClientFolderFromFolderCollection from else statement');
+      store.clientFile.deleteClientFiles(client);
     }
   }
 });

@@ -6,6 +6,7 @@ import {browserHistory} from 'react-router';
 export default React.createClass({
 
   render() {
+    console.log(this.props);
     return (
       <li className="client-container">
       <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage} className="folder-link">
@@ -28,9 +29,7 @@ export default React.createClass({
 
   removeClient(e) {
     e.preventDefault();
-    let clientName = this.props.client.name;
-    let clientId = this.props.client.objectId;
-    let clientFiles = this.props.client.clientFiles;
-    store.file.deleteClientFolderFromStorage(clientName, clientId, clientFiles);
+    let client = this.props.client;
+    store.fileStore.deleteClientFolder(client);
   }
 });

@@ -33,7 +33,6 @@ export default Backbone.Model.extend({
               }]),
             }, {
               success: (response) => {
-                console.log(response);
                 this.trigger('change');
 
               }
@@ -59,7 +58,7 @@ export default Backbone.Model.extend({
       },
       {
         success: (response) => {
-          console.log('added folder to clientFolders');
+        console.log('added folder to clientFolders');
         this.trigger('change');
         store.session.set({addFolder: false});
       },
@@ -108,7 +107,16 @@ export default Backbone.Model.extend({
 // ----------------------------
 
 
-  deleteClientFromDataTable(clientId) {
-    this.destroy ({ url: `https://api.backendless.com/v1/data/Clients/${clientId}`});
+  deleteClient(client) {
+    $.ajax({
+      type: 'DELETE',
+      url: `https://api.backendless.com/v1/data/Clients/${client.objectId}`,
+      success: () => {
+        console.log('client deleted!');
+      },
+      error: () => {
+        console.log('client was NOT deleted!');
+    }
+  });
   },
 });

@@ -1,4 +1,3 @@
-import Sessions from './Collections/sessionsCollection';
 import Session from './Models/sessionModel';
 
 import Clients from './Collections/clientsCollection';
@@ -21,7 +20,6 @@ import fileStore from './Models/fileStorageModel';
 export default {
 
   session : new Session(),
-  sessions : new Sessions(),
 
   clients : new Clients(),
   client : new Client(),

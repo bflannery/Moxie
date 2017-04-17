@@ -79,13 +79,13 @@ initialize() {
       window.localStorage.setItem('email',response.email);
       window.localStorage.setItem('ownerId',response.ownerId);
 
-        if(response.email.toLowerCase().includes('wemoxie')) {
+      if(response.email.toLowerCase().includes('wemoxie')) {
           this.set({auth: true});
-          console.log('logged in!');
+          console.log('logged in as moxie!');
           browserHistory.push('/home');
         } else {
           this.set({auth: false});
-          console.log('logged in!')
+          console.log('logged in as client!')
           store.clients.getClients(response.company);
         }
       }).fail((xhr)=>{

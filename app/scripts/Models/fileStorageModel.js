@@ -31,8 +31,6 @@ export default Backbone.Model.extend({
             let responseURL = response.fileURL;
             let splitURL = responseURL.split('/');
             let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
-            console.log(folderURL);
-
               console.log('create Client Folder passed');
               console.log('calling createClient');
               store.clients.create(
@@ -42,7 +40,7 @@ export default Backbone.Model.extend({
                 },
                 { success: (response)=> {
                     console.log('client created');
-                    store.folder.addFolderToData(folderURL , clientName);
+                    store.folder.addFolderToData(folderURL , clientName, response.id);
                 }, error: ()=> {
                     console.log('client not created');
                 }
@@ -84,6 +82,32 @@ export default Backbone.Model.extend({
                     console.log('on fail...');
                   }
           });
-        }
+        },
 
+        // ----------------------------
+        //Delete Client Folder and Client Files From File Storage
+        // On Success , call detelClientFilesFromFilesCollection on Files Collection
+        // If No Client Folder in file storage ...
+        // ----------------------------
+
+        deleteClientFolder(client) {
+            $.ajax({
+              type: 'DELETE',
+              url: client.folderURL,
+              success: () => {
+                  console.log('client folder and files deleted from storage');
+                  store.file.deleteClientFilesFromFiles(client);
+              },
+              error: (response) => {
+                console.log(response);
+                  if (response.responseText === '{"code":6000,"message":"File or directory cannot be found."}') {
+                      console.log('client folder does not exist on storage');
+                      store.file.deleteClientFilesFromFiles(client);
+
+                  } else {
+                      console.log('client folder and files not deleted from storage');
+                  }
+              }
+          });
+        }
   });

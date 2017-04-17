@@ -96,7 +96,7 @@ export default React.createClass({
                 <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
               </div>
                 <h2> {this.state.client.clientName} </h2>
-                <ClientFiles client={this.state.client}/>
+                <ClientFiles client={this.state.client} session={this.state.session}/>
                 <ClientFolders client={this.state.client} session={this.state.session}/>
               </div>
 
