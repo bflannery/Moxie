@@ -59,6 +59,7 @@
     "node-sass": "^4.5.0",
     "onchange": "^3.2.1",
     "parallelshell": "^2.0.0",
+    "pdf-image": "^1.1.0",
     "react-addons-test-utils": "^15.4.2",
     "should": "^11.2.0",
     "sinon": "^2.0.0",
