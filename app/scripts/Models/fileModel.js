@@ -85,7 +85,6 @@ export default Backbone.Model.extend({
     // ----------------------------
 
     addFileToData(fileUrl, fileName, clientId, folderName) {
-      console.log(clientId);
       if(clientId) {
         $.ajax({
             type: 'POST',
@@ -165,8 +164,6 @@ export default Backbone.Model.extend({
     // ----------------------------
 
     deleteClientFilesFromFiles(client) {
-      console.log(client);
-
         if(client.clientFiles === null || client.clientFiles.length < 0) {
           console.log('client files null or < 0');
           console.log('calling deleteClientFolder');
@@ -176,7 +173,6 @@ export default Backbone.Model.extend({
                     type: 'GET',
                     url: 'https://api.backendless.com/v1/data/Files',
                     success: (files) => {
-                      console.log(files);
                         let newTotalFiles = files.data.filter((file, i, arr) => {
                             if (file.clientId != client.objectId) {
                                 return true;
@@ -185,7 +181,6 @@ export default Backbone.Model.extend({
                                   type: 'DELETE',
                                     url: `https://api.backendless.com/v1/data/Files/${file.objectId}`,
                                     success: (response) => {
-                                      console.log(response);
                                         console.log('file deleted from files collection');
                                         console.log('calling deleteClientFolderFromFolderCollection from success');
                                         store.clientFile.deleteClientFiles(client);
