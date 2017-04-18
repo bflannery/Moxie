@@ -46,6 +46,8 @@ export default Backbone.Model.extend({
         });
       },
 
+      
+
       uploadFile(file, fileName, clientId, clientName) {
         if(!clientId && !clientName) {
           let fd = new FormData();
