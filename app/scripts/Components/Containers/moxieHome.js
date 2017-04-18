@@ -15,7 +15,7 @@ export default React.createClass({
       session: store.session.toJSON(),
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
-      fileStorage: store.fileStorage.toJSON()
+      folders: store.folders.toJSON(),
     };
   },
 
@@ -29,21 +29,24 @@ export default React.createClass({
     store.clients.fetch();
     store.clients.on('update change', this.updateState);
 
+    store.folders.fetch();
+    store.folder.on('update change', this.updateState);
+
   },
 
   componentWillUnmount() {
+    store.session.off('update change', this.updateState);
     store.files.off('update change', this.updateState);
     store.clients.off('update change', this.updateState);
-    store.session.off('update change', this.updateState);
-
+    store.folders.off('update change', this.updateState);
   },
 
   updateState() {
     this.setState({
+      session: store.session.toJSON(),
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
-      session: store.session.toJSON(),
-
+      folders: store.session.toJSON(),
     });
   },
 
@@ -67,7 +70,7 @@ export default React.createClass({
     if(this.state.session.addFileModal === true) {
       newClientFormState = (
         <div className="main primary-container">
-          <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session}/>
+          <DropzoneModal files={this.state.files} client={this.state.client}  session={this.state.session}/>
           <h2> moxie </h2>
           <ClientsList clients={this.state.clients} files={this.state.files}/>
         </div>

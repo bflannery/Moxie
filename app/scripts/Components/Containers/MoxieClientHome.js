@@ -14,11 +14,8 @@ import NavSideBar from './NavSideBar';
 import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
-
-
   getInitialState() {
     return {
-
         files: store.files.toJSON(),
         client: {
           clientFiles: []
@@ -67,8 +64,6 @@ export default React.createClass({
 },
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
     let clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>
@@ -89,16 +84,16 @@ export default React.createClass({
    }
 
     if(this.state.session.addFileModal === true) {
-          clientContainer = (
-              <div className="main primary-container">
-              <div className="modal-background"/>
-              <div className="modal-container">
-                <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
-              </div>
-                <h2> {this.state.client.clientName} </h2>
-                <ClientFiles client={this.state.client} session={this.state.session}/>
-                <ClientFolders client={this.state.client} session={this.state.session}/>
-              </div>
+      clientContainer = (
+        <div className="main primary-container">
+          <div className="modal-background"/>
+          <div className="modal-container">
+            <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
+          </div>
+          <h2> {this.state.client.clientName} </h2>
+          <ClientFiles client={this.state.client} session={this.state.session}/>
+          <ClientFolders client={this.state.client} session={this.state.session}/>
+        </div>
 
           );
         }
@@ -119,9 +114,3 @@ export default React.createClass({
      store.clients.get(this.state.client.objectId).set({addFileModal: true});
    }
 });
-
-
-// if(!store.session.company) {
-// let session = store.session.getLastSession();
-// console.log(session);
-// }

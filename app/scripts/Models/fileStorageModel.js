@@ -25,38 +25,37 @@ export default Backbone.Model.extend({
               'application-id': config.appId,
               'secret-key': config.secret,
               'application-type': 'REST'
-          },
-          success: (response) => {
-            response = JSON.parse(response);
-            let responseURL = response.fileURL;
-            let splitURL = responseURL.split('/');
-            let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
+          }
+        }).done((response)=> {
+              response = JSON.parse(response);
+              let responseURL = response.fileURL;
+              let splitURL = responseURL.split('/');
+              let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
               console.log('create Client Folder passed');
               console.log('calling createClient');
-              store.clients.create(
-                {
-                  clientName: clientName,
-                  folderURL : folderURL
+              store.clients.create({
+                clientName: clientName,
+                folderURL: folderURL
+              },{
+                success: (response) => {
+                  console.log(response);
+                  console.log('client created');
+                  store.folder.addClientFolder(folderURL, clientName, response.id);
                 },
-                { success: (response)=> {
-                    console.log('client created');
-                    store.folder.addFolderToData(folderURL , clientName, response.id);
-                }, error: ()=> {
-                    console.log('client not created');
-                }
-              });
-          },
-              error: (response) => {
-              console.log('create Client Folder failed')
-              }
+                error: (xhr) => {
+                  console.log('client not created: ', xhr);
+            }
           });
-        },
+        }).fail((xhr)=> {
+          console.log('create client folder error ', xhr);
+        });
+      },
 
-        createSubFolder(client, clientName, clientId, clientURL, folderName) {
 
+
+    createSubFolder(client, clientName, clientId, clientURL, folderName) {
           let fd = new FormData();
           fd.append('upload', client);
-
           $.ajax({
               type: 'POST',
               processData: false,
@@ -68,20 +67,16 @@ export default Backbone.Model.extend({
                   'secret-key': config.secret,
                   'application-type': 'REST'
               },
-              success: (response) => {
-                response = JSON.parse(response);
-                let responseURL = response.fileURL;
-                let splitURL = responseURL.split('/');
-                let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
-                console.log(folderURL);
-
-                  store.folder.addFolderToData(folderURL, folderName, clientName, clientId);
-                    console.log('on success...')
-                  },
-              error: (response) => {
-                    console.log('on fail...');
-                  }
-          });
+            }).done((response)=> {
+              response = JSON.parse(response);
+              let responseURL = response.fileURL;
+              let splitURL = responseURL.split('/');
+              let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
+              console.log('subFolder created');
+              store.folder.addFolderToData(folderURL, folderName, clientName, clientId);
+            }).fail((xhr)=> {
+              console.log('subFoler error: ', xhr);
+            });
         },
 
         // ----------------------------
@@ -94,12 +89,12 @@ export default Backbone.Model.extend({
             $.ajax({
               type: 'DELETE',
               url: client.folderURL,
-              success: () => {
+            }).done((response) => {
                   console.log('client folder and files deleted from storage');
                   store.file.deleteClientFilesFromFiles(client);
-              },
-              error: (response) => {
+              }).fail((response, xhr)=> {
                 console.log(response);
+                console.log(xhr);
                   if (response.responseText === '{"code":6000,"message":"File or directory cannot be found."}') {
                       console.log('client folder does not exist on storage');
                       store.file.deleteClientFilesFromFiles(client);
@@ -107,7 +102,6 @@ export default Backbone.Model.extend({
                   } else {
                       console.log('client folder and files not deleted from storage');
                   }
+              });
               }
-          });
-        }
   });

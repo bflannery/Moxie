@@ -166,38 +166,39 @@ export default Backbone.Model.extend({
 
     deleteClientFilesFromFiles(client) {
       console.log(client);
-        if(client.clientFiles.length > 0) {
-        $.ajax({
-            type: 'GET',
-            url: 'https://api.backendless.com/v1/data/Files',
-            success: (files) => {
-              console.log(files);
-                let newTotalFiles = files.data.filter((file, i, arr) => {
-                    if (file.clientId != client.objectId) {
-                        return true;
-                    } else {
-                        if (!file) {
-                            console.log('no files for client exists in collection');
-                        } else {
-                            $.ajax({
-                                type: 'DELETE',
-                                url: `https://api.backendless.com/v1/data/Files/${file.objectId}`,
-                                success: (response) => {
-                                  console.log(response);
-                                    console.log('file deleted from files collection');
-                                    console.log('calling deleteClientFolderFromFolderCollection from success');
-                                    store.clientFile.deleteClientFiles(client);
-                                }
+
+        if(client.clientFiles === null || client.clientFiles.length < 0) {
+          console.log('client files null or < 0');
+          console.log('calling deleteClientFolder');
+            store.folder.deleteClientFolder(client);
+          } else {
+                $.ajax({
+                    type: 'GET',
+                    url: 'https://api.backendless.com/v1/data/Files',
+                    success: (files) => {
+                      console.log(files);
+                        let newTotalFiles = files.data.filter((file, i, arr) => {
+                            if (file.clientId != client.objectId) {
+                                return true;
+                            } else {
+                                $.ajax({
+                                  type: 'DELETE',
+                                    url: `https://api.backendless.com/v1/data/Files/${file.objectId}`,
+                                    success: (response) => {
+                                      console.log(response);
+                                        console.log('file deleted from files collection');
+                                        console.log('calling deleteClientFolderFromFolderCollection from success');
+                                        store.clientFile.deleteClientFiles(client);
+                                      }
+                                    });
+                                  }
+                                });
+                              },
+                              error: () => {
+                                console.log('did not get files');
+                              }
                             });
+                          }
                         }
-                    }
-                });
-            }
-        });
-    } else {
-      console.log('object length is < 0')
-      console.log('calling deleteClientFolderFromFolderCollection from else statement');
-      store.clientFile.deleteClientFiles(client);
-    }
-  }
+
 });

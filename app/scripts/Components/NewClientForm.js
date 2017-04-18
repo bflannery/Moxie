@@ -29,7 +29,7 @@ export default React.createClass({
       store.fileStore.createSubFolder(client, clientName, clientObjectId, clientURL, folderName);
 
     } else {
-     let clientName = this.refs.folderName.value.toLowerCase();
+     let clientName = this.refs.folderName.value;
      store.fileStore.createClientFolder(clientName);
      store.session.set({ addFolder: false});
    }

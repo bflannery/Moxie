@@ -13,45 +13,28 @@ export default Backbone.Model.extend({
     },
 
 
-    addFolderToData(folderURL , folderName, clientId, parentFolderName) {
-      console.log('addFolderToData clientId: ' , clientId);
-      $.ajax({
-          type: 'POST',
-          url: 'https://api.backendless.com/v1/data/Folders',
-          contentType: 'application/json',
-          data: JSON.stringify({
-              folderURL,
-              folderName,
-              parentFolderName,
-              clientId
-          }),
-          success: (response) => {
-            console.log(response);
-              if(!clientId) {
-                this.trigger('change');
-                store.session.set({addFolder: false});
-              } else {
-
-              console.log('folder added to folder table...');
-              let folderName = response.folderName;
-              let folderId = response.objectId;
-              store.clients.get(response.clientId).addFolderToClientFolders(folderId, folderName);
-              }
-            },
-          error: () => {
-              console.log('no folder to data table');
-          }
-
+    addClientFolder(folderURL , folderName, clientId) {
+      console.log(clientId);
+      this.save({
+        folderURL : folderURL,
+        folderName : folderName,
+        clientId : clientId
+      }).done((response)=>{
+        console.log('added Client');
+        console.log(response);
+        store.folders.trigger('change');
+      }).fail((xhr)=> {
+        console.log('error: ' , xhr);
       });
     },
+
 
     deleteClientFolder(client) {
       console.log(client);
       $.ajax({
         type: 'GET',
         url: 'https://api.backendless.com/v1/data/Folders'
-      })
-      .done((clientFolders)=> {
+      }).done((clientFolders)=> {
         console.log(clientFolders);
         let newClientFolder = clientFolders.data.filter((clientFolder, i ,arr)=> {
           if(clientFolder.clientId !== client.objectId) {
@@ -71,8 +54,7 @@ export default Backbone.Model.extend({
             });
           }
         });
-      })
-      .fail((xhr)=> {
+      }).fail((xhr)=> {
         console.log('failed to get folders: ' , xhr);
       });
     }
