@@ -67,6 +67,7 @@ export default React.createClass({
     },
 
     uploadFiles() {
+  
       if(this.props.client) {
 
         let file = this.state.dropzoneFiles[0];
