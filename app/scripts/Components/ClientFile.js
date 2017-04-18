@@ -54,6 +54,10 @@ removeFile(e) {
   let fileUrl = this.props.clientFile.files.fileUrl;
   let clientId = this.props.clientFile.files.clientId;
   let clientFileId = this.props.clientFile.objectId;
-  store.files.get(fileId).deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
+  console.log(fileId);
+  console.log(fileUrl);
+  console.log(clientId);
+  console.log(clientFileId);
+  store.fileStore.deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
 }
 });

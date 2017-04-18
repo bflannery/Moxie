@@ -64,6 +64,7 @@ export default React.createClass({
 },
 
   render() {
+    console.log(this.state);
     let clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>

@@ -22,10 +22,7 @@ export default Backbone.Model.extend({
     // ----------------------------
 
 
-    addFileToClientFiles({
-        fileId,
-        folderName
-    }) {
+    addFileToClientFiles(fileId, folderName) {
         this.set({
             addFileModal: false
         });
@@ -40,8 +37,11 @@ export default Backbone.Model.extend({
             }]),
         }, {
             success: (response) => {
+              console.log('file added to clientFiles');
                 this.trigger('change');
-
+            },
+            error: (xhr) => {
+              console.log('error saving clientFile', xhr);
             }
         });
     },
