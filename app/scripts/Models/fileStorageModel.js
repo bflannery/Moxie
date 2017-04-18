@@ -46,6 +46,13 @@ export default Backbone.Model.extend({
         });
       },
 
+
+      // ----------------------------
+      // Dropzone Upload to Backendless File Storage
+      // On Success call addFileToData
+      // Alert File Exists if Response Code 6003
+      // ----------------------------
+
       uploadFile(file, fileName, clientId, clientName) {
         if(!clientId && !clientName) {
           let fd = new FormData();
@@ -59,6 +66,7 @@ export default Backbone.Model.extend({
               success: (response) => {
                   console.log('success on files storage to Moxie...');
                   response = JSON.parse(response);
+                  store.file.getPreview(response.fileURL);
                   store.file.addFileToData(response.fileURL, fileName, clientId, clientName);
               },
               error: (response) => {
@@ -83,8 +91,9 @@ export default Backbone.Model.extend({
               success: (response) => {
                   console.log('success on files storage to Moxie/client:id...');
                   response = JSON.parse(response);
-                  store.file.addFileToData(response.fileURL, fileName, clientId, clientName);
-              },
+                  let pdfImage = store.file.getPreview(file);
+                  console.log('pdfImage: ', pdfImage);
+                },
               error: (response) => {
                   if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
                       alert('File Already Exists');
@@ -95,7 +104,8 @@ export default Backbone.Model.extend({
         }
       },
 
-
+    //   store.file.addFileToData(response.fileURL, fileName, clientId, clientName);
+    // },
 
 
 

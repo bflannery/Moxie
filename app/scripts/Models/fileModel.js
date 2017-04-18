@@ -1,8 +1,10 @@
+import fs from 'fs';
 import Backbone from 'backbone';
 import $ from 'jquery';
 import config from '../config';
 import { browserHistory } from 'react-router';
 import store from '../store';
+var PDFImage = require('pdf-image').PDFImage;
 
 export default Backbone.Model.extend({
     url: 'https://api.backendless.com/v1/data/Files',
@@ -13,13 +15,18 @@ export default Backbone.Model.extend({
     },
 
 
-    // ----------------------------
-    // Dropzone Upload to Backendless File Storage
-    // On Success call addFileToData
-    // Alert File Exists if Response Code 6003
-    // ----------------------------
 
 
+getPreview(file) {
+  var pdfImage = new PDFImage(file);
+  console.log('Start');
+  pdfImage.convertPage(0).then(function (imagePath) {
+    console.log('converted');
+    // 0-th page (first page) of the slide.pdf is available as slide-0.png
+    fs.existsSync('slide-0.png'); // => true
+  });
+  console.log(pdfImage);
+},
 
     // ----------------------------
     // Add File To All Files Table

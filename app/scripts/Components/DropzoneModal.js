@@ -67,11 +67,7 @@ export default React.createClass({
     },
 
     uploadFiles() {
-      var pdfImage = new PDFImage("/tmp/slide.pdf");
-      pdfImage.convertPage(0).then(function (imagePath) {
-  // 0-th page (first page) of the slide.pdf is available as slide-0.png
-      fs.existsSync("/tmp/slide-0.png") // => true
-});
+  
       if(this.props.client) {
 
         let file = this.state.dropzoneFiles[0];
