@@ -19,64 +19,7 @@ export default Backbone.Model.extend({
     // Alert File Exists if Response Code 6003
     // ----------------------------
 
-    uploadFile(file, fileName, clientId, clientName) {
-      if(!clientId && !clientName) {
-        let fd = new FormData();
-        fd.append('upload', file);
-        $.ajax({
-            type: 'POST',
-            data: fd,
-            processData: false,
-            contentType: false,
-            url: 'https://api.backendless.com/v1/files/Moxie/' + fileName,
-            headers: {
-                'application-id': config.appId,
-                'secret-key': config.secret,
-                'application-type': 'REST'
-            },
-            success: (response) => {
-                console.log('success on files storage to Moxie...');
-                response = JSON.parse(response);
-                this.addFileToData(response.fileURL, fileName, clientId, client);
-            },
-            error: (response) => {
-                if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
-                    alert('File Already Exists');
-                } else {
-                  console.log('ya messed up');
-                }
 
-            }
-        });
-
-      } else {
-        let fd = new FormData();
-        fd.append('upload', file);
-        $.ajax({
-            type: 'POST',
-            data: fd,
-            processData: false,
-            contentType: false,
-            url: 'https://api.backendless.com/v1/files/Moxie/clients/' + clientName + '/' + fileName,
-            headers: {
-                'application-id': config.appId,
-                'secret-key': config.secret,
-                'application-type': 'REST'
-            },
-            success: (response) => {
-                console.log('success on files storage to Moxie/client:id...');
-                response = JSON.parse(response);
-                this.addFileToData(response.fileURL, fileName, clientId, clientName);
-            },
-            error: (response) => {
-                if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
-                    alert('File Already Exists');
-                }
-
-            }
-        });
-      }
-    },
 
     // ----------------------------
     // Add File To All Files Table
@@ -97,15 +40,15 @@ export default Backbone.Model.extend({
                 folderName
             }),
             success: (response) => {
-              console.log('addFileToData success response: ' + response );
+              console.log('addFileToData success response: ', response );
                 console.log('on file to data success with clientId...')
-                store.clients.get(response.clientId).addFileToClientFiles({
-                    fileId: response.objectId,
-                    folderName: response.folderName
-                });
+                store.clients.get(response.clientId).addFileToClientFiles(response.objectId,response.folderName);
+                store.files.trigger('change');
+              },
+            error: (xhr) => {
+              console.log('errod adding file to data table: ', xhr);
             }
-        });
-
+          });
       } else {
         $.ajax({
             type: 'POST',
@@ -123,21 +66,6 @@ export default Backbone.Model.extend({
   }
     },
 
-    // ----------------------------
-    // Delete File From Client Folder in File Storage
-    // On Success , call deleteFileFromDataTable
-    // ----------------------------
-
-    deleteFileFromStorage(objectId, fileUrl, clientId, clientFileId) {
-        $.ajax({
-            type: 'DELETE',
-            url: fileUrl,
-            success: () => {
-                console.log('deleted File From Storage');
-                this.deleteFileFromDataTable(objectId, clientId, clientFileId);
-            }
-        });
-    },
 
     // ----------------------------
     // Delete File From Data Files Table
