@@ -10,6 +10,7 @@ import ForgotPassword from './Components/ForgotPassword';
 
 import MoxieHome from './Components/Containers/MoxieHome';
 import MoxieClientHome from './Components/Containers/MoxieClientHome';
+import SubFolder from './Components/Containers/SubFolder';
 
 import Files from './Components/Containers/Files';
 import Recent from './Components/Containers/Recent';
@@ -23,7 +24,8 @@ const router = (
       <IndexRoute component={LandingPage}/>
        <Route path='/register' component={Register}/>
        <Route path='/home' component={MoxieHome}/>
-       <route path='/clients/:id' component = {MoxieClientHome}/>
+       <Route path='/clients/:id' component = {MoxieClientHome}/>
+       <Route path='/folders/:id' componenet = {SubFolder}/>
        <Route path='/forgotpassword' component={ForgotPassword}/>
        <Route path='/files' component = {Files}/>
        <Route path='/recent' component = {Recent}/>
