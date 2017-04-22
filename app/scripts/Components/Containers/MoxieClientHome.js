@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import store from '../../store';
 import Client from '../../Models/clientModel';
 
+import ClientItems from '../ClientItems';
 import ClientFiles from '../ClientFiles';
 import ClientFolders from '../ClientFolders';
 import DropzoneModal from '../DropzoneModal';
@@ -14,6 +15,15 @@ import NavSideBar from './NavSideBar';
 import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
+
+  initialize() {
+    if(store.clients.get(this.props.params.id) !== undefined) {
+    this.setState({
+      client: store.clients.get(this.props.params.id).toJSON(),
+    })
+  }
+},
+
   getInitialState() {
     return {
         files: store.files.toJSON(),
@@ -68,8 +78,7 @@ export default React.createClass({
     let clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>
-          <ClientFiles client={this.state.client} session={this.state.session}/>
-          <ClientFolders client={this.state.client} session={this.state.session}/>
+          <ClientItems client={this.state.client} session={this.state.session}/>
         </div>
     );
 
