@@ -1,25 +1,22 @@
 import React from 'react';
-import ClientFolder from './ClientFolder';
-
-import store from '../store';
+import ClientItem from './ClientItem';
 
 export default React.createClass({
   render() {
-    console.log(this.props);
-    let allItems = <div/>;
-    let clientItems = [];
-    let client = this.props.client;
+  let allItems = [];
+    let folders = this.props.client.clientFolders;
+    let files = this.props.client.clientFiles;
+    allItems = allItems.concat(files, folders);
 
-    clientItems = clientItems.concat(client.clientFiles);
-
-    console.log(clientItems);
-
-
+    let allClientItems =  allItems.map((item , i, arr)=> {
+      return <ClientItem key={i} item={item} session={this.props.session}/>
+    });
 
     return (
-      <ul className ="secondary-container">
-        {allItems}
-      </ul>
+      <div className="all-client-items">
+      {allClientItems}
+      </div>
     );
   }
+
 });

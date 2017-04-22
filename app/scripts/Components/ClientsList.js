@@ -8,8 +8,6 @@ export default React.createClass({
     let files;
 
     if(this.props.clients.length < 1) {
-
-
       clients = <li> No Clients </li>;
     } else {
       clients = this.props.clients.map((client, i, arr)=> {

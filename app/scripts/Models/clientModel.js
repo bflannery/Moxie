@@ -126,4 +126,14 @@ export default Backbone.Model.extend({
             }
         });
     },
+
+
+    getItems() {
+      let allItems = [];
+      let files = this.attributes.clientFiles.map((clientFile, i, arr)=>{
+          allItems.concat(clientFile);
+          return true;
+      });
+      console.log(allItems);
+    }
 });
