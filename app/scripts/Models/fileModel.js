@@ -12,15 +12,6 @@ export default Backbone.Model.extend({
         description: '',
     },
 
-
-    // ----------------------------
-    // Dropzone Upload to Backendless File Storage
-    // On Success call addFileToData
-    // Alert File Exists if Response Code 6003
-    // ----------------------------
-
-
-
     // ----------------------------
     // Add File To All Files Table
     // On Success, call AddFileToClientFiles on Clients Collections
