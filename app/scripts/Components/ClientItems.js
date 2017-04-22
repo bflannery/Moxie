@@ -16,4 +16,7 @@ export default React.createClass({
       <div className="all-client-items">
       {allClientItems}
       </div>
+    );
+  }
+
 });

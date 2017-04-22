@@ -27,9 +27,7 @@ export default React.createClass({
   getInitialState() {
     return {
         files: store.files.toJSON(),
-        client: {
-          clientFiles: []
-        },
+        client: {},
         folders: store.folders.toJSON(),
         session: store.session.toJSON()
     };
@@ -53,6 +51,8 @@ export default React.createClass({
 
       store.folders.fetch();
       store.folders.on('update change'. this.updateState);
+
+
   },
 
   componentWillUnmount() {
@@ -74,8 +74,13 @@ export default React.createClass({
 },
 
   render() {
-    console.log(this.state);
-    let clientContainer = (
+    let clientContainer;
+
+    if(this.state.client.clientFiles === undefined) {
+      clientContainer = <div/>;
+    } else {
+
+     clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>
           <ClientItems client={this.state.client} session={this.state.session}/>
@@ -107,6 +112,7 @@ export default React.createClass({
 
           );
         }
+    }
 
       return (
         <div className="client-file-page">
