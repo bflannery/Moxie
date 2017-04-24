@@ -1,3 +1,8 @@
+.primary-container h2 {
+
+}
+
+
 .client-list-container {
     margin-top: 4rem;
     text-align: center;
@@ -22,8 +27,8 @@
   padding: 0;
   outline: 0;
   color: #50a3a2;
-  border-radius: 3px;
   border: none;
+  border-bottom: 1px solid black;
   background: transparent;
   margin: 0 auto 10px 1rem;
   text-align: left;
@@ -46,7 +51,14 @@
 .client-container {
   width: 88%;
   margin: 1rem auto;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid black;
+}
+
+.client-container:hover {
+  background-color: #EDCC28;
+  color: white;
+  border-radius: 10px;
+  opacity: .8;
 }
 
 .folder-link {
@@ -66,24 +78,25 @@
   display: inline-block;
 }
 
-.client-name:hover {
-    color: blue;
-}
-
 .delete-client-button {
     margin: 0;
     vertical-align: middle;
     padding: 0.5rem 1rem;
 }
 
+.fa-times-circle {
+  color: black;
+}
+
 .file-link:visited {
-  color: white;
+  color: black;
 }
 
 
 @media(min-width:600px) {
   .client-input {
-    width: 30%;
+    width: 92%;
+    font-size: 1.2rem;
   }
 
 }

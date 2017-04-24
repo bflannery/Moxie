@@ -46,7 +46,7 @@ export default Backbone.Model.extend({
         });
       },
 
-      
+
 
       uploadFile(file, fileName, clientId, clientName) {
         if(!clientId && !clientName) {
@@ -96,9 +96,6 @@ export default Backbone.Model.extend({
           });
         }
       },
-
-
-
 
 
     createSubFolder(client, clientName, clientId, clientURL, folderName) {

@@ -85,8 +85,7 @@ export default Backbone.Model.extend({
 
     deleteClientFilesFromFiles(client) {
       console.log(client);
-
-        if(client.clientFiles === null || client.clientFiles.length < 0) {
+        if(client.clientFiles === null || client.clientFiles.length === 0) {
           console.log('client files null or < 0');
           console.log('calling deleteClientFolder');
             store.folder.deleteClientFolder(client);
