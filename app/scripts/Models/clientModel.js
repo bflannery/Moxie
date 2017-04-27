@@ -52,13 +52,15 @@ export default Backbone.Model.extend({
     // Push to ClientHome
     // ----------------------------
 
-    addFolderToClientFolders(id, folderName) {
+    addFolderToClientFolders(subFolderId, folderName) {
+      console.log(subFolderId);
+      console.log(folderName);
         this.save({
             clientFolders: this.get('clientFolders').concat([{
                 ___class: 'ClientFolders',
                 folders: {
                     ___class: 'Folders',
-                    objectId: id,
+                    objectId: subFolderId,
                     folderName: folderName
                 }
             }]),

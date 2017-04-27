@@ -98,7 +98,7 @@ export default Backbone.Model.extend({
       },
 
 
-    createSubFolder(client, clientName, clientId, clientURL, folderName) {
+    createSubFolder(client, subFolderName) {
           let fd = new FormData();
           fd.append('upload', client);
           $.ajax({
@@ -106,14 +106,14 @@ export default Backbone.Model.extend({
               processData: false,
               contentType: false,
               data: fd,
-              url: 'https://api.backendless.com/v1/files/Moxie/subFolders/' + folderName + '/moxie',
+              url: 'https://api.backendless.com/v1/files/Moxie/subFolders/' + subFolderName + '/moxie',
             }).done((response)=> {
               response = JSON.parse(response);
               let responseURL = response.fileURL;
               let splitURL = responseURL.split('/');
-              let folderURL = splitURL.slice(0,splitURL.length-1).join('/');
+              let subFolderURL = splitURL.slice(0,splitURL.length-1).join('/');
               console.log('subFolder created');
-              store.folder.addFolderToData(folderURL, folderName, clientName, clientId);
+              store.folder.addSubFolder(client, subFolderName, subFolderURL);
             }).fail((xhr)=> {
               console.log('subFoler error: ', xhr);
             });

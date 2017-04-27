@@ -22,11 +22,8 @@ export default React.createClass({
     e.preventDefault();
     if(this.props.client) {
       let client = this.props.client;
-      let clientName = this.props.client.clientName;
-      let clientObjectId = this.props.client.objectId;
-      let clientURL = this.props.client.folderURL;
-      let folderName = this.refs.folderName.value.toLowerCase();
-      store.fileStore.createSubFolder(client, clientName, clientObjectId, clientURL, folderName);
+      let subFolderName = this.refs.folderName.value.toLowerCase();
+      store.fileStore.createSubFolder(client, subFolderName);
 
     } else {
      let clientName = this.refs.folderName.value;

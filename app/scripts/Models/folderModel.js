@@ -57,5 +57,20 @@ export default Backbone.Model.extend({
       }).fail((xhr)=> {
         console.log('failed to get folders: ' , xhr);
       });
+    },
+
+    addSubFolder(client, subFolderName, subFolderURL) {
+      console.log(client)
+      this.save({
+        folderURL : subFolderURL,
+        folderName : subFolderName,
+        clientId : client.objectId
+      }).done((response)=>{
+        console.log('added Client');
+        console.log(response);
+        store.clients.get(response.clientId).addFolderToClientFolders(response.objectId, subFolderName);
+      }).fail((xhr)=> {
+        console.log('error: ' , xhr);
+      });
     }
   });
