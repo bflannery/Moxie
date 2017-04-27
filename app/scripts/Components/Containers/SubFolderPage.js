@@ -6,7 +6,7 @@ import store from '../../store';
 import Folder from '../../Models/folderModel';
 
 import ClientItems from '../ClientItems';
-import ClientFiles from '../ClientFiles';
+import SubFolderFiles from '../SubFolderFiles';
 import ClientFolders from '../ClientFolders';
 import DropzoneModal from '../DropzoneModal';
 import Header from '../Header';
@@ -69,12 +69,30 @@ updateState() {
     if(this.state.folder === undefined) {
       subFolderContainer = <div/>
     } else {
+
       subFolderContainer = (
         <div className="main primary-container">
           <h2> {this.state.folder.folderName} </h2>
+          <SubFolderFiles folder={this.state.folder} session={this.state.session}/>
         </div>
-      )
-    }
+      );
+
+
+      if(this.state.session.addFileModal === true) {
+        subFolderContainer = (
+          <div className="main primary-container">
+            <div className="modal-background"/>
+            <div className="modal-container">
+              <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
+            </div>
+            <h2> {this.state.folder.folderName} </h2>
+            <SubFolderFiles folder={this.state.folder} session={this.state.session}/>
+          </div>
+
+            );
+          }
+        }
+
     return (
       <div className="subfolder-container">
         <Header/>

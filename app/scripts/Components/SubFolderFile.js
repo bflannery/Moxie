@@ -13,19 +13,19 @@ export default React.createClass({
     if(this.props.session.auth === false) {
       fileLink = (
           <div>
-            <Link to={this.props.clientFile.files.fileUrl} target="_blank" className="file-link">
+            <Link to={this.props.files.fileUrl} target="_blank" className="file-link">
               <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
-              <span> {this.props.clientFile.files.fileName} </span>
+              <span> {this.props.files.fileName} </span>
             </Link>
             </div>
       );
     } else {
-        if(this.props.clientFile) {
+        if(this.props.files) {
       fileLink = (
             <div>
-              <Link to={this.props.clientFile.files.fileUrl} target="_blank" className="file-link">
+              <Link to={this.props.files.fileUrl} target="_blank" className="file-link">
                 <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
-                <span> {this.props.clientFile.files.fileName} </span>
+                <span> {this.props.files.fileName} </span>
               </Link>
               <button onClick={this.removeFile} type="submit" className="delete-file-button">
                 <i className="fa fa-times-circle" aria-hidden="true"></i>
