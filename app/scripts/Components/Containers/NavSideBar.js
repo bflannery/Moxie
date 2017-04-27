@@ -12,8 +12,7 @@ export default React.createClass({
           <ul className = "navSideBar-links-container">
             <Link to="/home" onClick={this.resetState} className ="navSideBar-links">Clients</Link>
             <Link to="/files" onClick={this.resetState} className="navSideBar-links">Files</Link>
-            <Link to="/recent" onClick={this.resetState} className ="navSideBar-links">Recent</Link>
-            <Link to="/trash" onClick={this.resetState} className ="navSideBar-links">Trash</Link>
+
             </ul>
         );
     }
@@ -32,3 +31,7 @@ export default React.createClass({
     store.session.set({addFileModal: false});
   }
 });
+
+
+//<Link to="/recent" onClick={this.resetState} className ="navSideBar-links">Recent</Link>
+//<Link to="/trash" onClick={this.resetState} className ="navSideBar-links">Trash</Link>
