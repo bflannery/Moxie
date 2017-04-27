@@ -86,6 +86,10 @@ body{
   }
 }
 
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
 @media all and (max-width: 650px) {
 			 .main-container{
 					 flex-direction: column;
