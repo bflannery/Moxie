@@ -25,7 +25,7 @@ const router = (
        <Route path='/register' component={Register}/>
        <Route path='/home' component={MoxieHome}/>
        <Route path='/clients/:id' component = {MoxieClientHome}/>
-       <Route path='/folders/:id' componenet = {SubFolder}/>
+       <Route path='/folders/:id' component = {SubFolder}/>
        <Route path='/forgotpassword' component={ForgotPassword}/>
        <Route path='/files' component = {Files}/>
        <Route path='/recent' component = {Recent}/>

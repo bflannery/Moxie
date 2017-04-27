@@ -28,7 +28,6 @@ export default Backbone.Model.extend({
       });
     },
 
-
     deleteClientFolder(client) {
       console.log(client);
       $.ajax({
@@ -66,11 +65,23 @@ export default Backbone.Model.extend({
         folderName : subFolderName,
         clientId : client.objectId
       }).done((response)=>{
-        console.log('added Client');
+        console.log('added SubFolder');
         console.log(response);
         store.clients.get(response.clientId).addFolderToClientFolders(response.objectId, subFolderName);
       }).fail((xhr)=> {
         console.log('error: ' , xhr);
       });
+    },
+
+    deleteSubFolder(subFolderId, clientId, clientFolderId) {
+      $.ajax({
+          type: 'DELETE',
+          url: `https://api.backendless.com/v1/data/Folders/${subFolderId}`,
+          success: () => {
+              console.log('deleted Folder From Table');
+              store.clients.get(clientId).deleteFolderFromClient(clientFolderId);
+          }
+      });
     }
+
   });

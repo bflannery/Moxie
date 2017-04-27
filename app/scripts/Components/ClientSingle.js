@@ -9,7 +9,7 @@ export default React.createClass({
     console.log(this.props);
     return (
       <li className="client-container">
-      <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage} className="folder-link">
+      <Link to ={`/clients/${this.props.client.objectId}`} className="folder-link">
       <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
         <h4 className="client-name"> {this.props.client.clientName} </h4>
         </Link>

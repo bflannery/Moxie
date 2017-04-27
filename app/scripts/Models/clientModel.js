@@ -110,6 +110,31 @@ export default Backbone.Model.extend({
         });
     },
 
+    deleteFolderFromClient(clientFolderId) {
+        let newClientFolders = this.get('clientFolders').filter((clientFolder, i, arr) => {
+            if (clientFolderId !== clientFolder.objectId) {
+                return true;
+            }
+        });
+        this.save({
+            clientFolders: newClientFolders
+        }, {
+            success: () => {
+                $.ajax({
+                    type: 'DELETE',
+                    url: `https://api.backendless.com/v1/data/ClientFolders/${clientFolderId}`,
+                    success: () => {
+                        console.log('deleted from ClientFolders');
+                    },
+                    error: () => {
+                        console.log('not deleted from ClientFolders');
+                    }
+                });
+            }
+        });
+    },
+
+
 
     // ----------------------------
     //Delete Client From Clients Table

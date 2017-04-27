@@ -20,12 +20,13 @@ export default React.createClass({
       session: store.session.toJSON()
     }
   },
-  
+
   render() {
     return (
       <div className="subfolder-container">
         <Header/>
         <div className="main-container">
+        <h1> SUBFOLDER HOME </h1>
         <NavSideBar session={this.state.session} />
         <Sidebar session={this.state.session}/>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
-import {browserHistory, Link} from 'react-router';
+import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import store from '../store';
 import $ from 'jquery';
 
@@ -47,7 +48,7 @@ export default React.createClass({
       } else if (this.props.item.folders){
         itemLink = (
           <div>
-            <Link to={this.props.item.folders.folderURL} className="file-link">
+            <Link to ={`/folders/${this.props.item.objectId}`} className="folder-link">
               <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
               <span> {this.props.item.folders.folderName} </span>
             </Link>
@@ -56,9 +57,7 @@ export default React.createClass({
             </button>
         </div>
       );
-      } else {
-          itemLink = <div/>;
-        }
+      }
     }
     return (
       <li className="client-file">
@@ -79,12 +78,13 @@ removeFile(e) {
   let clientFileId = this.props.item.objectId;
   store.fileStore.deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
 },
+
 removeFolder(e) {
   e.preventDefault();
-  let fileId = this.props.clientFolder.files.objectId;
-  let fileUrl = this.props.clientFolder.files.fileUrl;
-  let clientId = this.props.clientFolder.files.clientId;
-  let clientFileId = this.props.clientFolder.objectId;
-  store.files.get(fileId).deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
+  let subFolderId = this.props.item.folders.objectId;
+  let subFolderURL = this.props.item.folders.folderURL;
+  let clientId = this.props.item.folders.clientId;
+  let clientFolderId = this.props.item.objectId;
+  store.fileStore.deleteFolderFromStorage(subFolderId, subFolderURL, clientId, clientFolderId);
 }
 });

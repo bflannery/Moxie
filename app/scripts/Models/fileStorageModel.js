@@ -125,23 +125,19 @@ export default Backbone.Model.extend({
         // If No Client Folder in file storage ...
         // ----------------------------
 
-        deleteClientFolder(client) {
+        deleteFolderFromStorage(subFolderId, subFolderURL, clientId, clientFolderId) {
             $.ajax({
-              type: 'DELETE',
-              url: client.folderURL,
-            }).done((response) => {
-                  console.log('client folder and files deleted from storage');
-                  store.file.deleteClientFilesFromFiles(client);
-              }).fail((response, xhr)=> {
-                  if (response.responseText === '{"code":6000,"message":"File or directory cannot be found."}') {
-                      console.log('client folder does not exist on storage');
-                      store.file.deleteClientFilesFromFiles(client);
-
-                  } else {
-                      console.log('client folder and files not deleted from storage');
-                  }
-              });
-            },
+                type: 'DELETE',
+                url: subFolderURL,
+                success: () => {
+                  console.log('deleted subFolder From Storage');
+                  store.folder.deleteSubFolder(subFolderId, clientId, clientFolderId);
+                },
+                error: (xhr) => {
+                  console.log('error deleting from storage ', xhr);
+                }
+            });
+        },
 
             // ----------------------------
             // Delete File From Client Folder in File Storage
