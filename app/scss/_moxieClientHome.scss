@@ -10,7 +10,7 @@
 .client-file {
     width: 88%;
     margin: 1rem auto;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
 }
 
 .file-icon {
@@ -30,7 +30,7 @@
 }
 
 .file-link:hover {
-    color: #EDCC28;
+    color: $primary-yellow;
 }
 
 .delete-file-button {
@@ -40,6 +40,10 @@
   margin-top: 1.3rem;
   background: transparent;
   color: white;
+}
+
+.delete-file-button:hover {
+  background: white;
 }
 
 @media(min-width:800px) {

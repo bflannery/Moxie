@@ -39,12 +39,16 @@ font-size: 6rem;
   width: 52%;
 }
 
+.login-input::-webkit-input-placeholder {
+  color: white;
+}
+
 button{
   appearance: none;
   outline: 0;
   border: 0;
   padding: 1rem 3rem;
-  background-color: #006B82;
+  background-color: $primary-blue;
   color: white;
   border-radius: 3px;
   cursor: pointer;
@@ -53,7 +57,7 @@ button{
   margin-bottom: 1rem;
 
   &:hover{
-    background-color: #EDCC28;
+    background-color: $primary-yellow;
   }
 }
 
