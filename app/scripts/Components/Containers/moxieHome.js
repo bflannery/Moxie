@@ -11,6 +11,7 @@ import DropzoneModal from '../DropzoneModal';
 export default React.createClass({
 
   getInitialState() {
+
     return {
       session: store.session.toJSON(),
       files: store.files.toJSON(),
@@ -51,6 +52,9 @@ export default React.createClass({
   },
 
   render() {
+
+    console.log(this.state);
+    
     let newClientFormState = (
         <div className="main primary-container">
         <h2> moxie </h2>

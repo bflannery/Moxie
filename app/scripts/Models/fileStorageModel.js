@@ -158,4 +158,19 @@ export default Backbone.Model.extend({
                 });
             },
 
+            deleteClientFolder(client) {
+              $.ajax({
+                  type: 'DELETE',
+                  url: client.folderURL,
+                  success: () => {
+                    console.log('deleted ClientFolder From Storage');
+                    store.file.deleteClientFilesFromFiles(client);
+                  },
+                  error: (xhr) => {
+                    console.log('error deleting from storage ', xhr);
+                  }
+              });
+
+          }
+
   });

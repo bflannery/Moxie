@@ -31,6 +31,6 @@ export default React.createClass({
   removeClient(e) {
     e.preventDefault();
     let client = this.props.client;
-    store.fileStore.deleteClientFolder(client);
+      store.fileStore.deleteClientFolder(client);
   }
 });

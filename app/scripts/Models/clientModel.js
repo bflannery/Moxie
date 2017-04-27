@@ -6,7 +6,7 @@ import {
 import store from '../store';
 
 export default Backbone.Model.extend({
-    urlRoot: 'https://api.backendless.com/v1/data/Clients',
+    url: 'https://api.backendless.com/v1/data/Clients',
     idAttribute: 'objectId',
     defaults: {
         clientName: '',
@@ -54,14 +54,13 @@ export default Backbone.Model.extend({
 
     addFolderToClientFolders(subFolderId, folderName) {
       console.log(subFolderId);
-      console.log(folderName);
         this.save({
             clientFolders: this.get('clientFolders').concat([{
                 ___class: 'ClientFolders',
                 folders: {
                     ___class: 'Folders',
                     objectId: subFolderId,
-                    folderName: folderName
+                    folderName: folderName,
                 }
             }]),
         }, {

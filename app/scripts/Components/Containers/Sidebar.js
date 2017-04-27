@@ -6,6 +6,7 @@ export default React.createClass({
 
 
   render() {
+    console.log(this.props);
     let sideBar;
 
     if(this.props.session.auth === false) {
@@ -15,6 +16,12 @@ export default React.createClass({
         sideBar = (
           <div className = "sidebar-button-container">
           <button className="side-button add-client-button" onClick={this.toggleNewFolder}>Add Folder</button>
+          <button className="side-button add-file-button" onClick={this.dropZoneModal}> Add Files </button>
+          </div>
+        );
+      } else if (this.props.folder){
+        sideBar = (
+          <div className = "sidebar-button-container">
           <button className="side-button add-file-button" onClick={this.dropZoneModal}> Add Files </button>
           </div>
         );

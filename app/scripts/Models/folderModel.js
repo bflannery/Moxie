@@ -22,11 +22,12 @@ export default Backbone.Model.extend({
       }).done((response)=>{
         console.log('added Client');
         console.log(response);
-        store.folders.trigger('change');
+        this.trigger('change');
       }).fail((xhr)=> {
         console.log('error: ' , xhr);
       });
     },
+
 
     deleteClientFolder(client) {
       console.log(client);

@@ -48,7 +48,7 @@ export default React.createClass({
       } else if (this.props.item.folders){
         itemLink = (
           <div>
-            <Link to ={`/folders/${this.props.item.objectId}`} className="folder-link">
+            <Link to ={`/folders/${this.props.item.folders.objectId}`} className="folder-link">
               <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
               <span> {this.props.item.folders.folderName} </span>
             </Link>

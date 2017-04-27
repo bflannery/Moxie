@@ -35,6 +35,7 @@ export default React.createClass({
 
   componentDidMount() {
     let client = store.clients.get(this.props.params.id);
+    console.log(client);
     if(!client) {
           client = new Client({objectId: this.props.params.id , addFileModal: false});
           store.clients.add(client);
@@ -49,8 +50,6 @@ export default React.createClass({
       store.session.fetch();
       store.session.on('update change', this.updateState);
 
-      store.folders.fetch();
-      store.folders.on('update change'. this.updateState);
 
 
   },
@@ -59,7 +58,6 @@ export default React.createClass({
     store.clients.get(this.props.params.id).off('update change', this.updateState);
     store.files.off('update change', this.updateState);
     store.session.off('update change', this.updateState);
-    store.folders.off('update change', this.updateState);
   },
 
   updateState() {
@@ -67,16 +65,17 @@ export default React.createClass({
     this.setState({
       client: store.clients.get(this.props.params.id).toJSON(),
       files: store.files.toJSON(),
-      folders: store.folders.toJSON(),
       session: store.session.toJSON()
   });
   }
 },
 
   render() {
+
+    console.log(this.state);
     let clientContainer;
 
-    if(this.state.client.clientFiles === undefined) {
+    if(!this.state.client.clientFiles) {
       clientContainer = <div/>;
     } else {
 

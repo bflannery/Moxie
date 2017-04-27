@@ -6,6 +6,9 @@ import Client from './Models/clientModel';
 import ClientFiles from './Collections/clientFilesCollection';
 import ClientFile from './Models/clientFilesModel';
 
+import ClientFolders from './Collections/clientFoldersCollection';
+import ClientFolder from './Models/clientFolderModel';
+
 import Files from './Collections/filesCollection';
 import File from './Models/fileModel';
 
@@ -26,6 +29,9 @@ export default {
 
   clientFiles : new ClientFiles(),
   clientFile : new ClientFile(),
+
+  clientFolders : new ClientFolders(),
+  clientFolder : new ClientFolder(),
 
   files : new Files(),
   file : new File(),
