@@ -83,6 +83,36 @@ export default Backbone.Model.extend({
               store.clients.get(clientId).deleteFolderFromClient(clientFolderId);
           }
       });
-    }
+    },
+
+    addFileToSubFolder(fileId, folderName, clientId) {
+      console.log(fileId);
+      console.log(folderName);
+      console.log(clientId);
+
+        this.set({
+            addFileModal: false
+        });
+        this.save({
+            folderFiles: this.get('folderFiles').concat([{
+                ___class: 'FolderFiles',
+                files: {
+                    ___class: 'Files',
+                    objectId: fileId,
+                    
+                    clientId: clientId
+                }
+            }]),
+        }, {
+            success: (response) => {
+              console.log('file added to folderFiles');
+                this.trigger('change');
+            },
+            error: (xhr) => {
+              console.log('error saving folderFile', xhr);
+            }
+        });
+    },
+
 
   });

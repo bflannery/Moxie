@@ -38,7 +38,7 @@ export default Backbone.Model.extend({
                 store.files.trigger('change');
               },
             error: (xhr) => {
-              console.log('errod adding file to data table: ', xhr);
+              console.log('error adding file to data table: ', xhr);
             }
           });
       } else {
@@ -56,6 +56,27 @@ export default Backbone.Model.extend({
       }
     });
   }
+    },
+
+    addSubFileToData(fileURL, fileName, folderId, folderName, clientId) {
+      $.ajax({
+          type: 'POST',
+          url: 'https://api.backendless.com/v1/data/Files',
+          contentType: 'application/json',
+          data: JSON.stringify({
+              fileURL,
+              fileName,
+              folderId,
+              folderName,
+              clientId
+          }),
+          success: (response) => {
+              console.log('on subFile data success');
+              console.log(response);
+              store.folders.get(response.folderId).addFileToSubFolder(response.objectId, fileName, folderName, clientId);
+
+      }
+      });
     },
 
 

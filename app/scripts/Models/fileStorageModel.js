@@ -98,6 +98,34 @@ export default Backbone.Model.extend({
       },
 
 
+      uploadSubFile(file, fileName, folderId, folderName, clientId) {
+        console.log(clientId);
+        let fd = new FormData();
+        fd.append('upload', file);
+        $.ajax({
+            type: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            url: 'https://api.backendless.com/v1/files/Moxie/subFolders/' + folderName  + '/' + fileName,
+            success: (response) => {
+                console.log('success on files storage to subFolder...');
+                response = JSON.parse(response);
+                console.log(response);
+                store.file.addSubFileToData(response.fileURL, fileName, folderId, folderName, clientId);
+            },
+            error: (response) => {
+                if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
+                    alert('File Already Exists');
+                } else {
+                  console.log('ya messed up');
+                }
+
+            }
+        });
+
+      },
+
     createSubFolder(client, subFolderName) {
           let fd = new FormData();
           fd.append('upload', client);
