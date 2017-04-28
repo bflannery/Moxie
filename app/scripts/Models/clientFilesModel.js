@@ -5,12 +5,8 @@ import store from '../store';
 
 export default Backbone.Model.extend({
   url: 'https://api.backendless.com/v1/data/ClientFiles',
-    idAttribute: 'objectId',
-    defaults: {
-      name: '',
-      description: ''
+  idAttribute: 'objectId',
 
-    },
 
     // ----------------------------
     //Delete Client Files from ClientFiles Collection

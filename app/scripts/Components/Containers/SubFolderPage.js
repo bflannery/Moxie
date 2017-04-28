@@ -15,7 +15,13 @@ import NavSideBar from './NavSideBar';
 import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
-
+  Initialize() {
+    if(store.folders.get(this.props.params.id) == undefined) {
+    this.setState({
+      folder: store.folders.get(this.props.params.id).toJSON(),
+      })
+    }
+  },
 
   getInitialState() {
     return {
@@ -29,8 +35,8 @@ export default React.createClass({
 componentDidMount() {
 
   let folder = store.folders.get(this.props.params.id);
-  console.log(folder)
   folder.fetch();
+  folder.on('update change', this.updateState)
 
   store.clients.fetch();
   store.clients.on('update change', this.updateState);
@@ -52,16 +58,17 @@ componentWillUnmount() {
 },
 
 updateState() {
+  if(store.folders.get(this.props.params.id) !== undefined) {
   this.setState({
     folder: store.folders.get(this.props.params.id).toJSON(),
     files: store.files.toJSON(),
     clients: store.clients.toJSON(),
     session: store.session.toJSON(),
   });
+}
 },
 
   render() {
-    console.log(this.props);
     console.log(this.state);
 
     let subFolderContainer;
@@ -73,7 +80,7 @@ updateState() {
       subFolderContainer = (
         <div className="main primary-container">
           <h2> {this.state.folder.folderName} </h2>
-          <SubFolderFiles folder={this.state.folder} session={this.state.session}/>
+          <SubFolderFiles files={this.state.files} folder={this.state.folder} session={this.state.session}/>
         </div>
       );
 

@@ -33,9 +33,13 @@ export default Backbone.Model.extend({
                 folderURL: folderURL
               },{
                 success: (response) => {
+                  response = response.toJSON();
                   console.log(response);
                   console.log('client created');
-                  store.folder.addClientFolder(folderURL, clientName, response.id);
+                  window.localStorage.setItem('clientName' , response.clientName);
+                  window.localStorage.setItem('objectId' , response.objectId);
+                  browserHistory.push(`clients/${response.objectId}`);
+                  store.clients.trigger('change');
                 },
                 error: (xhr) => {
                   console.log('client not created: ', xhr);
@@ -126,14 +130,11 @@ export default Backbone.Model.extend({
 
       },
 
-    createSubFolder(client, subFolderName) {
-          let fd = new FormData();
-          fd.append('upload', client);
+    createSubFolder(clientName, clientId, subFolderName) {
           $.ajax({
               type: 'POST',
-              processData: false,
-              contentType: false,
-              data: fd,
+              contentType: 'multipart/form-data',
+              data: JSON.stringify({ subFolderName }),
               url: 'https://api.backendless.com/v1/files/Moxie/subFolders/' + subFolderName + '/moxie',
             }).done((response)=> {
               response = JSON.parse(response);
@@ -141,7 +142,7 @@ export default Backbone.Model.extend({
               let splitURL = responseURL.split('/');
               let subFolderURL = splitURL.slice(0,splitURL.length-1).join('/');
               console.log('subFolder created');
-              store.folder.addSubFolder(client, subFolderName, subFolderURL);
+              store.folder.addSubFolder(clientName, clientId, subFolderName, subFolderURL);
             }).fail((xhr)=> {
               console.log('subFoler error: ', xhr);
             });

@@ -21,9 +21,10 @@ export default React.createClass({
   addFolder(e) {
     e.preventDefault();
     if(this.props.client) {
-      let client = this.props.client;
+      let clientName = this.props.client.clientName;
+      let clientId = this.props.client.objectId;
       let subFolderName = this.refs.folderName.value.toLowerCase();
-      store.fileStore.createSubFolder(client, subFolderName);
+      store.fileStore.createSubFolder(clientName, clientId, subFolderName);
 
     } else {
      let clientName = this.refs.folderName.value;

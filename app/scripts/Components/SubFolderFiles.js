@@ -4,15 +4,24 @@ import SubFolderFile from './SubFolderFile';
 import store from '../store';
 
 export default React.createClass({
+
+
+
   render() {
     console.log(this.props);
-    let subFolderFiles = <div/>;
+    let subFolderFiles;
 
-    if(this.props.folder.files) {
-      let subFolderFiles = this.props.folder.files.map((file, i, arr)=> {
-      return <SubFolderFile file={file} clientId={this.props.folder.clientId} session={this.props.session}/>
-    })
-    }
+    if(this.props.folder.clientId) {
+
+      let folderFiles = this.props.folder.folderFiles;
+
+      subFolderFiles = folderFiles.map((file, i, arr)=> {
+      return <SubFolderFile key={i} file={file} clientId={this.props.folder.clientId} session={this.props.session}/>
+    });
+
+  } else {
+    subFolderFiles = <div/>
+  }
 
     return (
       <ul className ="secondary-container">

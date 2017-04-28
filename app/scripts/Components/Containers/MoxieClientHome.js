@@ -5,8 +5,6 @@ import { Link } from 'react-router';
 import store from '../../store';
 import Client from '../../Models/clientModel';
 
-import ClientItems from '../ClientItems';
-import ClientFiles from '../ClientFiles';
 import ClientFolders from '../ClientFolders';
 import DropzoneModal from '../DropzoneModal';
 import Header from '../Header';
@@ -17,40 +15,43 @@ import NewClientForm from '../NewClientForm';
 export default React.createClass({
 
   initialize() {
-    if(store.clients.get(this.props.params.id) !== undefined) {
+    if(store.clients.get(window.localStorage.clientId)) {
     this.setState({
-      client: store.clients.get(this.props.params.id).toJSON(),
-    })
+      client: {
+        clientName: window.localStorage.clientName,
+        objectId: clientId
+      }
+    });
   }
 },
 
   getInitialState() {
     return {
         files: store.files.toJSON(),
-        client: {},
-        folders: store.folders.toJSON(),
+        client: {
+
+        },
+        clients: store.clients.toJSON(),
         session: store.session.toJSON()
     };
   },
 
+
   componentDidMount() {
     let client = store.clients.get(this.props.params.id);
-    console.log(client);
     if(!client) {
-          client = new Client({objectId: this.props.params.id , addFileModal: false});
+          client = new Client({objectId: this.props.params.id});
           store.clients.add(client);
         }
+
       client.fetch();
       client.on('update change', this.updateState);
 
       store.files.fetch();
       store.files.on('update change', this.updateState);
 
-
       store.session.fetch();
       store.session.on('update change', this.updateState);
-
-
 
   },
 
@@ -71,18 +72,22 @@ export default React.createClass({
 },
 
   render() {
-
     console.log(this.state);
+    console.log(this.props);
+
     let clientContainer;
 
-    if(!this.state.client.clientFiles) {
-      clientContainer = <div/>;
+    if(!this.state.client.clientFolders) {
+      clientContainer = (
+        <div className="main primary-container">
+          <h2> {this.state.client.clientName}</h2>
+        </div>
+      );
     } else {
-
      clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>
-          <ClientItems client={this.state.client} session={this.state.session}/>
+          <ClientFolders client={this.state.client} session={this.state.session}/>
         </div>
     );
 
@@ -91,27 +96,12 @@ export default React.createClass({
        <div className="main primary-container">
          <h2> {this.state.client.clientName} </h2>
          <NewClientForm client={this.state.client}/>
-         <ClientFiles client={this.state.client} session={this.state.session}/>
          <ClientFolders client={this.state.client} session={this.state.session}/>
        </div>
      );
-   }
-
-    if(this.state.session.addFileModal === true) {
-      clientContainer = (
-        <div className="main primary-container">
-          <div className="modal-background"/>
-          <div className="modal-container">
-            <DropzoneModal files={this.state.files} client={this.state.client} session={this.state.session} dropzoneFiles={this.state.dropzoneFiles}/>
-          </div>
-          <h2> {this.state.client.clientName} </h2>
-          <ClientFiles client={this.state.client} session={this.state.session}/>
-          <ClientFolders client={this.state.client} session={this.state.session}/>
-        </div>
-
-          );
-        }
     }
+  }
+
 
       return (
         <div className="client-file-page">

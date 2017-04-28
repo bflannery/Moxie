@@ -3,6 +3,7 @@ import ClientItem from './ClientItem';
 
 export default React.createClass({
   render() {
+    console.log(this.props);
   let allItems = [];
     let folders = this.props.client.clientFolders;
     let files = this.props.client.clientFiles;

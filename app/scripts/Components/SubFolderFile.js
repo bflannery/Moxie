@@ -10,6 +10,7 @@ export default React.createClass({
 
     let fileLink;
 
+
     if(this.props.session.auth === false) {
       fileLink = (
           <div>
@@ -20,12 +21,12 @@ export default React.createClass({
             </div>
       );
     } else {
-        if(this.props.files) {
+        if(this.props.file) {
       fileLink = (
             <div>
-              <Link to={this.props.files.fileUrl} target="_blank" className="file-link">
+              <Link to={this.props.file.files.fileUrl} target="_blank" className="file-link">
                 <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
-                <span> {this.props.files.fileName} </span>
+                <span> {this.props.file.files.fileName} </span>
               </Link>
               <button onClick={this.removeFile} type="submit" className="delete-file-button">
                 <i className="fa fa-times-circle" aria-hidden="true"></i>
@@ -50,10 +51,10 @@ export default React.createClass({
 
 removeFile(e) {
   e.preventDefault();
-  let fileId = this.props.clientFile.files.objectId;
-  let fileUrl = this.props.clientFile.files.fileUrl;
-  let clientId = this.props.clientFile.files.clientId;
-  let clientFileId = this.props.clientFile.objectId;
+  let fileId = this.props.file.files.objectId;
+  let fileUrl = this.props.file.files.fileUrl;
+  let clientId = this.props.file.files.clientId;
+  let clientFileId = this.props.file.objectId;
   console.log(fileId);
   console.log(fileUrl);
   console.log(clientId);

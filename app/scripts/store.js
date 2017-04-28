@@ -12,6 +12,9 @@ import ClientFolder from './Models/clientFolderModel';
 import Files from './Collections/filesCollection';
 import File from './Models/fileModel';
 
+import FolderFiles from './Collections/folderFilesCollection';
+import FolderFile from './Models/folderFileModel';
+
 import Folders from './Collections/foldersCollection';
 import Folder from './Models/folderModel';
 
@@ -35,6 +38,9 @@ export default {
 
   files : new Files(),
   file : new File(),
+
+  folderFiles: new FolderFiles(),
+  folderFile: new FolderFile(),
 
   folders : new Folders(),
   folder : new Folder(),

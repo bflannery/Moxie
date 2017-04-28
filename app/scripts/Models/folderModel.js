@@ -9,34 +9,18 @@ export default Backbone.Model.extend({
     idAttribute: 'objectId',
     defaults: {
         folderName: '',
-        folderURL: ''
+        folderURL: '',
     },
-
-
-    addClientFolder(folderURL , folderName, clientId) {
-      console.log(clientId);
-      this.save({
-        folderURL : folderURL,
-        folderName : folderName,
-        clientId : clientId
-      }).done((response)=>{
-        console.log('added Client');
-        console.log(response);
-        this.trigger('change');
-      }).fail((xhr)=> {
-        console.log('error: ' , xhr);
-      });
-    },
-
 
     deleteClientFolder(client) {
       console.log(client);
       $.ajax({
         type: 'GET',
         url: 'https://api.backendless.com/v1/data/Folders'
-      }).done((clientFolders)=> {
-        console.log(clientFolders);
-        let newClientFolder = clientFolders.data.filter((clientFolder, i ,arr)=> {
+      }).done((clientFoldersData)=> {
+        let clientFolders = clientFoldersData.data;
+        console.log(clientFolders.data);
+        let newClientFolder = clientFolders.filter((clientFolder, i ,arr)=> {
           if(clientFolder.clientId !== client.objectId) {
             return true;
           } else {
@@ -59,12 +43,12 @@ export default Backbone.Model.extend({
       });
     },
 
-    addSubFolder(client, subFolderName, subFolderURL) {
-      console.log(client)
+    addSubFolder(clientName, clientId, subFolderName, subFolderURL) {
       this.save({
         folderURL : subFolderURL,
         folderName : subFolderName,
-        clientId : client.objectId
+        clientId : clientId,
+        clientName : clientName
       }).done((response)=>{
         console.log('added SubFolder');
         console.log(response);
@@ -85,22 +69,22 @@ export default Backbone.Model.extend({
       });
     },
 
-    addFileToSubFolder(fileId, folderName, clientId) {
+    addFileToSubFolder(fileId, fileURL, fileName, subFolderName, clientId) {
       console.log(fileId);
-      console.log(folderName);
+      console.log(fileURL);
+      console.log(fileName);
+      console.log(subFolderName);
       console.log(clientId);
 
-        this.set({
-            addFileModal: false
-        });
+
+        let folderFiles = this.get('folderFiles');
         this.save({
-            folderFiles: this.get('folderFiles').concat([{
+            ___class: 'data',
+            folderFiles: folderFiles.concat([{
                 ___class: 'FolderFiles',
                 files: {
                     ___class: 'Files',
                     objectId: fileId,
-                    
-                    clientId: clientId
                 }
             }]),
         }, {
@@ -116,3 +100,20 @@ export default Backbone.Model.extend({
 
 
   });
+
+
+
+      // addClientFolder(folderURL , folderName, clientId) {
+      //   console.log(clientId);
+      //   this.save({
+      //     folderURL : folderURL,
+      //     folderName : folderName,
+      //     clientId : clientId
+      //   }).done((response)=>{
+      //     console.log('added Client');
+      //     console.log(response);
+      //     this.trigger('change');
+      //   }).fail((xhr)=> {
+      //     console.log('error: ' , xhr);
+      //   });
+      // },

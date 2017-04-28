@@ -74,7 +74,7 @@ initialize() {
     }).done((response)=> {
       console.log(response);
 
-      window.localStorage.setItem('company', response.company);
+      localStorage.setItem('company', response.company);
       window.localStorage.setItem('user-token',response['user-token']);
       window.localStorage.setItem('email',response.email);
       window.localStorage.setItem('ownerId',response.ownerId);

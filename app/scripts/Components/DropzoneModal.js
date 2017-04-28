@@ -16,8 +16,6 @@ export default React.createClass({
   },
 
     render() {
-      console.log(this.state);
-      console.log(this.props);
       let dropzoneFiles = (
               <div className="files-container">
                 <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple/>

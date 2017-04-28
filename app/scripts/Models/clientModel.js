@@ -53,7 +53,6 @@ export default Backbone.Model.extend({
     // ----------------------------
 
     addFolderToClientFolders(subFolderId, folderName) {
-      console.log(subFolderId);
         this.save({
             clientFolders: this.get('clientFolders').concat([{
                 ___class: 'ClientFolders',
