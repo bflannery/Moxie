@@ -8,8 +8,8 @@ export default Backbone.Collection.extend({
   model: clientModel,
   url: 'https://api.backendless.com/v1/data/Clients',
 
-  parse(data) {
-    return data.data;
+  parse(clients) {
+    return clients.data;
   },
 
   // Get All Clients

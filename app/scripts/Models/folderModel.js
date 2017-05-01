@@ -47,12 +47,14 @@ export default Backbone.Model.extend({
       this.save({
         folderURL : subFolderURL,
         folderName : subFolderName,
-        clientId : clientId,
-        clientName : clientName
+        clientName: clientName,
+        clientId: clientId
       }).done((response)=>{
         console.log('added SubFolder');
         console.log(response);
-        store.clients.get(response.clientId).addFolderToClientFolders(response.objectId, subFolderName);
+        let client = store.clients.get(response.clientId);
+        console.log(client);
+        store.clients.get(response.clientId).addFolderToClientFolders(response.objectId, response.folderName, clientId);
       }).fail((xhr)=> {
         console.log('error: ' , xhr);
       });
@@ -79,9 +81,9 @@ export default Backbone.Model.extend({
 
         let folderFiles = this.get('folderFiles');
         this.save({
-            ___class: 'data',
             folderFiles: folderFiles.concat([{
                 ___class: 'FolderFiles',
+                subFolderName: subFolderName,
                 files: {
                     ___class: 'Files',
                     objectId: fileId,
@@ -90,7 +92,7 @@ export default Backbone.Model.extend({
         }, {
             success: (response) => {
               console.log('file added to folderFiles');
-                this.trigger('change');
+                store.files.trigger('change');
             },
             error: (xhr) => {
               console.log('error saving folderFile', xhr);

@@ -15,26 +15,25 @@ import NavSideBar from './NavSideBar';
 import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
-  Initialize() {
-    if(store.folders.get(this.props.params.id) == undefined) {
-    this.setState({
-      folder: store.folders.get(this.props.params.id).toJSON(),
-      })
-    }
-  },
 
   getInitialState() {
     return {
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
-      folder: {    },
+      folder: {
+            files: []
+      },
       session: store.session.toJSON(),
     };
   },
 
 componentDidMount() {
 
-  let folder = store.folders.get(this.props.params.id);
+  let folder = store.folder.get(this.props.params.id);
+  if(!folder) {
+    folder = new Folder({objectId: this.props.params.id});
+  }
+
   folder.fetch();
   folder.on('update change', this.updateState)
 
@@ -61,16 +60,15 @@ updateState() {
   if(store.folders.get(this.props.params.id) !== undefined) {
   this.setState({
     folder: store.folders.get(this.props.params.id).toJSON(),
+});
+  }
+  this.setState({
     files: store.files.toJSON(),
     clients: store.clients.toJSON(),
-    session: store.session.toJSON(),
-  });
-}
+    session: store.session.toJSON()
+  })
 },
-
   render() {
-    console.log(this.state);
-
     let subFolderContainer;
 
     if(this.state.folder === undefined) {

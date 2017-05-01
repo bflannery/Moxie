@@ -13,23 +13,11 @@ import NavSideBar from './NavSideBar';
 import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
-
-  initialize() {
-    if(store.clients.get(window.localStorage.clientId)) {
-    this.setState({
-      client: {
-        clientName: window.localStorage.clientName,
-        objectId: clientId
-      }
-    });
-  }
-},
-
   getInitialState() {
     return {
         files: store.files.toJSON(),
         client: {
-
+          clientFolders: []
         },
         clients: store.clients.toJSON(),
         session: store.session.toJSON()
@@ -38,11 +26,11 @@ export default React.createClass({
 
 
   componentDidMount() {
-    let client = store.clients.get(this.props.params.id);
-    if(!client) {
+
+      let client = store.client.get(this.props.params.id);
+      if(!client) {
           client = new Client({objectId: this.props.params.id});
-          store.clients.add(client);
-        }
+      }
 
       client.fetch();
       client.on('update change', this.updateState);
@@ -53,37 +41,36 @@ export default React.createClass({
       store.session.fetch();
       store.session.on('update change', this.updateState);
 
+      store.clients.fetch();
+      store.clients.on('uppdate change', this.updateState);
   },
 
   componentWillUnmount() {
     store.clients.get(this.props.params.id).off('update change', this.updateState);
     store.files.off('update change', this.updateState);
     store.session.off('update change', this.updateState);
+    store.clients.off('update change', this.updateState);
   },
 
   updateState() {
     if(store.clients.get(this.props.params.id) !== undefined) {
     this.setState({
-      client: store.clients.get(this.props.params.id).toJSON(),
-      files: store.files.toJSON(),
-      session: store.session.toJSON()
-  });
+      client: store.clients.get(this.props.params.id).toJSON()
+    });
   }
-},
+    this.setState({
+      files: store.files.toJSON(),
+      session: store.session.toJSON(),
+      clients: store.clients.toJSON()
+    })
+  },
+
+
 
   render() {
-    console.log(this.state);
-    console.log(this.props);
+    let clientContainer = <div className="main primary-container"/>
 
-    let clientContainer;
-
-    if(!this.state.client.clientFolders) {
-      clientContainer = (
-        <div className="main primary-container">
-          <h2> {this.state.client.clientName}</h2>
-        </div>
-      );
-    } else {
+    if(this.state.client.clientName) {
      clientContainer = (
         <div className="main primary-container">
           <h2> {this.state.client.clientName} </h2>

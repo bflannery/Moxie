@@ -15,6 +15,8 @@ export default Backbone.Model.extend({
         folderURL: ''
     },
 
+
+
     // ----------------------------
     // All File To ClientFiles Data Table
     // Trigger Update To Client for ClientHome render
@@ -29,16 +31,16 @@ export default Backbone.Model.extend({
         this.save({
             clientFiles: this.get('clientFiles').concat([{
                 ___class: 'ClientFiles',
+                folderName: folderName,
                 files: {
                     ___class: 'Files',
                     objectId: fileId,
-                    folderName: folderName
                 }
             }]),
         }, {
             success: (response) => {
               console.log('file added to clientFiles');
-                this.trigger('change');
+                store.files.trigger('change');
             },
             error: (xhr) => {
               console.log('error saving clientFile', xhr);
@@ -53,13 +55,15 @@ export default Backbone.Model.extend({
     // ----------------------------
 
     addFolderToClientFolders(subFolderId, folderName) {
+      console.log(this);
         this.save({
             clientFolders: this.get('clientFolders').concat([{
                 ___class: 'ClientFolders',
+                folderName: folderName,
                 folders: {
                     ___class: 'Folders',
                     objectId: subFolderId,
-                    folderName: folderName,
+
                 }
             }]),
         }, {
@@ -139,8 +143,8 @@ export default Backbone.Model.extend({
     // Triggers('change')
     // ----------------------------
 
-
     deleteClient(client) {
+      console.log(client);
       this.destroy({url: `https://api.backendless.com/v1/data/Clients/${client.objectId}`},
         {
             success: () => {

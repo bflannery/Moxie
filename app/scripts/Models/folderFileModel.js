@@ -7,5 +7,9 @@ import store from '../store';
 export default Backbone.Model.extend({
     url: 'https://api.backendless.com/v1/data/FolderFiles',
     idAttribute: 'objectId',
-    files: {},
+    defaults: {
+      name: ''
+    },
+  
+
   });

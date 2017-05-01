@@ -8,7 +8,6 @@ export default React.createClass({
 
 
   render() {
-    console.log(this.props);
     let subFolderFiles;
 
     if(this.props.folder.clientId) {

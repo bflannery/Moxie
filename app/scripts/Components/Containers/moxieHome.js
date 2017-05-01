@@ -13,6 +13,7 @@ export default React.createClass({
   getInitialState() {
 
     return {
+
       session: store.session.toJSON(),
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
@@ -68,7 +69,7 @@ export default React.createClass({
         </div>
       );
     }
-  
+
     return (
 
       <div className="moxie-home">

@@ -17,19 +17,19 @@ export default Backbone.Model.extend({
     // Trigger Change on File Model
     // ----------------------------
 
-    addFileToData(fileURL, fileName, clientId, folderName) {
+    addFileToData(fileURL, fileName, folderName) {
       console.log(clientId);
       if(clientId) {
         store.files.create({
           fileName: fileName,
           fileURL: fileURL,
-          clientId : clientId,
           folderName : folderName
         }, {
           success: (response) => {
             console.log ('file created');
             console.log(response);
             store.clients.get(clientId).addFileToClientFiles(response.id, folderName);
+
           }
         });
 
@@ -65,7 +65,7 @@ export default Backbone.Model.extend({
           success: (response) => {
               console.log('on subFile data success');
               let subFolder = store.folders.get(response.folderId);
-              console.log(typeof subFolder);
+              console.log(subFolder);
               store.folders.get(response.folderId).addFileToSubFolder(response.objectId, fileURL, fileName, folderName, clientId);
 
       }
@@ -120,7 +120,7 @@ export default Backbone.Model.extend({
                                       console.log(response);
                                         console.log('file deleted from files collection');
                                         console.log('calling deleteClientFolderFromFolderCollection from success');
-                                        store.clientFile.deleteClientFiles(client);
+                                        store.folderFile.deleteClientFolderFiles(client);
                                       }
                                     });
                                   }

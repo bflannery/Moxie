@@ -49,58 +49,7 @@ export default Backbone.Model.extend({
           console.log('create client folder error ', xhr);
         });
       },
-
-
-
-      uploadFile(file, fileName, clientId, clientName) {
-        if(!clientId && !clientName) {
-          let fd = new FormData();
-          fd.append('upload', file);
-          $.ajax({
-              type: 'POST',
-              data: fd,
-              processData: false,
-              contentType: false,
-              url: 'https://api.backendless.com/v1/files/Moxie/' + fileName,
-              success: (response) => {
-                  console.log('success on files storage to Moxie...');
-                  response = JSON.parse(response);
-                  store.file.addFileToData(response.fileURL, fileName, clientId, clientName);
-              },
-              error: (response) => {
-                  if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
-                      alert('File Already Exists');
-                  } else {
-                    console.log('ya messed up');
-                  }
-
-              }
-          });
-
-        } else {
-          let fd = new FormData();
-          fd.append('upload', file);
-          $.ajax({
-              type: 'POST',
-              data: fd,
-              processData: false,
-              contentType: false,
-              url: 'https://api.backendless.com/v1/files/Moxie/clients/' + clientName + '/' + fileName,
-              success: (response) => {
-                  console.log('success on files storage to Moxie/client:id...');
-                  response = JSON.parse(response);
-                  store.file.addFileToData(response.fileURL, fileName, clientId, clientName);
-              },
-              error: (response) => {
-                  if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
-                      alert('File Already Exists');
-                  }
-
-              }
-          });
-        }
-      },
-
+      
 
       uploadSubFile(file, fileName, folderId, folderName, clientId) {
         console.log(clientId);
