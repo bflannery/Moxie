@@ -11,7 +11,9 @@ import DropzoneModal from '../DropzoneModal';
 export default React.createClass({
 
   getInitialState() {
+
     return {
+
       session: store.session.toJSON(),
       files: store.files.toJSON(),
       clients: store.clients.toJSON(),
@@ -66,15 +68,6 @@ export default React.createClass({
           <ClientsList clients={this.state.clients} files={this.state.files}/>
         </div>
       );
-    }
-    if(this.state.session.addFileModal === true) {
-      newClientFormState = (
-        <div className="main primary-container">
-          <DropzoneModal files={this.state.files} client={this.state.client}  session={this.state.session}/>
-          <h2> moxie </h2>
-          <ClientsList clients={this.state.clients} files={this.state.files}/>
-        </div>
-    );
     }
 
     return (

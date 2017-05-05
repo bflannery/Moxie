@@ -16,8 +16,6 @@ export default React.createClass({
   },
 
     render() {
-      console.log(this.state);
-      console.log(this.props);
       let dropzoneFiles = (
               <div className="files-container">
                 <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} id="dropzone" name="files" multiple/>
@@ -80,7 +78,10 @@ export default React.createClass({
 
         let file = this.state.dropzoneFiles[0];
         let fileName = this.state.dropzoneFiles[0].name;
-        store.fileStore.uploadFile(file, fileName);
+        let folderId = this.props.folder.objectId;
+        let folderName = this.props.folder.folderName
+        let clientId = this.props.folder.clientId
+        store.fileStore.uploadSubFile(file, fileName, folderId, folderName, clientId);
         store.session.set({addFileModal: false});
       }
     },

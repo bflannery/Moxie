@@ -9,7 +9,7 @@ export default React.createClass({
     allItems = allItems.concat(files, folders);
 
     let allClientItems =  allItems.map((item , i, arr)=> {
-      return <ClientItem key={i} item={item} session={this.props.session}/>
+      return <ClientItem key={i} item={item} client={this.props.client} session={this.props.session}/>
     });
 
     return (

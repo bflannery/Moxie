@@ -8,19 +8,8 @@ export default Backbone.Collection.extend({
   model: clientModel,
   url: 'https://api.backendless.com/v1/data/Clients',
 
-
-  parse(data) {
-    return data.data.sort(function(a,b){
-      let nameA = a.name;
-      let nameB = b.name;
-      if(nameA < nameB) {
-        return -1;
-      }
-      if(nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
+  parse(clients) {
+    return clients.data;
   },
 
   // Get All Clients

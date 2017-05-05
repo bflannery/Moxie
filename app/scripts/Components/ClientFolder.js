@@ -7,18 +7,18 @@ import $ from 'jquery';
 export default React.createClass({
 
   render() {
-    console.log(this.props);
+
     if(this.props.clientFolder) {
       return (
-          <li className="client-file">
-              <Link to={'#'} className="file-link">
-                <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
-                <span> {this.props.clientFolder.folders.folderName} </span>
-              </Link>
-              <button onClick={this.removeFile} type="submit" className="delete-file-button">
-                <i className="fa fa-times-circle" aria-hidden="true"></i>
-              </button>
-          </li>
+          <li className = "client-file">
+            <Link to ={`/folders/${this.props.clientFolder.folders.objectId}`} className="folder-link">
+              <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
+              <span> {this.props.clientFolder.folders.folderName} </span>
+            </Link>
+            <button onClick={this.removeFolder} type="submit" className="delete-file-button">
+              <i className="fa fa-times-circle" aria-hidden="true"></i>
+            </button>
+        </li>
         );
     } else {
       return (

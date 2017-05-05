@@ -5,7 +5,6 @@ import MoxieFile from './MoxieFile';
 export default React.createClass({
   render() {
     let clients;
-    let files;
 
     if(this.props.clients.length < 1) {
       clients = <li> No Clients </li>;

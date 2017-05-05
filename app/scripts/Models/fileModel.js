@@ -9,7 +9,6 @@ export default Backbone.Model.extend({
     idAttribute: 'objectId',
     defaults: {
         fileName: '',
-        description: '',
     },
 
     // ----------------------------
@@ -18,29 +17,22 @@ export default Backbone.Model.extend({
     // Trigger Change on File Model
     // ----------------------------
 
-    addFileToData(fileUrl, fileName, clientId, folderName) {
+    addFileToData(fileURL, fileName, folderName) {
       console.log(clientId);
       if(clientId) {
-        $.ajax({
-            type: 'POST',
-            url: 'https://api.backendless.com/v1/data/Files',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                fileUrl,
-                fileName,
-                clientId,
-                folderName
-            }),
-            success: (response) => {
-              console.log('addFileToData success response: ', response );
-                console.log('on file to data success with clientId...')
-                store.clients.get(response.clientId).addFileToClientFiles(response.objectId,response.folderName);
-                store.files.trigger('change');
-              },
-            error: (xhr) => {
-              console.log('errod adding file to data table: ', xhr);
-            }
-          });
+        store.files.create({
+          fileName: fileName,
+          fileURL: fileURL,
+          folderName : folderName
+        }, {
+          success: (response) => {
+            console.log ('file created');
+            console.log(response);
+            store.clients.get(clientId).addFileToClientFiles(response.id, folderName);
+
+          }
+        });
+
       } else {
         $.ajax({
             type: 'POST',
@@ -56,6 +48,28 @@ export default Backbone.Model.extend({
       }
     });
   }
+    },
+
+    addSubFileToData(fileURL, fileName, folderId, folderName, clientId) {
+      $.ajax({
+          type: 'POST',
+          url: 'https://api.backendless.com/v1/data/Files',
+          contentType: 'application/json',
+          data: JSON.stringify({
+              fileURL,
+              fileName,
+              folderId,
+              folderName,
+              clientId
+          }),
+          success: (response) => {
+              console.log('on subFile data success');
+              let subFolder = store.folders.get(response.folderId);
+              console.log(subFolder);
+              store.folders.get(response.folderId).addFileToSubFolder(response.objectId, fileURL, fileName, folderName, clientId);
+
+      }
+      });
     },
 
 
@@ -85,10 +99,10 @@ export default Backbone.Model.extend({
 
     deleteClientFilesFromFiles(client) {
       console.log(client);
-        if(client.clientFiles === null || client.clientFiles.length === 0) {
-          console.log('client files null or < 0');
+        if(client.clientFolders === null || client.clientFolders.length === 0) {
+          console.log('client folders null or < 0');
           console.log('calling deleteClientFolder');
-            store.folder.deleteClientFolder(client);
+            store.clientFolder.deleteClientFolder(client);
           } else {
                 $.ajax({
                     type: 'GET',
@@ -106,7 +120,7 @@ export default Backbone.Model.extend({
                                       console.log(response);
                                         console.log('file deleted from files collection');
                                         console.log('calling deleteClientFolderFromFolderCollection from success');
-                                        store.clientFile.deleteClientFiles(client);
+                                        store.folderFile.deleteClientFolderFiles(client);
                                       }
                                     });
                                   }
@@ -120,3 +134,24 @@ export default Backbone.Model.extend({
                         }
 
 });
+
+
+// $.ajax({
+//     type: 'POST',
+//     url: 'https://api.backendless.com/v1/data/Files',
+//     contentType: 'application/json',
+//     data: JSON.stringify({
+//         fileUrl,
+//         fileName,
+//         folderName
+//     }),
+//     success: (response) => {
+//       console.log('addFileToData success response: ', response );
+//         console.log('on file to data success with clientId...');
+//         store.clients.get(clientId).addFileToClientFiles(response.objectId,response.folderName);
+//         store.files.trigger('change');
+//       },
+//     error: (xhr) => {
+//       console.log('error adding file to data table: ', xhr);
+//     }
+//   });

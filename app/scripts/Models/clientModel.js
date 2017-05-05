@@ -6,7 +6,7 @@ import {
 import store from '../store';
 
 export default Backbone.Model.extend({
-    urlRoot: 'https://api.backendless.com/v1/data/Clients',
+    url: 'https://api.backendless.com/v1/data/Clients',
     idAttribute: 'objectId',
     defaults: {
         clientName: '',
@@ -14,6 +14,8 @@ export default Backbone.Model.extend({
         addFileModal: false,
         folderURL: ''
     },
+
+
 
     // ----------------------------
     // All File To ClientFiles Data Table
@@ -29,16 +31,16 @@ export default Backbone.Model.extend({
         this.save({
             clientFiles: this.get('clientFiles').concat([{
                 ___class: 'ClientFiles',
+                folderName: folderName,
                 files: {
                     ___class: 'Files',
                     objectId: fileId,
-                    folderName: folderName
                 }
             }]),
         }, {
             success: (response) => {
               console.log('file added to clientFiles');
-                this.trigger('change');
+                store.files.trigger('change');
             },
             error: (xhr) => {
               console.log('error saving clientFile', xhr);
@@ -52,14 +54,16 @@ export default Backbone.Model.extend({
     // Push to ClientHome
     // ----------------------------
 
-    addFolderToClientFolders(id, folderName) {
+    addFolderToClientFolders(subFolderId, folderName) {
+      console.log(this);
         this.save({
             clientFolders: this.get('clientFolders').concat([{
                 ___class: 'ClientFolders',
+                folderName: folderName,
                 folders: {
                     ___class: 'Folders',
-                    objectId: id,
-                    folderName: folderName
+                    objectId: subFolderId,
+
                 }
             }]),
         }, {
@@ -108,14 +112,39 @@ export default Backbone.Model.extend({
         });
     },
 
+    deleteFolderFromClient(clientFolderId) {
+        let newClientFolders = this.get('clientFolders').filter((clientFolder, i, arr) => {
+            if (clientFolderId !== clientFolder.objectId) {
+                return true;
+            }
+        });
+        this.save({
+            clientFolders: newClientFolders
+        }, {
+            success: () => {
+                $.ajax({
+                    type: 'DELETE',
+                    url: `https://api.backendless.com/v1/data/ClientFolders/${clientFolderId}`,
+                    success: () => {
+                        console.log('deleted from ClientFolders');
+                    },
+                    error: () => {
+                        console.log('not deleted from ClientFolders');
+                    }
+                });
+            }
+        });
+    },
+
+
 
     // ----------------------------
     //Delete Client From Clients Table
     // Triggers('change')
     // ----------------------------
 
-
     deleteClient(client) {
+      console.log(client);
       this.destroy({url: `https://api.backendless.com/v1/data/Clients/${client.objectId}`},
         {
             success: () => {

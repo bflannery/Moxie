@@ -6,10 +6,9 @@ import {browserHistory} from 'react-router';
 export default React.createClass({
 
   render() {
-    console.log(this.props);
     return (
       <li className="client-container">
-      <Link to ={`/clients/${this.props.client.objectId}`} onClick={this.clientPage} className="folder-link">
+      <Link to ={`/clients/${this.props.client.objectId}`} className="folder-link">
       <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
         <h4 className="client-name"> {this.props.client.clientName} </h4>
         </Link>
@@ -31,6 +30,6 @@ export default React.createClass({
   removeClient(e) {
     e.preventDefault();
     let client = this.props.client;
-    store.fileStore.deleteClientFolder(client);
+      store.fileStore.deleteClientFolder(client);
   }
 });
