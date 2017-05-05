@@ -50,7 +50,6 @@ componentDidMount() {
 },
 
 componentWillUnmount() {
-  store.folders.get(this.props.params.id).off('update change', this.updateState);
   store.files.off('update change', this.updateState);
   store.session.off('update change', this.updateState);
   store.clients.off('update change', this.updateState);

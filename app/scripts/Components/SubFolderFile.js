@@ -6,6 +6,7 @@ import $ from 'jquery';
 
 export default React.createClass({
   render() {
+    console.log(this.props);
     let fileLink;
 
 
@@ -19,21 +20,19 @@ export default React.createClass({
             </div>
       );
     } else {
-        if(this.props.file) {
-      fileLink = (
-            <div>
-              <Link to={this.props.file.files.fileUrl} target="_blank" className="file-link">
-                <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
-                <span> {this.props.file.files.fileName} </span>
-              </Link>
-              <button onClick={this.removeFile} type="submit" className="delete-file-button">
-                <i className="fa fa-times-circle" aria-hidden="true"></i>
-              </button>
-            </div>
+        if(this.props.file.files) {
+          fileLink = (
+                <div>
+                  <Link to={this.props.file.files.fileUrl} target="_blank" className="file-link">
+                    <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
+                    <span> {this.props.file.files.fileName} </span>
+                  </Link>
+                  <button onClick={this.removeFile} type="submit" className="delete-file-button">
+                    <i className="fa fa-times-circle" aria-hidden="true"></i>
+                  </button>
+                </div>
 
-        );
-        } else {
-          fileLink = <div/>;
+            );
         }
     }
     return (
