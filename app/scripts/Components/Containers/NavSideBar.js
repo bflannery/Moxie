@@ -5,8 +5,6 @@ import NavBarClientFolders from '../NavBarClientFolders';
 
 export default React.createClass({
   render() {
-    console.log(this.props)
-
     let navBar;
     if(this.props.session.auth === false) {
 

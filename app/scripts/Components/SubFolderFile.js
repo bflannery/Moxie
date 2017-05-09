@@ -13,9 +13,9 @@ export default React.createClass({
     if(this.props.session.auth === false) {
       fileLink = (
           <div>
-            <Link to={this.props.files.fileUrl} target="_blank" className="file-link">
+            <Link to={this.props.file.files.fileUrl} target="_blank" className="file-link">
               <i className="fa fa-file-o file-icon" aria-hidden="true"></i>
-              <span> {this.props.files.fileName} </span>
+              <span> {this.props.file.files.fileName} </span>
             </Link>
             </div>
       );

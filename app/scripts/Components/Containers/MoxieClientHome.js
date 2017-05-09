@@ -13,6 +13,8 @@ import NavSideBar from './NavSideBar';
 import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
+
+
   getInitialState() {
     return {
         files: store.files.toJSON(),
@@ -20,20 +22,14 @@ export default React.createClass({
           clientFolders: []
         },
         clients: store.clients.toJSON(),
-        session: store.session.toJSON()
+        session: store.session.toJSON(),
     };
   },
 
 
   componentDidMount() {
-
-      let client = store.client.get(this.props.params.id);
-      if(!client) {
-          client = new Client({objectId: this.props.params.id});
-      }
-
-      client.fetch();
-      client.on('update change', this.updateState);
+      store.clients.fetch();
+      store.clients.on('uppdate change', this.updateState);
 
       store.files.fetch();
       store.files.on('update change', this.updateState);
@@ -41,8 +37,14 @@ export default React.createClass({
       store.session.fetch();
       store.session.on('update change', this.updateState);
 
-      store.clients.fetch();
-      store.clients.on('uppdate change', this.updateState);
+      let client = store.clients.get(this.props.params.id);
+      if(!client) {
+          client = new Client({objectId: this.props.params.id});
+      }
+
+      client.fetch();
+      client.on('update change', this.updateState);
+
   },
 
   componentWillUnmount() {
@@ -52,7 +54,7 @@ export default React.createClass({
     store.clients.off('update change', this.updateState);
   },
 
-  updateState() {
+  updateState(clientId) {
     if(store.clients.get(this.props.params.id) !== undefined) {
     this.setState({
       client: store.clients.get(this.props.params.id).toJSON()

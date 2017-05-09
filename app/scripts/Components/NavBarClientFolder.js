@@ -9,7 +9,7 @@ export default React.createClass({
   if(this.props.clientFolder) {
     return (
         <li className = "nav-client-folder">
-          <Link to ={`/folders/${this.props.clientFolder.objectId}`} className="nav-client-folder-link">
+          <Link to ={`/folders/${this.props.clientFolder.folders.objectId}`} className="nav-client-folder-link">
             <span> {this.props.clientFolder.folders.folderName} </span>
           </Link>
       </li>

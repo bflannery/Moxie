@@ -27,15 +27,19 @@ export default React.createClass({
     };
   },
 
+  componentWillMount() {
+    let folder = store.folders.get(this.props.params.id);
+    if(!folder) {
+      folder = new Folder({objectId: this.props.params.id});
+    }
+
+    folder.fetch();
+    folder.on('update change', this.updateState)
+  },
+
 componentDidMount() {
-
-  let folder = store.folder.get(this.props.params.id);
-  if(!folder) {
-    folder = new Folder({objectId: this.props.params.id});
-  }
-
-  folder.fetch();
-  folder.on('update change', this.updateState)
+  store.folders.fetch();
+  store.folders.on('update change', this.updateState);
 
   store.clients.fetch();
   store.clients.on('update change', this.updateState);
@@ -46,7 +50,13 @@ componentDidMount() {
   store.session.fetch();
   store.session.on('update change', this.updateState);
 
+  let folder = store.folders.get(this.props.params.id);
+  if(!folder) {
+    folder = new Folder({objectId: this.props.params.id});
+  }
 
+  folder.fetch();
+  folder.on('update change', this.updateState);
 },
 
 componentWillUnmount() {
@@ -59,7 +69,7 @@ updateState() {
   if(store.folders.get(this.props.params.id) !== undefined) {
   this.setState({
     folder: store.folders.get(this.props.params.id).toJSON(),
-});
+    });
   }
   this.setState({
     files: store.files.toJSON(),
@@ -68,6 +78,7 @@ updateState() {
   })
 },
   render() {
+    console.log(this.state);
     let subFolderContainer;
 
     if(this.state.folder === undefined) {
