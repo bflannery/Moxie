@@ -11,6 +11,7 @@ import Header from '../Header';
 import Sidebar from './Sidebar';
 import NavSideBar from './NavSideBar';
 import NewClientForm from '../NewClientForm';
+import ImageModal from '../ImageModal';
 
 export default React.createClass({
 
@@ -67,6 +68,8 @@ export default React.createClass({
 
 
   render() {
+    console.log(this.state);
+
     let clientContainer = <div className="main primary-container"/>
 
     if(this.state.client.clientName) {
@@ -85,7 +88,15 @@ export default React.createClass({
          <ClientFolders client={this.state.client} session={this.state.session}/>
        </div>
      );
-    }
+   } else if(this.state.client.addPhoto) {
+       clientContainer = (
+         <div className="main primary-container">
+           <h2> {this.state.client.clientName} </h2>
+           <ImageModal client={this.state.client}/>
+           <ClientFolders client={this.state.client} session={this.state.session}/>
+         </div>
+       );
+     }
   }
 
 

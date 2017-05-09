@@ -12,6 +12,7 @@ export default Backbone.Model.extend({
         clientName: '',
         addFolder: false,
         addFileModal: false,
+        addPhoto: false,
         folderURL: ''
     },
 
