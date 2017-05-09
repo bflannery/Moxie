@@ -16,6 +16,7 @@ import NewClientForm from '../NewClientForm';
 
 export default React.createClass({
 
+
   getInitialState() {
     return {
       files: store.files.toJSON(),
@@ -24,18 +25,10 @@ export default React.createClass({
             files: []
       },
       session: store.session.toJSON(),
+      client: {}
     };
   },
 
-  componentWillMount() {
-    let folder = store.folders.get(this.props.params.id);
-    if(!folder) {
-      folder = new Folder({objectId: this.props.params.id});
-    }
-
-    folder.fetch();
-    folder.on('update change', this.updateState)
-  },
 
 componentDidMount() {
   store.folders.fetch();
@@ -57,28 +50,38 @@ componentDidMount() {
 
   folder.fetch();
   folder.on('update change', this.updateState);
+
+  console.log(folder);
 },
 
 componentWillUnmount() {
   store.files.off('update change', this.updateState);
   store.session.off('update change', this.updateState);
   store.clients.off('update change', this.updateState);
+  store.folders.off('update change', this.updateState);
 },
 
 updateState() {
+
+  let client = store.clients.get(this.state.folder.clientId);
+
+
   if(store.folders.get(this.props.params.id) !== undefined) {
   this.setState({
     folder: store.folders.get(this.props.params.id).toJSON(),
     });
   }
   this.setState({
+    client: client.toJSON(),
     files: store.files.toJSON(),
     clients: store.clients.toJSON(),
-    session: store.session.toJSON()
+    session: store.session.toJSON(),
+    folders: store.folders.toJSON()
   })
 },
   render() {
     console.log(this.state);
+    console.log(this.props);
     let subFolderContainer;
 
     if(this.state.folder === undefined) {
@@ -113,7 +116,7 @@ updateState() {
         <Header/>
         <div className="main-container">
         {subFolderContainer}
-        <NavSideBar session={this.state.session} />
+        <NavSideBar session={this.state.session} client={this.state.client}/>
         <Sidebar session={this.state.session} folder={this.state.folder}/>
         </div>
       </div>

@@ -8,6 +8,16 @@ export default React.createClass({
 
   render() {
 
+    if(this.props.session.auth === false) {
+      return (
+          <li className = "client-file">
+            <Link to ={`/folders/${this.props.clientFolder.folders.objectId}`} className="folder-link">
+              <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
+              <span> {this.props.clientFolder.folders.folderName} </span>
+            </Link>
+        </li>
+        );
+    } else {
     if(this.props.clientFolder) {
       return (
           <li className = "client-file">
@@ -24,6 +34,7 @@ export default React.createClass({
       return (
         <div />
       );
+    }
     }
   },
 

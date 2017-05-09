@@ -17,6 +17,7 @@
       margin: 0;
       position: relative;
       display: inline-block;
+      text-shadow: -2px 0 $primary-logo-darkblue, 0 2px $primary-logo-darkblue, 2px 0 $primary-logo-darkblue, 0 -2px $primary-logo-darkblue;
     }
 }
 
@@ -90,8 +91,8 @@
 
 @media(min-width:600px) {
   .logout-container {
-    margin-top: 1.85rem;
-    margin-right: 2rem;
+    margin-top: 4rem;
+    margin-right: 3rem;
 
   }
 }

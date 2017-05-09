@@ -17,7 +17,6 @@ export default React.createClass({
 
   getInitialState() {
     return {
-        files: store.files.toJSON(),
         client: {
           clientFolders: []
         },
@@ -49,7 +48,6 @@ export default React.createClass({
 
   componentWillUnmount() {
     store.clients.get(this.props.params.id).off('update change', this.updateState);
-    store.files.off('update change', this.updateState);
     store.session.off('update change', this.updateState);
     store.clients.off('update change', this.updateState);
   },
@@ -61,7 +59,6 @@ export default React.createClass({
     });
   }
     this.setState({
-      files: store.files.toJSON(),
       session: store.session.toJSON(),
       clients: store.clients.toJSON()
     })
@@ -70,7 +67,6 @@ export default React.createClass({
 
 
   render() {
-    console.log(this.state);
     let clientContainer = <div className="main primary-container"/>
 
     if(this.state.client.clientName) {

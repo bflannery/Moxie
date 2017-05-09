@@ -1,7 +1,6 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import store from '../../store';
-import SideBarClientFolders from '../SideBarClientFolders';
 
 export default React.createClass({
 

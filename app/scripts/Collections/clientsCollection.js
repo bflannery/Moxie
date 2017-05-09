@@ -21,7 +21,6 @@ export default Backbone.Collection.extend({
       type: 'GET',
       url: 'https://api.backendless.com/v1/data/Clients',
       success: (clients) => {
-        console.log(clients);
         return clients.data.filter((client, i ,arr)=>{
             if(client.clientName === company) {
               this.trigger('change');

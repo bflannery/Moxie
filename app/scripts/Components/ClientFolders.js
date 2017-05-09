@@ -12,7 +12,7 @@ export default React.createClass({
       clientFolders = <div />;
     } else {
       clientFolders = this.props.client.clientFolders.map((clientFolder, i, arr) => {
-        return <ClientFolder key={i} clientFolder={clientFolder}/>
+        return <ClientFolder key={i} clientFolder={clientFolder} session={this.props.session}/>
       });
     }
 

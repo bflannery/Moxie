@@ -9,9 +9,7 @@ export default React.createClass({
     return (
       <div className="header">
         <div className="header-logo-container">
-          <h2 className="header-logo">
-            <Link to="/home" onClick={this.resetState}>we.moxie </Link>
-          </h2>
+         <img src="../../assets/images/wemoxie_logo.png" height="125px" width="150px"/>
         </div>
         <Logout />
       </div>
