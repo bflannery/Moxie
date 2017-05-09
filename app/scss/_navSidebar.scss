@@ -5,17 +5,28 @@
 }
 
 .nav-client-folder {
-  background-color: $primary-logo-lightblue;
+background-color: $primary-yellow;;
 text-align: center;
 padding: 1rem;
 border: 1px solid black;
 color: white;
 margin: 2rem 1rem;
-}
-
 .nav-client-folder-link {
   color: $primary-logo-darkblue;
+  }
 }
+
+.nav-client-folder:hover{
+  background-color: $primary-logo-darkblue;
+    .nav-client-folder-link {
+        color: $primary-yellow;
+      }
+}
+
+.navSideBar-folders-container {
+  text-align: center;
+}
+
 
 @media (min-width: 649px) {
   .navSideBar-links-container {

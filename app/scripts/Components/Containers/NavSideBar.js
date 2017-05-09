@@ -5,7 +5,7 @@ import NavBarClientFolders from '../NavBarClientFolders';
 
 export default React.createClass({
   render() {
-    
+    console.log(this.props);
     let navBar;
     if(this.props.session.auth === false) {
 
@@ -13,6 +13,11 @@ export default React.createClass({
         navBar = (
           <div className="navSideBar-folders-container">
           <h5> Your Folders </h5>
+          <div className="nav-client-folder">
+          <Link to={`/clients/${this.props.client.objectId}`}  className="nav-client-folder-link">
+            <span> Home </span>
+          </Link>
+          </div>
           <NavBarClientFolders clientFolders={this.props.client.clientFolders}/>
           </div>
         );

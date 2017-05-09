@@ -6,10 +6,12 @@ import $ from 'jquery';
 
 export default React.createClass({
   render() {
+    console.log(this.props);
     let fileLink;
 
 
     if(this.props.session.auth === false) {
+      if(this.props.file.files) {
       fileLink = (
           <div>
             <Link to={this.props.file.files.fileUrl} target="_blank" className="file-link">
@@ -19,6 +21,10 @@ export default React.createClass({
             </div>
       );
     } else {
+      fileLink = <div/>
+    }
+  }
+    else {
         if(this.props.file.files) {
           fileLink = (
                 <div>
