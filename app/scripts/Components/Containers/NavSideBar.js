@@ -1,12 +1,20 @@
 import React from 'react';
 import {browserHistory , Link} from 'react-router';
 import store from '../../store';
+import NavBarClientFolders from '../NavBarClientFolders';
 
 export default React.createClass({
   render() {
+    console.log(this.props)
+
     let navBar;
     if(this.props.session.auth === false) {
-      navBar = <div />;
+
+      if(this.props.client) {
+        navBar = <NavBarClientFolders clientFolders={this.props.client.clientFolders}/>
+      } else {
+        navBar = <div />;
+      }
     } else {
         navBar = (
           <ul className = "navSideBar-links-container">
@@ -31,6 +39,8 @@ export default React.createClass({
     store.session.set({addFileModal: false});
   }
 });
+
+
 
 
 //<Link to="/recent" onClick={this.resetState} className ="navSideBar-links">Recent</Link>

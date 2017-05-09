@@ -1,15 +1,15 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import store from '../../store';
+import SideBarClientFolders from '../SideBarClientFolders';
 
 export default React.createClass({
 
 
   render() {
     let sideBar;
-
     if(this.props.session.auth === false) {
-      sideBar = <div />;
+        sideBar = <div />;
     } else {
       if(this.props.clientId) {
         sideBar = (
@@ -32,7 +32,6 @@ export default React.createClass({
       );
     }
   }
-
     return(
         <aside className="sidebar sidebar-2">
         {sideBar}

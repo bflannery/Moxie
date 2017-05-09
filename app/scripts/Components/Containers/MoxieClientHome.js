@@ -68,6 +68,7 @@ export default React.createClass({
 
 
   render() {
+    console.log(this.state);
     let clientContainer = <div className="main primary-container"/>
 
     if(this.state.client.clientName) {
@@ -95,7 +96,7 @@ export default React.createClass({
           <Header/>
           <div className="main-container">
           {clientContainer}
-          <NavSideBar session={this.state.session}/>
+          <NavSideBar session={this.state.session} client={this.state.client}/>
           <Sidebar session={this.state.session} clientId={this.props.params.id}/>
         </div>
         </div>
