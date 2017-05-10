@@ -66,7 +66,7 @@ export default Backbone.Model.extend({
               console.log('on subFile data success');
               let subFolder = store.folders.get(response.folderId);
               console.log(subFolder);
-              store.folders.get(response.folderId).addFileToSubFolder(response.objectId, fileURL, fileName, folderName, clientId);
+              store.folders.get(response.folderId).addFileToSubFolder(response.objectId, fileURL, fileName, folderName, folderId, clientId);
 
       }
       });

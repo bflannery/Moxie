@@ -53,7 +53,7 @@ export default React.createClass({
     store.clients.off('update change', this.updateState);
   },
 
-  updateState(clientId) {
+  updateState() {
     if(store.clients.get(this.props.params.id) !== undefined) {
     this.setState({
       client: store.clients.get(this.props.params.id).toJSON()
@@ -68,7 +68,7 @@ export default React.createClass({
 
 
   render() {
-    console.log(this.state);
+
 
     let clientContainer = <div className="main primary-container"/>
 

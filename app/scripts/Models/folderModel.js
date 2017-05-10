@@ -43,23 +43,6 @@ export default Backbone.Model.extend({
       });
     },
 
-    addSubFolder(clientName, clientId, subFolderName, subFolderURL) {
-      this.save({
-        folderURL : subFolderURL,
-        folderName : subFolderName,
-        clientName: clientName,
-        clientId: clientId
-      }).done((response)=>{
-        console.log('added SubFolder');
-        console.log(response);
-        let client = store.clients.get(response.clientId);
-        console.log(client);
-        store.clients.get(response.clientId).addFolderToClientFolders(response.objectId, response.folderName, clientId);
-      }).fail((xhr)=> {
-        console.log('error: ' , xhr);
-      });
-    },
-
     deleteSubFolder(subFolderId, clientId, clientFolderId) {
       $.ajax({
           type: 'DELETE',
@@ -71,35 +54,52 @@ export default Backbone.Model.extend({
       });
     },
 
-    addFileToSubFolder(fileId, fileURL, fileName, subFolderName, clientId) {
-      console.log(fileId);
-      console.log(fileURL);
-      console.log(fileName);
-      console.log(subFolderName);
-      console.log(clientId);
-
-
-        let folderFiles = this.get('folderFiles');
-        this.save({
-            folderFiles: folderFiles.concat([{
-                ___class: 'FolderFiles',
-                subFolderName: subFolderName,
-                files: {
-                    ___class: 'Files',
-                    objectId: fileId,
-                }
-            }]),
-        }, {
-            success: (response) => {
-              console.log('file added to folderFiles');
-                store.files.trigger('change');
-            },
-            error: (xhr) => {
-              console.log('error saving folderFile', xhr);
+    addFileToSubFolder(fileId, fileURL, fileName, subFolderName, subFolderId, clientId) {
+      let folderFiles;
+      if(this.get('folderFiles')) {
+        folderFiles = this.get('folderFiles').concat([
+          {
+            ___class: 'FolderFiles',
+            folderName: subFolderName,
+            files: {
+                ___class: 'Files',
+                objectId: fileId,
             }
-        });
-    },
+          }
+        ]);
+      } else {
+        folderFiles = (
+          {
+            ___class: 'FolderFiles',
+            folderName: subFolderName,
+            files: {
+                ___class: 'Files',
+                objectId: fileId,
+            }
+          }
+        );
+      }
+      $.ajax({
+        type: 'PUT',
+          url: `https://api.backendless.com/v1/data/Folders/${subFolderId}`,
+          contentType: 'application/json',
+          data: JSON.stringify({
+              folderFiles
+          }),
+          success: (response) => {
+            console.log('added folder to clientFiles');
+              this.trigger('change');
+              store.session.set({
+                  addFile: false
+              });
+              browserHistory.push('/folders/' + subFolderId);
 
+          },
+          error: () => {
+              console.log('not added');
+          }
+      });
+    }
 
   });
 

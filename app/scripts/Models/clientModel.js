@@ -55,33 +55,51 @@ export default Backbone.Model.extend({
     // Push to ClientHome
     // ----------------------------
 
-    addFolderToClientFolders(subFolderId, folderName) {
-      console.log(this);
-        this.save({
-            clientFolders: this.get('clientFolders').concat([{
-                ___class: 'ClientFolders',
-                folderName: folderName,
-                folders: {
-                    ___class: 'Folders',
-                    objectId: subFolderId,
-
+    addFolderToClientFolders(subFolderId, folderName, clientId) {
+      console.log(clientId);
+      let clientFolders;
+      if(this.get('clientFolders')) {
+          clientFolders = this.get('clientFolders').concat([
+            {
+              ___class: 'ClientFolders',
+              folderName: folderName,
+              folders: {
+                  ___class: 'Folders',
+                  objectId: subFolderId,
                 }
-            }]),
-        }, {
+
+            }]);
+        } else {
+          clientFolders = [{
+            ___class: 'ClientFolders',
+            folderName: folderName,
+            folders: {
+                ___class: 'Folders',
+                objectId: subFolderId,
+              }
+          }];
+        }
+        $.ajax({
+          type: 'PUT',
+            url: `https://api.backendless.com/v1/data/Clients/${clientId}`,
+            contentType: 'application/json',
+            data: JSON.stringify({
+                clientFolders
+            }),
             success: (response) => {
-                console.log('added folder to clientFolders');
+              console.log('added folder to clientFolders');
                 this.trigger('change');
                 store.session.set({
                     addFolder: false
                 });
+                browserHistory.push('/folders/' + subFolderId);
+
             },
             error: () => {
                 console.log('not added');
             }
         });
     },
-
-
 
     // ----------------------------
     // Delete File From ClientFiles Data Table

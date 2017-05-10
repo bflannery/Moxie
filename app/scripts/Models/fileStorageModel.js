@@ -49,7 +49,7 @@ export default Backbone.Model.extend({
           console.log('create client folder error ', xhr);
         });
       },
-      
+
 
       uploadSubFile(file, fileName, folderId, folderName, clientId) {
         console.log(clientId);
@@ -91,7 +91,23 @@ export default Backbone.Model.extend({
               let splitURL = responseURL.split('/');
               let subFolderURL = splitURL.slice(0,splitURL.length-1).join('/');
               console.log('subFolder created');
-              store.folder.addSubFolder(clientName, clientId, subFolderName, subFolderURL);
+              store.folders.create({
+                folderURL : subFolderURL,
+                folderName : subFolderName,
+                clientName: clientName,
+                clientId: clientId
+              },
+                { success: (response)=>{
+                    console.log('added SubFolder');
+                  response = response.toJSON();
+                  console.log(response);
+                  store.clients.get(response.clientId).addFolderToClientFolders(response.objectId, response.folderName, clientId);
+                  }
+                },
+                { error: (xhr)=> {
+                console.log('error: ' , xhr);
+                  }
+              });
             }).fail((xhr)=> {
               console.log('subFoler error: ', xhr);
             });

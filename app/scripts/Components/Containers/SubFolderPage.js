@@ -51,7 +51,6 @@ componentDidMount() {
   folder.fetch();
   folder.on('update change', this.updateState);
 
-  console.log(folder);
 },
 
 componentWillUnmount() {
@@ -63,16 +62,19 @@ componentWillUnmount() {
 
 updateState() {
 
-  let client = store.clients.get(this.state.folder.clientId);
+if(store.clients.get(this.state.folder.clientId) !== undefined){
+  this.setState({
+    client: store.clients.get(this.state.folder.clientId)
+  });
+}
 
-
-  if(store.folders.get(this.props.params.id) !== undefined) {
+if(store.folders.get(this.props.params.id) !== undefined) {
   this.setState({
     folder: store.folders.get(this.props.params.id).toJSON(),
     });
   }
   this.setState({
-    client: client.toJSON(),
+
     files: store.files.toJSON(),
     clients: store.clients.toJSON(),
     session: store.session.toJSON(),
@@ -80,8 +82,7 @@ updateState() {
   })
 },
   render() {
-    console.log(this.state);
-    console.log(this.props);
+
     let subFolderContainer;
 
     if(this.state.folder === undefined) {

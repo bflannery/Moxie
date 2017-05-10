@@ -15,7 +15,9 @@ export default React.createClass({
       let folderFiles = this.props.folder.folderFiles;
 
       subFolderFiles = folderFiles.map((file, i, arr)=> {
+        if(file.folderId === this.props.folder.objectId) {
       return <SubFolderFile key={i} file={file} clientId={this.props.folder.clientId} session={this.props.session}/>
+    }
     });
 
   } else {
