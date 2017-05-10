@@ -7,7 +7,7 @@ export default React.createClass({
     let clients;
 
     if(this.props.clients.length < 1) {
-      clients = <li> No Clients </li>;
+      clients = <div/>;
     } else {
       clients = this.props.clients.map((client, i, arr)=> {
         if(window.localStorage.getItem('ownerId') === this.props.clients[i].ownerId)
