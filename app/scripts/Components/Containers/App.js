@@ -8,6 +8,9 @@ export default React.createClass({
     return (
       <div className="app-container">
         {this.props.children}
+        <div className="footer-container">
+          <span className="copyright"> &copy; 2017 bfproductions </span>
+        </div>
       </div>
     );
   }

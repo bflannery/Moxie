@@ -6,11 +6,27 @@ export default React.createClass({
 
   render() {
     console.log(this.props);
+    let newSubFolder;
+    if(this.props.client.clientName) {
+      newSubFolder = (
+        <form className="add-new-client" onSubmit={this.addFolder}>
+          <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
+          <input type="text" ref="folderName" className="client-input" placeholder="Add New Folder"/>
+        </form>
+      );
+    } else {
+      newSubFolder = (
+        <form className="add-new-client" onSubmit={this.addFolder}>
+          <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
+          <input type="text" ref="folderName" className="client-input" placeholder="Add New Client"/>
+        </form>
+      )
+    }
     return (
-      <form className="add-new-client" onSubmit={this.addFolder}>
-        <i className="fa fa-folder-o folder-icon" aria-hidden="true"></i>
-        <input type="text" ref="folderName" className="client-input"/>
-      </form>
+      <div>
+        {newSubFolder}
+      </div>
+
     );
   },
 

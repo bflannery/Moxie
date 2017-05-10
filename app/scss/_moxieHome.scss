@@ -9,11 +9,11 @@
 .add-new-client {
     width: 88%;
     margin: 1rem auto;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
     background: transparent;
-    font-size: 1.5rem;
       .fa {
         margin-left: .5rem;
+        font-size: 1.5rem;
       }
 }
 
@@ -21,16 +21,20 @@
   display: inline-block;
   padding: 0;
   outline: 0;
-  color: $primary-blue;
+  color: $primary-logo-lightblue;
   border: none;
-  border-bottom: 1px solid black;
   background: transparent;
   margin: 0 auto 10px 1rem;
   text-align: left;
-  font-size: 16px;
   transition-duration: 0.25s;
   font-weight: 300;
-  width: 52%;
+  width: 65%;
+  font-size: 1.5rem;
+}
+
+.client-input::-webkit-input-placeholder {
+  color: $primary-yellow;
+
 }
 
 .create-button {
@@ -50,7 +54,7 @@
 }
 
 .folder-link:hover {
-  color: $primary-blue;
+  color: $primary-logo-lightblue;
 }
 
 .folder-link {
@@ -60,7 +64,6 @@
   display: inline-block;
     h4 {
       display:inline-block;
-      font-size: 1.2rem;
       margin: 1rem 0 1rem 1rem;
     }
 }
@@ -88,7 +91,11 @@
 @media(min-width:600px) {
   .client-input {
     width: 85%;
-    font-size: 1.2rem;
+    font-size: 1.75rem;
+  }
+
+  .folder-link {
+    font-size: 1.75rem;
   }
 
 }

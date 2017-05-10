@@ -65,10 +65,11 @@
 
 .logout-link{
   position: relative;
-  color: $primary-logo-darkblue;
+  color: $primary-logo-lightblue;
   display: inline-block;
   background: transparent;
   padding: 0.4rem;
+  font-weight: 400
 }
 
 .logout-link:before {
