@@ -12,47 +12,22 @@ export default Backbone.Model.extend({
         folderURL: '',
     },
 
-    deleteClientFolder(client) {
-      console.log(client);
+    deleteClientFolder(clientFolder) {
       $.ajax({
-        type: 'GET',
-        url: 'https://api.backendless.com/v1/data/Folders'
-      }).done((clientFoldersData)=> {
-        let clientFolders = clientFoldersData.data;
-        console.log(clientFolders.data);
-        let newClientFolder = clientFolders.filter((clientFolder, i ,arr)=> {
-          if(clientFolder.clientId !== client.objectId) {
-            return true;
-          } else {
-            $.ajax({
-              type: 'DELETE',
-              url: `https://api.backendless.com/v1/data/Folders/${clientFolder.objectId}`,
-              success: () => {
-                console.log('folder deleted');
-                store.clients.get(client.objectId).deleteClient(client);
-              },
-              error: ()=> {
-                console.log('folder was not deleted');
-              }
+        type: 'DELETE',
+        url: `https://api.backendless.com/v1/data/Folders/${clientFolder.folders.objectId}`,
+        success: () => {
+          console.log('clientFolder deleted from Folders ');
+          window.location.reload();
+        },
+        error: () => {
+          console.log('clientFolder NOT deleted from Folders');
+        }
 
-            });
-          }
-        });
-      }).fail((xhr)=> {
-        console.log('failed to get folders: ' , xhr);
       });
-    },
+      },
 
-    deleteSubFolder(subFolderId, clientId, clientFolderId) {
-      $.ajax({
-          type: 'DELETE',
-          url: `https://api.backendless.com/v1/data/Folders/${subFolderId}`,
-          success: () => {
-              console.log('deleted Folder From Table');
-              store.clients.get(clientId).deleteFolderFromClient(clientFolderId);
-          }
-      });
-    },
+
 
     addFileToSubFolder(fileId, fileURL, fileName, subFolderName, subFolderId, clientId) {
       let folderFiles;

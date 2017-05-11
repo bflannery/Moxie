@@ -6,6 +6,7 @@ import $ from 'jquery';
 
 export default React.createClass({
   render() {
+    console.log(this.props);
     let fileLink;
 
 
@@ -52,14 +53,7 @@ export default React.createClass({
 
 removeFile(e) {
   e.preventDefault();
-  let fileId = this.props.file.files.objectId;
-  let fileUrl = this.props.file.files.fileUrl;
-  let clientId = this.props.file.files.clientId;
-  let clientFileId = this.props.file.objectId;
-  console.log(fileId);
-  console.log(fileUrl);
-  console.log(clientId);
-  console.log(clientFileId);
-  store.fileStore.deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
+  let folderFile = this.props.file;
+  store.fileStore.deleteFileFromStorage(folderFile);
 }
 });

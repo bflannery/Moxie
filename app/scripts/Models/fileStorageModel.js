@@ -96,13 +96,13 @@ export default Backbone.Model.extend({
         // If No Client Folder in file storage ...
         // ----------------------------
 
-        deleteFolderFromStorage(subFolderId, subFolderURL, clientId, clientFolderId) {
+        deleteSubFolderFromStorage(clientFolder) {
             $.ajax({
                 type: 'DELETE',
-                url: subFolderURL,
+                url: clientFolder.folders.folderURL,
                 success: () => {
                   console.log('deleted subFolder From Storage');
-                  store.folder.deleteSubFolder(subFolderId, clientId, clientFolderId);
+                  store.file.deleteSubFolderFiles(clientFolder);
                 },
                 error: (xhr) => {
                   console.log('error deleting from storage ', xhr);
@@ -117,13 +117,13 @@ export default Backbone.Model.extend({
             // On Success , call deleteFileFromDataTable
             // ----------------------------
 
-            deleteFileFromStorage(objectId, fileUrl, clientId, clientFileId) {
+            deleteFileFromStorage(folderFile) {
                 $.ajax({
                     type: 'DELETE',
-                    url: fileUrl,
+                    url: folderFile.files.fileUrl,
                     success: () => {
                       console.log('deleted File From Storage');
-                      store.file.deleteFileFromDataTable(objectId, clientId, clientFileId);
+                      store.file.deleteFolderFile(folderFile);
                     },
                     error: (xhr) => {
                       console.log('error deleting from storage ', xhr);

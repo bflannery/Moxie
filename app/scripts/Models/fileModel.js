@@ -103,7 +103,7 @@ export default Backbone.Model.extend({
     if (!client.clientFolders || client.clientFolders.length === 0) {
       console.log('clientFolders is null or 0');
       console.log('calling deleteClient');
-      store.client.deleteClient(client);
+      store.clients.get(client.objectId).deleteClient(client);
     } else {
       let newClientFolders = client.clientFolders.map((clientFolder, i, arr) => {
         console.log(clientFolder);
@@ -173,37 +173,94 @@ export default Backbone.Model.extend({
         }
       });
     }
+  },
+
+
+
+  deleteSubFolderFiles(clientFolder) {
+    console.log(clientFolder);
+    if(!clientFolder.folders.folderFiles || clientFolder.folders.folderFiles.length === 0) {
+      console.log('clientFiles is null or 0');
+      console.log('calling deleteClientFolder');
+      $.ajax({
+        type: 'DELETE',
+        url: `https://api.backendless.com/v1/data/ClientFolders/${clientFolder.objectId}`,
+        success: () => {
+          console.log('clientFolder deleted from ClientFolders');
+          store.folders.get(clientFolder.folders.objectId).deleteClientFolder(clientFolder);
+        }
+      });
+    } else {
+      if (clientFolder.folders.folderFiles.length > 0) {
+        let newClientFiles = clientFolder.folders.folderFiles.map((folderFile, i, arr) => {
+          console.log(folderFile);
+          $.ajax({
+            type: 'DELETE',
+            url: `https://api.backendless.com/v1/data/Files/${folderFile.files.objectId}`,
+            success: () => {
+              console.log('clientFiles deleted from Files');
+              $.ajax({
+                type: 'DELETE',
+                url: `https://api.backendless.com/v1/data/FolderFiles/${folderFile.objectId}`,
+                success: () => {
+                  console.log('clientFolderFiles deleted from FolderFiles')
+                      $.ajax({
+                        type: 'DELETE',
+                        url: `https://api.backendless.com/v1/data/Folders/${clientFolder.folders.objectId}`,
+                        success: () => {
+                          console.log('clientFolder deleted from Folders');
+                          $.ajax({
+                            type: 'DELETE',
+                            url: `https://api.backendless.com/v1/data/ClientFolders/${clientFolder.objectId}`,
+                            success: (response) => {
+                              console.log(response);
+                              console.log('clientFolder deleted from ClientFolders');
+                              store.folders.trigger('change');
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+        });
+      } else {
+        $.ajax({
+          type: 'DELETE',
+          url: `https://api.backendless.com/v1/data/Folders/${clientFolder.folders.objectId}`,
+          success: () => {
+            console.log('clientFolder deleted from Folders');
+            $.ajax({
+              type: 'DELETE',
+              url: `https://api.backendless.com/v1/data/ClientFolders/${clientFolder.objectId}`,
+              success: (response) => {
+                console.log(response);
+                console.log('clientFolder deleted from ClientFolders');
+              }
+            });
+          }
+        });
+      }
+    }
+  },
+
+  deleteFolderFile(folderFile) {
+    console.log(folderFile);
+    $.ajax({
+      type: 'DELETE',
+      url: `https://api.backendless.com/v1/data/Files/${folderFile.files.objectId}`,
+      success: () => {
+        console.log('Folder File deleted from Files');
+        $.ajax({
+          type: 'DELETE',
+          url: `https://api.backendless.com/v1/data/FolderFiles/${folderFile.objectId}`,
+          success: () => {
+            console.log('FolderFile deleted from FolderFiles');
+          }
+        });
+      }
+    });
+
   }
 });
-
-
-// $.ajax({
-//     type: 'POST',
-//     url: 'https://api.backendless.com/v1/data/Files',
-//     contentType: 'application/json',
-//     data: JSON.stringify({
-//         fileUrl,
-//         fileName,
-//         folderName
-//     }),
-//     success: (response) => {
-//       console.log('addFileToData success response: ', response );
-//         console.log('on file to data success with clientId...');
-//         store.clients.get(clientId).addFileToClientFiles(response.objectId,response.folderName);
-//         store.files.trigger('change');
-//       },
-//     error: (xhr) => {
-//       console.log('error adding file to data table: ', xhr);
-//     }
-//   });
-
-
-// let newTotalFiles = files.data.filter((file, i, arr) => {
-//     if (file.clientId != client.objectId) {
-//         return true;
-//     } else {
-//
-//           }
-//         });
-
-//  store.folderFile.deleteClientFolderFiles(client);

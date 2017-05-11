@@ -44,12 +44,9 @@ export default React.createClass({
     //Create local variables for clientFile values
     //Call deleteFileFromStorage through Files Collection
 
-    removeFile(e) {
+    removeFolder(e) {
       e.preventDefault();
-      let fileId = this.props.clientFolder.files.objectId;
-      let fileUrl = this.props.clientFolder.files.fileUrl;
-      let clientId = this.props.clientFolder.files.clientId;
-      let clientFileId = this.props.clientFolder.objectId;
-      store.files.get(fileId).deleteFileFromStorage(fileId, fileUrl, clientId, clientFileId);
+      let clientFolder = this.props.clientFolder;
+      store.fileStore.deleteSubFolderFromStorage(clientFolder);
     }
   });
