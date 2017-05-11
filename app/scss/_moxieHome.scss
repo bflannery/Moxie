@@ -1,0 +1,112 @@
+.client-list-container {
+    margin-top: 4rem;
+    text-align: center;
+}
+.client-form-title {
+  margin-left: 1rem;
+}
+
+.add-new-client {
+    width: 88%;
+    margin: 1rem auto;
+    border-bottom: 1px solid black;
+    background: transparent;
+      .fa {
+        margin-left: .5rem;
+        font-size: 1.5rem;
+      }
+}
+
+.client-input {
+  display: inline-block;
+  padding: 0;
+  outline: 0;
+  color: $primary-logo-lightblue;
+  border: none;
+  background: transparent;
+  margin: 0 auto 10px 1rem;
+  text-align: left;
+  transition-duration: 0.25s;
+  font-weight: 300;
+  width: 65%;
+  font-size: 1.5rem;
+}
+
+.client-input::-webkit-input-placeholder {
+  color: $primary-yellow;
+
+}
+
+.create-button {
+    padding: 0.4rem 1.7rem;
+    margin-left: .5rem;
+    font-size: 20px;
+}
+
+.client-list {
+    margin: 1rem 0;
+}
+
+.client-container {
+  width: 88%;
+  margin: 1rem auto;
+  border-bottom: 1px solid black;
+}
+
+.folder-link:hover {
+  color: $primary-logo-lightblue;
+}
+
+.folder-link {
+  vertical-align: middle;
+  margin-left: .5rem;
+  font-size: 1.5rem;
+  display: inline-block;
+    h4 {
+      display:inline-block;
+      margin: 1rem 0 1rem 1rem;
+    }
+}
+
+.folder-icon {
+  margin: 1rem 0;
+  display: inline-block;
+}
+
+.delete-client-button {
+    margin: 0;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+}
+
+.fa-times-circle {
+  color: black;
+}
+
+.file-link:visited {
+  color: black;
+}
+
+
+@media(min-width:600px) {
+  .client-input {
+    width: 85%;
+    font-size: 1.75rem;
+  }
+
+  .folder-link {
+    font-size: 1.75rem;
+  }
+
+}
+
+@media(min-width: 800px) {
+
+  .client-list-container {
+    text-align: left;
+  }
+
+  .delete-client-button {
+    float: right;
+  }
+}

@@ -1,0 +1,26 @@
+.sidebar-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.side-button {
+  margin: .1rem 1.2rem;
+  padding: .8rem 1rem;
+}
+
+@media (min-width: 650px) {
+  .sidebar-button-container {
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+    margin: 1rem auto;
+  }
+
+  .side-button {
+    margin: .2rem auto;
+    font-size: .75rem;
+    width: 85%;
+    padding: .5rem;
+  }
+
+}

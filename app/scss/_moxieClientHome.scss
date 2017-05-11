@@ -1,0 +1,77 @@
+.title-add-container {
+  margin: 5rem 0;
+}
+
+.client-page-name {
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+
+.client-file {
+    width: 88%;
+    margin: 1rem auto;
+    border-bottom: 1px solid black;
+}
+
+.file-icon {
+    margin: 1rem 0;
+    display: inline-block;
+}
+
+.file-link {
+  vertical-align: middle;
+  margin-left: .5rem;
+  font-size: 1.5rem;
+  display: inline-block;
+    span {
+      font-size: 1.2rem;
+      margin: 1rem 0 1rem 1rem;
+    }
+}
+
+.file-link:hover {
+    color: $primary-yellow;
+}
+
+.delete-file-button {
+  float: right;
+  padding: 0;
+  margin-right: 2rem;
+  margin-top: 1.3rem;
+  background: transparent;
+  color: white;
+}
+
+.delete-file-button:hover {
+  background: white;
+}
+
+@media(min-width:800px) {
+
+  .title-add-container {
+    margin: 5rem 0 1rem 0;
+  }
+
+  .client-files-container {
+        margin-top: 1rem;
+  }
+
+  .file-icon {
+    display: inline-block;
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
+
+  .file-name-container {
+    display: inline-block;
+  }
+
+  .file-link {
+    margin-left: 2rem;
+  }
+
+  .delete-file-button {
+    margin-left: 1rem;
+    top: 0.4rem;
+  }
+}
