@@ -88,11 +88,9 @@ export default Backbone.Model.extend({
           }),
           success: (response) => {
             console.log('added folder to clientFiles');
-              this.trigger('change');
-              store.session.set({
-                  addFile: false
-              });
-              browserHistory.push('/folders/' + subFolderId);
+            console.log(response);
+            window.location.reload();
+            console.log('triggered');
 
           },
           error: () => {

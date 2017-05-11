@@ -11,6 +11,8 @@ export default Backbone.Model.extend({
         name: '',
     },
 
+
+
     createClientFolder(clientName) {
       let folder = 'moxie';
       let fd = new FormData();
@@ -51,33 +53,6 @@ export default Backbone.Model.extend({
       },
 
 
-      uploadSubFile(file, fileName, folderId, folderName, clientId) {
-        console.log(clientId);
-        let fd = new FormData();
-        fd.append('upload', file);
-        $.ajax({
-            type: 'POST',
-            data: fd,
-            processData: false,
-            contentType: false,
-            url: 'https://api.backendless.com/v1/files/Moxie/subFolders/' + folderName  + '/' + fileName,
-            success: (response) => {
-                console.log('success on files storage to subFolder...');
-                response = JSON.parse(response);
-                console.log(response);
-                store.file.addSubFileToData(response.fileURL, fileName, folderId, folderName, clientId);
-            },
-            error: (response) => {
-                if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
-                    alert('File Already Exists');
-                } else {
-                  console.log('ya messed up');
-                }
-
-            }
-        });
-
-      },
 
     createSubFolder(clientName, clientId, subFolderName) {
           $.ajax({
@@ -113,6 +88,8 @@ export default Backbone.Model.extend({
             });
         },
 
+
+
         // ----------------------------
         //Delete Client Folder and Client Files From File Storage
         // On Success , call detelClientFilesFromFilesCollection on Files Collection
@@ -133,6 +110,8 @@ export default Backbone.Model.extend({
             });
         },
 
+
+
             // ----------------------------
             // Delete File From Client Folder in File Storage
             // On Success , call deleteFileFromDataTable
@@ -152,6 +131,8 @@ export default Backbone.Model.extend({
                 });
             },
 
+
+
             deleteClientFolder(client) {
               $.ajax({
                   type: 'DELETE',
@@ -165,6 +146,34 @@ export default Backbone.Model.extend({
                   }
               });
 
-          }
+          },
+
+
+
+          uploadSubFile(file, fileName, folderId, folderName, clientId) {
+            let fd = new FormData();
+            fd.append('upload', file);
+            $.ajax({
+                type: 'POST',
+                data: fd,
+                processData: false,
+                contentType: false,
+                url: 'https://api.backendless.com/v1/files/Moxie/subFolders/' + folderName  + '/' + fileName,
+                success: (response) => {
+                    console.log('success on files storage to subFolder...');
+                    response = JSON.parse(response);
+                    store.file.addSubFileToData(response.fileURL, fileName, folderId, folderName, clientId);
+                },
+                error: (response) => {
+                    if (response.responseText === '{"code":6003,"message":"Unable to upload the file: file already exists"}') {
+                        alert('File Already Exists');
+                    } else {
+                      console.log('ya messed up');
+                    }
+
+                }
+            });
+
+          },
 
   });

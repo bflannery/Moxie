@@ -51,6 +51,7 @@ export default React.createClass({
     store.clients.get(this.props.params.id).off('update change', this.updateState);
     store.session.off('update change', this.updateState);
     store.clients.off('update change', this.updateState);
+    store.files.off('update change', this.updateState);
   },
 
   updateState() {

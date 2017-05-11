@@ -6,7 +6,6 @@ import $ from 'jquery';
 
 export default React.createClass({
   render() {
-    console.log(this.props);
     let fileLink;
 
 

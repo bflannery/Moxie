@@ -82,7 +82,6 @@ if(store.folders.get(this.props.params.id) !== undefined) {
   })
 },
   render() {
-
     let subFolderContainer;
 
     if(this.state.folder === undefined) {
